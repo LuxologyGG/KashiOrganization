@@ -200,7 +200,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .hero__sub p { max-width: 44ch; color: color-mix(in srgb,var(--paper) 80%, transparent); }
 .hero__scroll { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 3; display: grid; place-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: color-mix(in srgb,var(--paper) 70%, transparent); }
 .hero__scroll .chev { color: var(--gold-2); animation: k-chev 1.8s var(--e-inout) infinite; }
-.hero__meta { position: absolute; top: 42%; right: var(--gutter); z-index: 2; text-align: right; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb,var(--paper) 62%, transparent); display: grid; gap: 8px; }
+.hero__meta { position: absolute; top: 42%; right: var(--gutter); z-index: 2; text-align: right; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb,var(--paper) 84%, transparent); display: grid; gap: 8px; text-shadow: 0 1px 14px rgba(6,14,22,.7); }
 .hero__meta b { color: var(--gold-2); font-weight: 500; }
 @media (max-width: 760px){ .hero__meta { display:none; } }
 
@@ -326,8 +326,9 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--gold); }
 .field :is(input, textarea, select):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .field textarea { resize: vertical; min-height: 120px; }
-.field.err input, .field.err textarea { border-color: #e0603f; }
-.field__msg { font-family: var(--font-mono); font-size: 10px; letter-spacing:.08em; color: #e0603f; text-transform: uppercase; min-height: 12px; }
+.field.err input, .field.err textarea { border-color: #c14a30; }
+.field__msg { font-family: var(--font-mono); font-size: 10px; letter-spacing:.08em; color: #b0402a; text-transform: uppercase; min-height: 12px; }
+.on-dark .field__msg { color: #f0917a; }
 .form__ok { padding: 22px; border: 1px solid var(--gold); background: var(--gold-wash); font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .04em; display: none; }
 .form.is-sent .form__ok { display: block; }
 

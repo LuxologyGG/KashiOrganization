@@ -26,7 +26,13 @@
     $$('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
-        if (id.length > 1 && $(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -70 }); }
+        const t = id.length > 1 ? $(id) : null;
+        if (t) {
+          e.preventDefault();
+          lenis.scrollTo(id, { offset: -70 });
+          t.setAttribute("tabindex", "-1");
+          t.focus({ preventScroll: true }); // keyboard focus follows (skip-link + anchors)
+        }
       });
     });
   }
