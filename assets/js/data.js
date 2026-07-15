@@ -213,7 +213,7 @@ window.KASHI = {
   ],
 
   faqs: [
-    { q: "Where does Kashi Organization build?", a: "We focus on the Palos Verdes Peninsula and the greater South Bay — Hermosa Beach, Redondo Beach, Manhattan Beach and the Peninsula cities — where we've built and developed for nearly two decades." },
+    { q: "Where does Kashi Organization build?", a: "We focus on the South Bay and the Palos Verdes Peninsula — Hermosa Beach, Redondo Beach, Manhattan Beach and the Peninsula cities — where we've built and developed for two decades." },
     { q: "Do you take on remodels, or only ground-up homes?", a: "Both. Our core is ground-up custom homes and development, but we also take on whole-home remodels, additions and ADUs where the scope and standard fit the way we work." },
     { q: "Are you licensed and insured?", a: "Yes. Kashi Organization holds California CSLB license #998954, Class B General Building — active, in good standing, with a clean record. We carry full insurance and workers' compensation coverage." },
     { q: "How involved is the owner?", a: "Directly. Arash Abbasian is hands-on across every project — the reason clients and trade partners consistently point to communication, integrity and follow-through as what sets Kashi apart." },

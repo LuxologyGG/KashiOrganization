@@ -323,7 +323,8 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .field { position: relative; display: grid; gap: 8px; }
 .field label { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-soft); }
 .field input, .field textarea, .field select { background: transparent; border: 0; border-bottom: 1px solid var(--line); padding: 12px 2px; color: var(--fg); transition: border-color .3s; }
-.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--gold); }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--gold); }
+.field :is(input, textarea, select):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .field textarea { resize: vertical; min-height: 120px; }
 .field.err input, .field.err textarea { border-color: #e0603f; }
 .field__msg { font-family: var(--font-mono); font-size: 10px; letter-spacing:.08em; color: #e0603f; text-transform: uppercase; min-height: 12px; }
@@ -332,7 +333,6 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 
 /* ============================ Split reveal primitives ============================ */
 .line-mask { overflow: hidden; }
-[data-reveal] { will-change: transform, opacity; }
 .split-line { overflow: hidden; display: block; }
 .split-line > * { display: block; }
 
@@ -396,7 +396,11 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .repnote { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-faint); display: inline-flex; align-items: center; gap: 8px; }
 .repnote::before { content:""; width: 6px; height: 6px; border: 1px solid var(--fg-faint); transform: rotate(45deg); flex: none; }
 
+@media (max-width: 760px) {
+  .hotspot { display: none; }
+}
 @media (max-width: 560px) {
   .cols-3.keep-2, .cols-4.keep-2 { grid-template-columns: 1fr; }
   .hero__meta { display: none; }
 }
+#main:focus { outline: none; }

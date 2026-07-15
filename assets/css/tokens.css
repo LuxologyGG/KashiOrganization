@@ -35,7 +35,7 @@
   --bg-2:       var(--paper-1);
   --fg:         var(--ink);
   --fg-soft:    color-mix(in srgb, var(--ink) 74%, var(--paper));   /* ~5.8:1 on bone */
-  --fg-faint:   color-mix(in srgb, var(--ink) 54%, var(--paper));   /* ~3.4:1 on bone */
+  --fg-faint:   color-mix(in srgb, var(--ink) 66%, var(--paper));   /* ~4.7:1 on bone (AA) */
   --line:       color-mix(in srgb, var(--ink) 18%, transparent);
   --line-soft:  color-mix(in srgb, var(--ink) 9%, transparent);
   --accent:     var(--gold);
@@ -105,6 +105,7 @@
   --fg:       var(--paper);
   --fg-soft:  color-mix(in srgb, var(--paper) 66%, var(--ink));
   --fg-faint: color-mix(in srgb, var(--paper) 40%, var(--ink));
+  --fg-faint: color-mix(in srgb, var(--paper) 58%, var(--ink));   /* ~4.7:1 on navy (AA) */
   --line:     color-mix(in srgb, var(--paper) 16%, transparent);
   --line-soft:color-mix(in srgb, var(--paper) 9%, transparent);
   --accent:   var(--gold-2);
