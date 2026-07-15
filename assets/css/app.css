@@ -379,7 +379,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .hud-readout .row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .06em; }
 .hud-readout .row:last-child { border-bottom: 0; }
 .hud-readout .row .k { color: var(--fg-faint); text-transform: uppercase; }
-.hud-readout .row .v { color: var(--accent); font-weight: 500; text-align: right; }
+.hud-readout .row .v { color: var(--accent-text); font-weight: 500; text-align: right; }
 .hud-readout .ghost { position: absolute; right: 0; bottom: -6%; font-family: var(--font-display); font-size: clamp(120px,20vw,300px); line-height: .8; color: color-mix(in srgb, var(--fg) 6%, transparent); pointer-events: none; z-index: -1; }
 
 /* ---------- Hotspot label (echo of Vaulk c-e-videofloatinglabel) ---------- */

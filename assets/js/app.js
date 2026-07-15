@@ -94,10 +94,12 @@
       if (!menu.id) menu.id = "site-menu";
       toggle.setAttribute("aria-controls", menu.id);
       toggle.setAttribute("aria-expanded", "false");
+      const inertEls = [$("#main"), $("footer")].filter(Boolean);
       const setOpen = (open) => {
         document.body.classList.toggle("menu-open", open);
         toggle.setAttribute("aria-expanded", String(open));
         toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        inertEls.forEach((el) => { el.inert = open; }); // trap focus within the menu
         if (lenis) open ? lenis.stop() : lenis.start();
         if (open) { const first = $("a", menu); first && first.focus(); }
         else toggle.focus();
