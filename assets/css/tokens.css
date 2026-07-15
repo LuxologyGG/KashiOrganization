@@ -1,0 +1,197 @@
+/* =============================================================
+   KASHI ORGANIZATION — Design System Tokens
+   Motion/structure DNA adapted from Vaulk (LEOLEO) · palette from
+   the Kashi lion emblem: deep navy, steel-blue facets, antique gold,
+   warm bone. Fluid vw scaling off a 1440px reference, near-zero radii,
+   mono technical labels, HUD detailing.
+   ============================================================= */
+
+:root {
+  /* ---- Core palette (sampled from the Kashi emblem) ---- */
+  --ink:        #0b1e33;   /* deep navy — primary dark ground   */
+  --ink-1:      #0e2338;
+  --ink-2:      #12314c;   /* steel navy                        */
+  --ink-3:      #1b3f5e;
+  --steel:      #45596b;   /* lion facet mid                    */
+  --steel-2:    #7c8b99;   /* lion facet light                  */
+  --steel-3:    #a9b5bf;
+
+  --paper:      #f4efe6;   /* warm bone — primary light ground  */
+  --paper-1:    #efe8db;
+  --paper-2:    #e7ded0;
+  --paper-3:    #dcd1bd;
+
+  --gold:       #c1922f;   /* antique gold accent               */
+  --gold-1:     #d3a544;
+  --gold-2:     #e6c072;   /* highlight gold                    */
+  --gold-deep:  #8a6420;
+  --gold-wash:  rgba(193,146,47,.12);
+
+  --white:      #ffffff;
+  --black:      #06121e;
+
+  /* ---- Semantic (light ground defaults; dark sections override) ---- */
+  --bg:         var(--paper);
+  --bg-2:       var(--paper-1);
+  --fg:         var(--ink);
+  --fg-soft:    color-mix(in srgb, var(--ink) 62%, var(--paper));
+  --fg-faint:   color-mix(in srgb, var(--ink) 38%, var(--paper));
+  --line:       color-mix(in srgb, var(--ink) 16%, transparent);
+  --line-soft:  color-mix(in srgb, var(--ink) 9%, transparent);
+  --accent:     var(--gold);
+  --accent-ink: #241a06;
+
+  /* ---- Typography ---- */
+  --font-display: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-body:    "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:    "Chivo Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Fluid type scale — clamp(min, fluid vw @1440, max) */
+  --fs-eyebrow: clamp(10px, .78vw, 12px);
+  --fs-mono:    clamp(11px, .86vw, 13px);
+  --fs-body:    clamp(15px, 1.04vw, 17px);
+  --fs-lead:    clamp(18px, 1.53vw, 23px);
+  --fs-h4:      clamp(19px, 1.6vw, 24px);
+  --fs-h3:      clamp(26px, 2.9vw, 44px);
+  --fs-h2:      clamp(34px, 4.7vw, 74px);
+  --fs-h1:      clamp(44px, 7.2vw, 118px);
+  --fs-display: clamp(60px, 12vw, 210px);
+
+  --lh-tight:   0.98;
+  --lh-snug:    1.08;
+  --lh-body:    1.62;
+  --tracking-mono: .16em;
+  --tracking-wide: .28em;
+
+  /* ---- Spacing — 8px base, fluid ---- */
+  --u:      8px;
+  --gutter: clamp(20px, 5vw, 96px);
+  --sect:   clamp(72px, 11vw, 190px);   /* vertical section rhythm */
+  --sect-sm:clamp(48px, 7vw, 110px);
+  --maxw:   1560px;
+  --measure: 66ch;
+
+  /* ---- Form language ---- */
+  --radius:   2px;
+  --radius-lg:3px;
+  --border:   1px solid var(--line);
+  --notch:    26px;   /* cut-corner size for notched surfaces */
+
+  /* ---- Motion ---- */
+  --e-expo:  cubic-bezier(.16,1,.3,1);
+  --e-out:   cubic-bezier(.22,.61,.36,1);
+  --e-inout: cubic-bezier(.65,.05,.36,1);
+  --e-power: cubic-bezier(.7,0,.2,1);
+  --t-fast:  .32s;
+  --t-med:   .6s;
+  --t-slow:  1s;
+
+  /* ---- Layering ---- */
+  --z-grid:   0;
+  --z-base:   1;
+  --z-nav:    60;
+  --z-cursor: 90;
+  --z-loader: 100;
+
+  color-scheme: light;
+}
+
+/* Dark ground scope — apply to sections that invert */
+.on-dark {
+  --bg:       var(--ink);
+  --bg-2:     var(--ink-1);
+  --fg:       var(--paper);
+  --fg-soft:  color-mix(in srgb, var(--paper) 66%, var(--ink));
+  --fg-faint: color-mix(in srgb, var(--paper) 40%, var(--ink));
+  --line:     color-mix(in srgb, var(--paper) 16%, transparent);
+  --line-soft:color-mix(in srgb, var(--paper) 9%, transparent);
+  --accent:   var(--gold-2);
+  color-scheme: dark;
+}
+
+/* ============================ Reset ============================ */
+*,*::before,*::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img,svg,video,canvas { display: block; max-width: 100%; }
+img,video { height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input,textarea,select { font: inherit; color: inherit; }
+ul,ol { list-style: none; padding: 0; }
+h1,h2,h3,h4 { font-weight: 400; line-height: var(--lh-snug); }
+::selection { background: var(--gold); color: var(--accent-ink); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+}
+
+/* ============================ Type utilities ============================ */
+.display { font-family: var(--font-display); }
+.serif   { font-family: var(--font-display); }
+.mono    { font-family: var(--font-mono); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: .7em;
+}
+.eyebrow::before {
+  content:"";
+  width: 7px; height: 7px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  flex: none;
+}
+.eyebrow--plain::before { display:none; }
+
+.h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: var(--lh-tight); font-weight: 400; letter-spacing: -.01em; }
+.h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: var(--lh-tight); font-weight: 400; letter-spacing: -.008em; }
+.h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-snug); font-weight: 400; }
+.h4 { font-family: var(--font-display); font-size: var(--fs-h4); line-height: 1.2; font-weight: 500; }
+.lead { font-size: var(--fs-lead); line-height: 1.42; color: var(--fg-soft); font-weight: 400; }
+.measure { max-width: var(--measure); }
+
+/* ============================ Layout utilities ============================ */
+.wrap   { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.section{ padding-block: var(--sect); position: relative; }
+.section--sm { padding-block: var(--sect-sm); }
+.grid   { display: grid; gap: clamp(20px, 2.4vw, 40px); }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.flex   { display:flex; }
+.between{ justify-content: space-between; }
+.items-end { align-items:flex-end; }
+.gap-s  { gap: calc(var(--u)*2); }
+@media (max-width: 900px){
+  .cols-2,.cols-3,.cols-4 { grid-template-columns: 1fr; }
+  .cols-3.keep-2, .cols-4.keep-2 { grid-template-columns: repeat(2,1fr); }
+}
+
+/* ============================ Keyframes ============================ */
+@keyframes k-drift {
+  0%   { transform: translate(-4%, -2%) rotate(0deg) scale(1.05); }
+  50%  { transform: translate(4%, 3%) rotate(8deg) scale(1.15); }
+  100% { transform: translate(-4%, -2%) rotate(0deg) scale(1.05); }
+}
+@keyframes k-blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+@keyframes k-marquee { to { transform: translate3d(-50%,0,0); } }
+@keyframes k-chev { 0%,100%{ transform: translateY(0); opacity:.9 } 50%{ transform: translateY(5px); opacity:.4 } }
+@keyframes k-spin { to { transform: rotate(360deg); } }

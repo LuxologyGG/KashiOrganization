@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Kashi Organization</title>
+<meta name="description" content="Start a conversation with Kashi Organization about your custom home or development on the Palos Verdes Peninsula. Call (310) 882-5505 or send an inquiry.">
+<meta name="theme-color" content="#0b1e33">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="icon" href="assets/img/brand/kashi-emblem.png">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/vendor/lenis.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body class="loading">
+
+<div class="loader"><div class="loader__inner"><div class="loader__mark"><img src="assets/img/brand/kashi-emblem.png" alt=""></div><div class="loader__bar"><div class="loader__fill"></div></div><div class="loader__row"><span>Contact</span><span class="loader__count"><b>000</b> / 100</span></div></div></div>
+
+<nav class="nav">
+  <a class="nav__brand" href="index.html" aria-label="Kashi Organization home"><img src="assets/img/brand/kashi-emblem.png" alt=""><span class="wordmark">KASHI<small>ORGANIZATION</small></span></a>
+  <div class="nav__links"><a class="nav__link" href="projects.html">Projects</a><a class="nav__link" href="services.html">Services</a><a class="nav__link" href="about.html">About</a></div>
+  <a class="nav__cta btn-cta" href="contact.html" data-magnetic="0.25">Contact us</a>
+  <button class="nav__toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="menu"><nav><a href="projects.html"><small>01</small>Projects</a><a href="services.html"><small>02</small>Services</a><a href="about.html"><small>03</small>About</a><a href="contact.html"><small>04</small>Contact</a></nav><div class="menu__foot"><span>(310) 882-5505</span><span>Palos Verdes Peninsula · South Bay, LA</span><span>CSLB #998954 · Class B</span></div></div>
+
+<main>
+<section class="subhero">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h1 data-reveal="lines">Let's talk about<br>your <em>project.</em></h1>
+    <p class="subhero__lead lead" data-reveal="fade">Tell us about your site, your program and roughly where you are in the process. We'll follow up to set an initial conversation and outline how a Kashi build takes shape.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:clamp(20px,3vw,40px)">
+  <div class="wrap contact-grid">
+    <form class="form" data-contact novalidate>
+      <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required data-err="Please enter your name"><div class="field__msg"></div></div>
+      <div class="grid cols-2" style="gap:clamp(18px,2vw,26px)">
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required data-err="Enter a valid email"><div class="field__msg"></div></div>
+        <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel"><div class="field__msg"></div></div>
+      </div>
+      <div class="grid cols-2" style="gap:clamp(18px,2vw,26px)">
+        <div class="field"><label for="type">Project type</label>
+          <select id="type" name="type"><option>Custom home</option><option>Remodel / addition</option><option>ADU</option><option>Development</option><option>Construction management</option><option>Something else</option></select>
+        </div>
+        <div class="field"><label for="location">Project location</label><input id="location" name="location" type="text" placeholder="e.g. Redondo Beach"><div class="field__msg"></div></div>
+      </div>
+      <div class="field"><label for="message">Tell us about it</label><textarea id="message" name="message" required data-err="A few words, please"></textarea><div class="field__msg"></div></div>
+      <div><button type="submit" class="btn btn--gold" data-magnetic="0.15"><span>Send inquiry</span> <span class="btn__chev">→</span></button></div>
+      <div class="form__ok">Thank you — your inquiry is in. We'll be in touch shortly. For anything urgent, call (310) 882-5505.</div>
+    </form>
+
+    <aside class="contact-info">
+      <div class="ci-block"><span class="lbl">Call the office</span><a href="tel:+13108825505">(310) 882-5505</a></div>
+      <div class="ci-block"><span class="lbl">Email</span><a href="mailto:info@kashiorganization.com">info@kashiorganization.com</a></div>
+      <div class="ci-block"><span class="lbl">Service area</span><p>Palos Verdes Peninsula, Hermosa Beach, Redondo Beach, Manhattan Beach &amp; the greater South Bay.</p></div>
+      <div class="ci-block"><span class="lbl">License</span><p>CSLB #998954 · Class B General Building · Licensed &amp; insured</p></div>
+      <div class="ci-block hud" style="border:1px solid var(--line);border-top:1px solid var(--line);padding:22px;margin-top:8px">
+        <span class="lbl">Coordinates</span>
+        <p class="mono" style="font-size:var(--fs-mono);color:var(--fg-soft)">33.77° N, 118.39° W<br>Palos Verdes Peninsula, CA</p>
+        <span class="corner-frame"></span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section on-dark" style="background:var(--ink);color:var(--paper)">
+  <div class="wrap">
+    <div class="shead"><span class="eyebrow">Good to know</span><h2 class="h2 mt-s" data-reveal="lines">Questions, answered.</h2></div>
+    <div class="acc" id="faqs"></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer on-dark">
+  <div class="tech-grid"></div>
+  <div class="wrap footer__grid">
+    <div class="footer__brand"><img src="assets/img/brand/kashi-lockup.png" alt="Kashi Organization"><p>Custom homes and real estate development on the Palos Verdes Peninsula and South Bay since 2006.</p></div>
+    <div class="footer__col"><h4>Explore</h4><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+    <div class="footer__col"><h4>Office</h4><a href="tel:+13108825505">(310) 882-5505</a><a href="mailto:info@kashiorganization.com">info@kashiorganization.com</a><p>Palos Verdes Peninsula<br>South Bay, Los Angeles</p><p>CSLB #998954 · Class B</p></div>
+  </div>
+  <div class="wrap"><div class="footer__big" data-parallax="0.08">KASHI</div></div>
+  <div class="wrap footer__bar"><span>© 2026 Kashi Organization, Inc.</span><span>Construction Management · Real Estate Development</span><span>Licensed &amp; insured · CSLB #998954</span></div>
+</footer>
+
+<script src="assets/js/vendor/gsap.min.js"></script>
+<script src="assets/js/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/vendor/SplitText.min.js"></script>
+<script src="assets/js/vendor/ScrambleTextPlugin.min.js"></script>
+<script src="assets/js/vendor/InertiaPlugin.min.js"></script>
+<script src="assets/js/vendor/Flip.min.js"></script>
+<script src="assets/js/vendor/CustomEase.min.js"></script>
+<script src="assets/js/vendor/lenis.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var K=window.KASHI, f=document.getElementById('faqs');
+  if (f) f.innerHTML = K.faqs.map(function(q){return '<div class="acc__item"><button class="acc__q">'+q.q+'<span class="pm"></span></button><div class="acc__a"><div><p>'+q.a+'</p></div></div></div>';}).join('');
+});
+</script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
