@@ -4,9 +4,14 @@
 
 /* ---------- Sub-page hero (projects / about / services / contact) ---------- */
 .subhero { position: relative; padding-top: calc(var(--gutter) + clamp(70px,9vw,140px)); padding-bottom: clamp(30px,4vw,60px); overflow: hidden; }
-.subhero .eyebrow { color: var(--gold); }
+.subhero .eyebrow { color: var(--accent-text); }
 .subhero h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: .98; letter-spacing: -.015em; margin-top: 20px; max-width: 16ch; }
-.subhero h1 em { font-style: italic; color: var(--gold); }
+.subhero h1 em { font-style: italic; color: var(--accent-text); }
+.on-dark.subhero .eyebrow, .on-dark .subhero .eyebrow { color: var(--gold-2); }
+.on-dark.subhero h1 em, .on-dark .subhero h1 em { color: var(--gold-2); }
+/* subhero with HUD readout column */
+.subhero__grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(30px,5vw,80px); align-items: end; }
+@media (max-width: 900px){ .subhero__grid { grid-template-columns: 1fr; } .subhero__grid .hud-readout { display: none; } }
 .subhero__lead { margin-top: 26px; max-width: 52ch; }
 .subhero__row { display:flex; justify-content: space-between; align-items:flex-end; gap: 30px; flex-wrap: wrap; margin-top: clamp(30px,4vw,54px); }
 
@@ -76,11 +81,14 @@
 
 /* dots grid feature */
 .dots { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(var(--cols, 20), 1fr); place-items: center; font-size: 4px; --dot-base: #24405c; --dot-active: #e6c072; }
-.dots .dot { width: 4px; height: 4px; border-radius: 50%; will-change: transform; }
+.dots .dot { width: 4px; height: 4px; border-radius: 50%; }
 .dots-wrap { position: relative; overflow: hidden; }
 
 /* Reveal pre-hide guard — only when JS is active; no-JS shows everything */
-.js [data-reveal="fade"], .js [data-reveal-item], .js [data-reveal="lines"] { opacity: 0; }
+.js [data-reveal="fade"], .js [data-reveal-item], .js [data-reveal="lines"], .js [data-scramble] { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal], [data-reveal-item] { opacity: 1 !important; transform: none !important; }
+  [data-reveal], [data-reveal-item], [data-scramble] { opacity: 1 !important; transform: none !important; }
 }
+/* Vendor/JS failure safety net — reveal everything, drop the loader */
+.js-failed [data-reveal], .js-failed [data-reveal-item], .js-failed [data-scramble] { opacity: 1 !important; }
+.js-failed .loader { display: none !important; }

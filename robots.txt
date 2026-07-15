@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://luxologygg.github.io/KashiOrganization/sitemap.xml

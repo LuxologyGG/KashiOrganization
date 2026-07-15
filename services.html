@@ -13,8 +13,17 @@
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" href="assets/css/pages.css">
+<meta property="og:image" content="https://luxologygg.github.io/KashiOrganization/assets/img/projects/ext-coastal-1.jpg">
+<link rel="canonical" href="https://luxologygg.github.io/KashiOrganization/services.html">
+<meta property="og:url" content="https://luxologygg.github.io/KashiOrganization/services.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://luxologygg.github.io/KashiOrganization/assets/img/projects/ext-coastal-1.jpg">
+<noscript><style>.loader{display:none!important}body.loading{overflow:auto!important}[data-reveal],[data-reveal-item],[data-scramble]{opacity:1!important}</style></noscript>
+<script>setTimeout(function(){if(!window.__kashiBooted){document.documentElement.classList.add("js-failed");document.body.classList.remove("loading");var l=document.querySelector(".loader");if(l)l.remove();}},4500);</script>
 </head>
 <body class="loading">
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="loader"><div class="loader__inner"><div class="loader__mark"><img src="assets/img/brand/kashi-emblem.png" alt=""></div><div class="loader__bar"><div class="loader__fill"></div></div><div class="loader__row"><span>Services</span><span class="loader__count"><b>000</b> / 100</span></div></div></div>
 
@@ -26,14 +35,23 @@
 </nav>
 <div class="menu"><nav><a href="projects.html"><small>01</small>Projects</a><a href="services.html"><small>02</small>Services</a><a href="about.html"><small>03</small>About</a><a href="contact.html"><small>04</small>Contact</a></nav><div class="menu__foot"><span>(310) 882-5505</span><span>Palos Verdes Peninsula · South Bay, LA</span><span>CSLB #998954 · Class B</span></div></div>
 
-<main>
+<main id="main">
 <section class="subhero on-dark" style="background:var(--ink);color:var(--paper)">
   <div class="tech-grid"></div>
   <div class="glow" style="left:-6%;top:-10%"></div>
-  <div class="wrap" style="position:relative;z-index:2">
-    <span class="eyebrow">Capabilities</span>
-    <h1 data-reveal="lines">Everything it takes<br>to build <em>well.</em></h1>
-    <p class="subhero__lead lead" data-reveal="fade">From a single custom residence to a full development, Kashi manages the entire arc — feasibility and design through construction, delivery and beyond. One accountable team, one standard of finish.</p>
+  <div class="wrap subhero__grid" style="position:relative;z-index:2">
+    <div>
+      <span class="eyebrow" data-scramble="scroll">Capabilities</span>
+      <h1 data-reveal="lines">Everything it takes<br>to build <em>well.</em></h1>
+      <p class="subhero__lead lead" data-reveal="fade">From a single custom residence to a full development, Kashi manages the entire arc — feasibility and design through construction, delivery and beyond. One accountable team, one standard of finish.</p>
+    </div>
+    <div class="hud-readout hud" data-reveal="fade">
+      <div class="row"><span class="k">Services</span><span class="v">06</span></div>
+      <div class="row"><span class="k">Scope</span><span class="v">Ground-up → sale</span></div>
+      <div class="row"><span class="k">Region</span><span class="v">South Bay · PV</span></div>
+      <div class="row"><span class="k">Standard</span><span class="v">One team</span></div>
+      <span class="corner-frame"></span>
+    </div>
   </div>
 </section>
 
@@ -77,7 +95,6 @@
 <script src="assets/js/vendor/SplitText.min.js"></script>
 <script src="assets/js/vendor/ScrambleTextPlugin.min.js"></script>
 <script src="assets/js/vendor/InertiaPlugin.min.js"></script>
-<script src="assets/js/vendor/Flip.min.js"></script>
 <script src="assets/js/vendor/CustomEase.min.js"></script>
 <script src="assets/js/vendor/lenis.min.js"></script>
 <script src="assets/js/data.js"></script>
@@ -88,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function(){
   if (rows) rows.innerHTML = K.services.map(function(s,i){
     var rev = i%2===1;
     return '<div class="feat-row '+(rev?'rev':'')+'" style="margin-bottom:clamp(48px,7vw,120px)">'+
-      '<div class="feat-row__media img-reveal" data-reveal="clip"><img src="'+IMG(s.img)+'" alt="'+s.title+'" loading="lazy"></div>'+
-      '<div><span class="eyebrow">Service '+s.k+'</span>'+
+      '<div class="feat-row__media img-reveal"><img src="'+IMG(s.img)+'" alt="'+s.title+' — representative of Kashi\'s work" loading="lazy"></div>'+
+      '<div><span class="eyebrow" data-scramble="scroll">Service '+s.k+'</span>'+
         '<h2 class="h3 mt-s" data-reveal="lines">'+s.title+'</h2>'+
         '<p class="lead mt-s measure" data-reveal="fade" style="font-size:var(--fs-body)">'+s.copy+'</p></div>'+
     '</div>';

@@ -10,7 +10,7 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 
-  gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, InertiaPlugin, Flip, CustomEase);
+  gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, InertiaPlugin, CustomEase);
   CustomEase.create("kashi", "0.16,1,0.3,1");
 
   /* ---------------- Lenis smooth scroll ---------------- */
@@ -18,6 +18,7 @@
   function initLenis() {
     if (reduce) return;
     lenis = new Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    window.lenisRef = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -48,7 +49,7 @@
 
   /* ---------------- Custom cursor ---------------- */
   function initCursor() {
-    if (window.matchMedia("(hover: none)").matches || window.innerWidth < 900) return;
+    if (reduce || window.matchMedia("(hover: none)").matches || window.innerWidth < 900) return;
     const cur = document.createElement("div");
     cur.className = "cursor";
     cur.innerHTML = '<div class="cursor__ring"></div><div class="cursor__dot"></div><div class="cursor__label">View</div>';
@@ -83,13 +84,35 @@
       },
     });
     const toggle = $(".nav__toggle"), menu = $(".menu");
-    if (toggle) {
-      toggle.addEventListener("click", () => {
-        const open = document.body.classList.toggle("menu-open");
+    if (toggle && menu) {
+      if (!menu.id) menu.id = "site-menu";
+      toggle.setAttribute("aria-controls", menu.id);
+      toggle.setAttribute("aria-expanded", "false");
+      const setOpen = (open) => {
+        document.body.classList.toggle("menu-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
         if (lenis) open ? lenis.stop() : lenis.start();
-      });
-      $$(".menu a").forEach((a) => a.addEventListener("click", () => { document.body.classList.remove("menu-open"); lenis && lenis.start(); }));
+        if (open) { const first = $("a", menu); first && first.focus(); }
+        else toggle.focus();
+      };
+      toggle.addEventListener("click", () => setOpen(!document.body.classList.contains("menu-open")));
+      $$("a", menu).forEach((a) => a.addEventListener("click", () => setOpen(false)));
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("menu-open")) setOpen(false); });
     }
+    initNavTheme(nav);
+  }
+
+  // Toggle .nav.is-light when a light-ground section sits under the fixed header
+  function initNavTheme(nav) {
+    const sections = $$("[data-theme]");
+    if (!sections.length) return;
+    sections.forEach((sec) => {
+      ScrollTrigger.create({
+        trigger: sec, start: "top 64px", end: "bottom 64px",
+        onToggle: (self) => { if (self.isActive) nav.classList.toggle("is-light", sec.dataset.theme === "light"); },
+      });
+    });
   }
 
   /* ---------------- Reveals ---------------- */
@@ -120,22 +143,29 @@
     $$('[data-reveal="clip"]').forEach((el) => {
       gsap.fromTo(el, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 1.1, ease: "kashi", scrollTrigger: { trigger: el, start: "top 86%", once: true } });
     });
-    // image cover wipe
+    // image reveal — one clean clip-path wipe + subtle settle scale
     $$(".img-reveal").forEach((el) => {
-      const cover = document.createElement("i"); // not used; ::after handles it
-      gsap.to(el, { "--x": 1, duration: 0.1 });
-      gsap.fromTo(el.querySelector("img") || el, { scale: 1.16 }, { scale: 1, duration: 1.4, ease: "kashi", scrollTrigger: { trigger: el, start: "top 85%", once: true } });
-      gsap.to(el, { duration: 1.05, ease: "kashi", scrollTrigger: { trigger: el, start: "top 85%", once: true }, onStart() { el.style.setProperty("--reveal", "1"); }, });
+      const img = el.querySelector("img") || el;
+      if (reduce) { gsap.set(el, { clipPath: "none" }); gsap.set(img, { scale: 1 }); return; }
+      gsap.set(el, { clipPath: "inset(0 0 100% 0)" });
+      gsap.timeline({ scrollTrigger: { trigger: el, start: "top 86%", once: true } })
+        .fromTo(el, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 1.05, ease: "kashi" })
+        .fromTo(img, { scale: 1.14 }, { scale: 1, duration: 1.3, ease: "kashi" }, 0);
     });
-    // scramble (Vaulk-style per-char)
+    // scramble (Vaulk-style per-char) — resolves INTO the real text
     $$('[data-scramble="scroll"]').forEach((el) => {
-      if (reduce) return;
+      if (reduce) { gsap.set(el, { opacity: 1 }); return; }
       const split = new SplitText(el, { type: "words,chars", wordsClass: "word", charsClass: "char" });
-      gsap.to(split.words, {
-        duration: 1.3, stagger: 0.02,
-        scrambleText: { text: "{original}", chars: "upperCase", speed: 0.95 },
-        scrollTrigger: { trigger: el, start: "top 86%", once: true },
-        onComplete: () => split.revert(),
+      ScrollTrigger.create({
+        trigger: el, start: "top 90%", once: true,
+        onEnter: () => {
+          gsap.set(el, { opacity: 1 });
+          gsap.to(split.words, {
+            duration: 1.2, stagger: 0.02,
+            scrambleText: { text: "{original}", chars: "upperCase", speed: 0.95 },
+            onComplete: () => split.revert(),
+          });
+        },
       });
     });
     // parallax
@@ -145,11 +175,6 @@
       gsap.fromTo(el, { yPercent: -sp * 50 }, { yPercent: sp * 50, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
     });
   }
-
-  // CSS hook for image reveal
-  const style = document.createElement("style");
-  style.textContent = ".img-reveal::after{transform:scaleX(1);transition:transform 1.05s cubic-bezier(.16,1,.3,1)}.img-reveal[style*='--reveal']::after{transform:scaleX(0)}";
-  document.head.appendChild(style);
 
   /* ---------------- Counters / odometer ---------------- */
   function initCounters() {
@@ -196,12 +221,12 @@
 
   /* ---------------- Interactive dots grid (osmo/InertiaPlugin) ---------------- */
   function initDots() {
+    if (reduce || window.matchMedia("(hover: none)").matches) return;
     $$("[data-dots]").forEach((container) => {
-      if (reduce) return;
       const base = getComputedStyle(container).getPropertyValue("--dot-base").trim() || "#26405a";
       const active = getComputedStyle(container).getPropertyValue("--dot-active").trim() || "#c1922f";
-      const threshold = 170, shockRadius = 260, shockPower = 4, maxSpeed = 4500;
-      let dots = [], centers = [];
+      const threshold = 170, maxSpeed = 4500;
+      let dots = [], centers = [], inView = false, dirty = true;
       function build() {
         container.innerHTML = "";
         dots = []; centers = [];
@@ -215,22 +240,43 @@
           container.appendChild(d); dots.push(d);
         }
         container.style.setProperty("--cols", cols);
-        requestAnimationFrame(() => { centers = dots.map((d) => { const r = d.getBoundingClientRect(); return { el: d, x: r.left + r.width / 2, y: r.top + r.height / 2 }; }); });
+        dirty = true; recenter();
       }
-      build(); window.addEventListener("resize", build);
-      let lt = 0, lx = 0, ly = 0;
-      window.addEventListener("mousemove", (e) => {
-        const now = performance.now(), dt = now - lt || 16;
-        let sp = Math.min(Math.hypot(e.clientX - lx, e.clientY - ly) / dt * 1000, maxSpeed);
-        lt = now; lx = e.clientX; ly = e.clientY;
-        centers.forEach(({ el, x, y }) => {
-          const dist = Math.hypot(x - e.clientX, y - e.clientY);
-          if (dist < threshold) {
-            if (!el._i) { el._i = true; gsap.to(el, { backgroundColor: active, duration: 0.2, onComplete: () => gsap.to(el, { backgroundColor: base, duration: 1.4 }) }); }
-            if (sp > 90) { el._i = false; const push = (threshold - dist) / threshold; const ang = Math.atan2(y - e.clientY, x - e.clientX); gsap.to(el, { inertia: { x: Math.cos(ang) * push * 14, y: Math.sin(ang) * push * 14 }, }); gsap.to(el, { x: 0, y: 0, duration: 1.2, ease: "elastic.out(1,0.5)", delay: 0.05 }); }
-          } else el._i = false;
+      function recenter() {
+        if (!dirty) return; dirty = false;
+        requestAnimationFrame(() => {
+          centers = dots.map((d) => { const r = d.getBoundingClientRect(); return { el: d, x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
         });
-      });
+      }
+      build();
+      window.addEventListener("resize", build);
+      // recompute viewport-space centers whenever the page scrolls (they move with scroll)
+      const markDirty = () => { dirty = true; if (inView) recenter(); };
+      (window.lenisRef ? window.lenisRef.on("scroll", markDirty) : window.addEventListener("scroll", markDirty, { passive: true }));
+      ScrollTrigger.create({ trigger: container.closest("section") || container, start: "top bottom", end: "bottom top",
+        onToggle: (self) => { inView = self.isActive; if (inView) { dirty = true; recenter(); } } });
+      setTimeout(() => { dirty = true; recenter(); }, 400); // after loader releases layout
+
+      let lt = 0, lx = 0, ly = 0, raf = 0;
+      window.addEventListener("mousemove", (e) => {
+        if (!inView || !centers.length) return;
+        if (raf) return;
+        const cx = e.clientX, cy = e.clientY;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          const now = performance.now(), dt = now - lt || 16;
+          const sp = Math.min(Math.hypot(cx - lx, cy - ly) / dt * 1000, maxSpeed);
+          lt = now; lx = cx; ly = cy;
+          for (const c of centers) {
+            const dist = Math.hypot(c.x - cx, c.y - cy);
+            if (dist < threshold) {
+              const el = c.el;
+              if (!el._i) { el._i = true; gsap.to(el, { backgroundColor: active, duration: 0.2, onComplete: () => gsap.to(el, { backgroundColor: base, duration: 1.4, onComplete: () => (el._i = false) }) }); }
+              if (sp > 90) { const push = (threshold - dist) / threshold; const ang = Math.atan2(c.y - cy, c.x - cx); gsap.to(el, { inertia: { x: Math.cos(ang) * push * 16, y: Math.sin(ang) * push * 16 } }); gsap.to(el, { x: 0, y: 0, duration: 1.2, ease: "elastic.out(1,0.5)", delay: 0.05 }); }
+            }
+          }
+        });
+      }, { passive: true });
     });
   }
 
@@ -342,7 +388,7 @@
     const p = R.projects.find((x) => x.slug === slug) || R.projects[0];
     document.title = `${p.title} — Kashi Organization`;
     const specRows = Object.entries(p.specs).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
-    const gallery = p.gallery.map((g, i) => `<figure class="pd-gitem ${i % 3 === 0 ? "wide" : ""} img-reveal" data-reveal-item><img src="${IMG(g)}" alt="${p.title} — detail ${i + 1}" loading="lazy"></figure>`).join("");
+    const gallery = p.gallery.map((g, i) => `<figure class="pd-gitem ${i % 3 === 0 ? "wide" : ""} img-reveal"><img src="${IMG(g)}" alt="${p.style} interior/exterior in the style of ${p.title}" loading="lazy"></figure>`).join("");
     // next project
     const idx = R.projects.indexOf(p); const next = R.projects[(idx + 1) % R.projects.length];
     root.innerHTML = `
@@ -361,7 +407,8 @@
           <dl class="spec pd-spec">${specRows}</dl>
         </div>
       </section>
-      <section class="wrap pd-gallery" data-reveal-group>${gallery}</section>
+      <section class="wrap" style="padding-top:clamp(16px,2vw,26px)"><span class="repnote">Photography representative of Kashi's work — project details are documented</span></section>
+      <section class="wrap pd-gallery">${gallery}</section>
       <section class="section wrap">
         <div class="rowline"><span class="eyebrow eyebrow--plain">Next project</span></div>
         <a href="project.html?slug=${next.slug}" class="pd-next" data-cursor="view">
@@ -376,22 +423,46 @@
   function initForm() {
     const form = $("[data-contact]");
     if (!form) return;
+    const ok = $(".form__ok", form);
+    const btnSpan = () => { const b = $("button[type=submit] span", form); return b; };
+    const succeed = () => {
+      form.classList.add("is-sent");
+      if (ok) { ok.setAttribute("role", "status"); ok.setAttribute("tabindex", "-1"); ok.focus(); }
+      const s = btnSpan(); if (s) s.textContent = "Send inquiry";
+      form.reset();
+    };
+    const mailtoFallback = () => {
+      const g = (n) => (form.querySelector("#" + n) || {}).value || "";
+      const body = `Name: ${g("name")}\nEmail: ${g("email")}\nPhone: ${g("phone")}\nType: ${g("type")}\nLocation: ${g("location")}\n\n${g("message")}`;
+      const href = `mailto:${form.dataset.mailto || "info@kashiorganization.com"}?subject=${encodeURIComponent("Project inquiry — " + g("name"))}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
+      succeed();
+    };
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      let ok = true;
+      let valid = true, firstBad = null;
       $$(".field", form).forEach((f) => {
         const input = $("input,textarea,select", f);
         if (!input || !input.hasAttribute("required")) return;
         const msg = $(".field__msg", f);
         let bad = !input.value.trim();
         if (input.type === "email" && input.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value)) bad = true;
-        f.classList.toggle("err", bad); if (msg) msg.textContent = bad ? (input.dataset.err || "Required") : "";
-        if (bad) ok = false;
+        f.classList.toggle("err", bad);
+        input.setAttribute("aria-invalid", String(bad));
+        if (msg) { msg.textContent = bad ? (input.dataset.err || "Required") : ""; if (!msg.id) msg.id = input.id + "-msg"; input.setAttribute("aria-describedby", msg.id); }
+        if (bad) { valid = false; firstBad = firstBad || input; }
       });
-      if (!ok) return;
-      const btn = $("button[type=submit]", form);
-      if (btn) btn.querySelector("span") ? (btn.querySelector("span").textContent = "Sending…") : null;
-      setTimeout(() => { form.classList.add("is-sent"); form.reset(); if (btn && btn.querySelector("span")) btn.querySelector("span").textContent = "Send inquiry"; }, 700);
+      if (!valid) { firstBad && firstBad.focus(); return; }
+      const s = btnSpan(); if (s) s.textContent = "Sending…";
+      const endpoint = form.dataset.endpoint;
+      if (endpoint) {
+        fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+          .then((r) => { if (r.ok) succeed(); else throw new Error("bad status"); })
+          .catch(() => mailtoFallback());
+      } else {
+        // No backend wired — open the visitor's mail client so the lead is never lost.
+        setTimeout(mailtoFallback, 300);
+      }
     });
   }
 
@@ -415,6 +486,7 @@
     const start = () => { initReveals(); initCounters(); ScrollTrigger.refresh(); };
     document.fonts && document.fonts.ready ? document.fonts.ready.then(start) : start();
     setTimeout(() => ScrollTrigger.refresh(), 800);
+    window.__kashiBooted = true;
   }
 
   document.addEventListener("DOMContentLoaded", () => {

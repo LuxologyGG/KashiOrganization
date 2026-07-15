@@ -14,7 +14,7 @@ window.KASHI = {
     since: "2006",
     owner: "Arash Abbasian",
     ownerRole: "Founder & Principal",
-    region: "Palos Verdes Peninsula · South Bay, Los Angeles",
+    region: "South Bay · Palos Verdes Peninsula, Los Angeles",
     phone: "(310) 882-5505",
     phoneAlt: "(310) 704-8090",
     email: "info@kashiorganization.com",
@@ -24,7 +24,7 @@ window.KASHI = {
     rating: "5.0",
     reviews: "11",
     intro:
-      "For nearly two decades, Kashi Organization has built custom homes and led development across the Palos Verdes Peninsula and the South Bay. We work with our clients from first sketch to final walkthrough, with an obsessive eye for detail and a standard of quality that does not bend.",
+      "For two decades, Kashi Organization has built custom homes and led development across the South Bay and the Palos Verdes Peninsula. We work with our clients from first sketch to final walkthrough, with an obsessive eye for detail and a standard of quality that does not bend.",
     ethos:
       "We don't just build quality — we build homes people are proud to live in.",
   },
@@ -38,7 +38,7 @@ window.KASHI = {
   ],
 
   services: [
-    { k: "01", title: "Custom Home Building", copy: "Ground-up bespoke residences, engineered and finished to the last detail. From foundation to final coat, every home is built as if it were our own." , img: "ext-contemporary-1" },
+    { k: "01", title: "Custom Home Building", copy: "Ground-up bespoke residences, engineered and finished to the last detail. From foundation to final coat, every home is built as if it were our own." , img: "pool-1" },
     { k: "02", title: "Construction Management", copy: "Owner's representation, budgeting, scheduling and trade coordination. We manage the complexity so the vision stays intact and on-budget.", img: "kitchen-1" },
     { k: "03", title: "Real Estate Development", copy: "Full-cycle development of spec and investment properties — tens of millions delivered, from site acquisition through sale.", img: "ext-coastal-1" },
     { k: "04", title: "Whole-Home Remodels & Additions", copy: "Timeless renovations and additions that respect the original architecture while elevating how a home lives.", img: "living-4" },
@@ -205,7 +205,7 @@ window.KASHI = {
   ],
 
   credentials: [
-    { b: "Est. 2006", s: "Palos Verdes Peninsula" },
+    { b: "Est. 2006", s: "South Bay · Los Angeles" },
     { b: "CSLB #998954", s: "Class B General Building" },
     { b: "Score 92", s: "BuildZoom · top tier" },
     { b: "5.0 ★", s: "11 client reviews" },

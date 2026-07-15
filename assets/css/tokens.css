@@ -34,12 +34,14 @@
   --bg:         var(--paper);
   --bg-2:       var(--paper-1);
   --fg:         var(--ink);
-  --fg-soft:    color-mix(in srgb, var(--ink) 62%, var(--paper));
-  --fg-faint:   color-mix(in srgb, var(--ink) 38%, var(--paper));
-  --line:       color-mix(in srgb, var(--ink) 16%, transparent);
+  --fg-soft:    color-mix(in srgb, var(--ink) 74%, var(--paper));   /* ~5.8:1 on bone */
+  --fg-faint:   color-mix(in srgb, var(--ink) 54%, var(--paper));   /* ~3.4:1 on bone */
+  --line:       color-mix(in srgb, var(--ink) 18%, transparent);
   --line-soft:  color-mix(in srgb, var(--ink) 9%, transparent);
   --accent:     var(--gold);
   --accent-ink: #241a06;
+  --accent-text:var(--gold-deep);  /* gold that passes AA as text on light ground */
+  --focus:      var(--gold-deep);
 
   /* ---- Typography ---- */
   --font-display: "Fraunces", "Times New Roman", Georgia, serif;
@@ -106,7 +108,22 @@
   --line:     color-mix(in srgb, var(--paper) 16%, transparent);
   --line-soft:color-mix(in srgb, var(--paper) 9%, transparent);
   --accent:   var(--gold-2);
+  --accent-text: var(--gold-2);
+  --focus:    var(--gold-2);
   color-scheme: dark;
+}
+
+/* Skip link + global keyboard focus ring (WCAG 2.4.7) */
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 200;
+  background: var(--ink); color: var(--paper);
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 12px 18px; transition: top .2s var(--e-out);
+}
+.skip-link:focus { top: 12px; outline: 2px solid var(--gold-2); }
+:where(a, button, input, textarea, select, .filter, .pcard, .acc__q, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
 /* ============================ Reset ============================ */
