@@ -30,7 +30,7 @@ function boot() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x0c0b0a, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.95;
+  renderer.toneMappingExposure = 0.9;
 
   const scene = new THREE.Scene();
   const group = new THREE.Group();      // the house
@@ -44,34 +44,25 @@ function boot() {
   // ---- post: bloom ----
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.36, 0.4, 0.22);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.22, 0.35, 0.3);
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
 
-  // ---- palette (earthy + a cool spruce pop, glows under bloom) ----
-  const PAL = [
-    new THREE.Color(0xe0a63a), // amber gold
-    new THREE.Color(0xe6d29e), // warm cream (window highlights)
-    new THREE.Color(0x9c5f28), // bronze
-    new THREE.Color(0x3f8f7e), // teal spruce
-  ];
-  // Voronoi colour seeds (model space, Y up, extent ~ ±2): roof=bright, walls=bronze, base=spruce
-  const SEEDS = [
-    { p: new THREE.Vector3(0.0,  1.9,  0.2), c: 0 },
-    { p: new THREE.Vector3(1.1,  1.3,  1.1), c: 1 },
-    { p: new THREE.Vector3(-1.3, 0.3,  0.9), c: 2 },
-    { p: new THREE.Vector3(1.2, -0.1, -0.9), c: 2 },
-    { p: new THREE.Vector3(0.0,  0.5,  1.7), c: 1 },
-    { p: new THREE.Vector3(-0.9, 0.9, -1.3), c: 3 },
-    { p: new THREE.Vector3(0.1, -1.5,  0.0), c: 3 },
-  ];
+  // ---- colour: a coherent warm vertical gradient (foundation -> walls -> roof),
+  //      with an occasional cool spark scattered evenly, like the reference. ----
+  const C_BASE  = new THREE.Color(0x8a5222); // deep bronze (foundation / base)
+  const C_WALL  = new THREE.Color(0xc98a34); // amber (walls)
+  const C_ROOF  = new THREE.Color(0xe7d3a0); // warm cream (roofline / top)
+  const C_SPARK = new THREE.Color(0x4f8a7c); // teal-spruce, used sparingly
+  const PAL = [C_WALL, C_ROOF, C_BASE, C_SPARK]; // background scatter
+  let minY = -1, spanY = 2; // set from model bounds in build()
+  const tmpC = new THREE.Color();
   const colorAt = (v) => {
-    let best = 0, bd = Infinity;
-    for (let i = 0; i < SEEDS.length; i++) {
-      const d = SEEDS[i].p.distanceToSquared(v);
-      if (d < bd) { bd = d; best = i; }
-    }
-    return PAL[SEEDS[best].c];
+    const t = Math.min(1, Math.max(0, (v.y - minY) / spanY)); // 0 base .. 1 roof
+    if (t < 0.5) tmpC.copy(C_BASE).lerp(C_WALL, t / 0.5);
+    else tmpC.copy(C_WALL).lerp(C_ROOF, (t - 0.5) / 0.5);
+    if (Math.random() < 0.06) tmpC.lerp(C_SPARK, 0.7); // rare cool spark, evenly scattered
+    return tmpC;
   };
 
   const TARGET = 4.2; // largest model dimension after normalising
@@ -103,20 +94,24 @@ function boot() {
     geo.translate(-ctr.x, -ctr.y, -ctr.z);
     geo.scale(s, s, s);
     geo.computeVertexNormals();
+    geo.computeBoundingBox();
+    minY = geo.boundingBox.min.y;
+    spanY = Math.max(1e-4, geo.boundingBox.max.y - geo.boundingBox.min.y);
     const solid = new THREE.Mesh(geo, new THREE.MeshBasicMaterial());
 
-    // ---- surface samples (area-weighted base density) ----
-    const N_SURF = 5200;
+    // ---- surface samples: even, area-weighted base coverage ----
+    const N_SURF = 8000;
     const sampler = new MeshSurfaceSampler(solid).build();
     const pos = [];
     const pv = new THREE.Vector3();
     for (let i = 0; i < N_SURF; i++) { sampler.sample(pv); pos.push(pv.x, pv.y, pv.z); }
 
-    // ---- edge samples: dense on hard edges (roofline / corners / window+door frames) ----
-    const edges = new THREE.EdgesGeometry(geo, 20); // 20° threshold
+    // ---- edge samples: a LIGHT emphasis on the major hard edges (roofline / corners /
+    //      window+door frames), well jittered so they read as denser bands, not razor lines ----
+    const edges = new THREE.EdgesGeometry(geo, 32); // only major edges
     const ep = edges.attributes.position;
     const a = new THREE.Vector3(), b = new THREE.Vector3(), p = new THREE.Vector3();
-    const EDGE_DENSITY = 26, JIT = 0.012;
+    const EDGE_DENSITY = 8, JIT = 0.03;
     for (let i = 0; i < ep.count; i += 2) {
       a.fromBufferAttribute(ep, i); b.fromBufferAttribute(ep, i + 1);
       const n = Math.max(2, Math.round(a.distanceTo(b) * EDGE_DENSITY));
