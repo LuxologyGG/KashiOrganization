@@ -335,3 +335,10 @@
   .ct-fact { grid-template-columns: 1fr; }
   .ct-fact .fv, .ct-fact .fk { grid-column: 1; text-align: left; }
 }
+
+/* ---------- Hero emblem: simplistic line-art of the lion, drawn in ---------- */
+.ct-hero__emblem { position: absolute; top: clamp(56px, 11vh, 150px); right: clamp(18px, 7vw, 150px);
+  width: clamp(190px, 26vw, 400px); z-index: 0; pointer-events: none;
+  color: color-mix(in srgb, var(--ink) 60%, transparent); }
+.ct-hero__emblem svg { width: 100%; height: auto; overflow: visible; }
+@media (max-width: 900px){ .ct-hero__emblem { display: none; } }

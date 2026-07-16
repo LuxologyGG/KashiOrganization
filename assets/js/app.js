@@ -312,6 +312,21 @@
       .to(polys, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)", stagger: { each: 0.028, from: "random" } }, 0.25);
   }
 
+  /* ---------------- Outline emblem that draws itself in (stroke) ---------------- */
+  function initEmblemDraw() {
+    var box = $("[data-emblem-draw]");
+    if (!box) return;
+    var shapes = $$("polygon, circle", box);
+    if (!shapes.length) return;
+    if (reduce) { gsap.set(shapes, { strokeDashoffset: 0 }); return; }
+    gsap.set(shapes, { strokeDasharray: 1, strokeDashoffset: 1 });
+    gsap.to(shapes, {
+      strokeDashoffset: 0, duration: 1.15, ease: "power1.inOut",
+      stagger: { each: 0.02, from: "random" },
+      scrollTrigger: { trigger: box, start: "top 95%", once: true }
+    });
+  }
+
   /* ---------------- "Vision meets execution": line drawing → photo scrub ---------------- */
   function initVME() {
     const stage = $("[data-vme]");
@@ -468,6 +483,7 @@
     initMarquee();
     initHero();
     initCtaEmblem();
+    initEmblemDraw();
     initVME();
     initAccordion();
     initTesti();
