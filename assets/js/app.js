@@ -299,31 +299,16 @@
 
   /* ---------------- CTA emblem: rings draw on, polygons assemble ---------------- */
   function initCtaEmblem() {
-    const box = $("[data-emblem]");
-    if (!box) return;
-    const svg = $("svg", box); if (!svg) return;
-    const polys = $$("polygon", svg);
-    const rings = $$("circle", svg);
     if (reduce) return; // static emblem for reduced motion
-    gsap.set(polys, { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" });
-    gsap.set(rings, { strokeDasharray: 1, strokeDashoffset: 1 });
-    const tl = gsap.timeline({ scrollTrigger: { trigger: box, start: "top 82%", once: true } });
-    tl.to(rings, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut", stagger: 0.18 }, 0)
-      .to(polys, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)", stagger: { each: 0.028, from: "random" } }, 0.25);
-  }
-
-  /* ---------------- Outline emblem that draws itself in (stroke) ---------------- */
-  function initEmblemDraw() {
-    var box = $("[data-emblem-draw]");
-    if (!box) return;
-    var shapes = $$("path, polygon, circle, line, ellipse", box);
-    if (!shapes.length) return;
-    if (reduce) { gsap.set(shapes, { strokeDashoffset: 0 }); return; }
-    gsap.set(shapes, { strokeDasharray: 1, strokeDashoffset: 1 });
-    gsap.to(shapes, {
-      strokeDashoffset: 0, duration: 1.15, ease: "power1.inOut",
-      stagger: { each: 0.02, from: "random" },
-      scrollTrigger: { trigger: box, start: "top 95%", once: true }
+    $$("[data-emblem]").forEach((box) => {
+      const svg = $("svg", box); if (!svg) return;
+      const polys = $$("polygon", svg);
+      const rings = $$("circle", svg);
+      gsap.set(polys, { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" });
+      gsap.set(rings, { strokeDasharray: 1, strokeDashoffset: 1 });
+      const tl = gsap.timeline({ scrollTrigger: { trigger: box, start: "top 85%", once: true } });
+      tl.to(rings, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut", stagger: 0.18 }, 0)
+        .to(polys, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)", stagger: { each: 0.026, from: "random" } }, 0.25);
     });
   }
 
@@ -483,7 +468,6 @@
     initMarquee();
     initHero();
     initCtaEmblem();
-    initEmblemDraw();
     initVME();
     initAccordion();
     initTesti();

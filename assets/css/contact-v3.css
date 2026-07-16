@@ -337,10 +337,17 @@
 }
 
 /* ---------- Hero emblem: simplistic line-art of the lion, drawn in ---------- */
-.ct-hero__emblem { position: absolute; top: 50%; right: clamp(-24px, 2vw, 70px); transform: translateY(-50%);
-  width: clamp(300px, 40vw, 560px); z-index: 0; pointer-events: none;
-  color: color-mix(in srgb, var(--ink) 44%, transparent); }
-.ct-hero__emblem svg { width: 100%; height: auto; overflow: visible; }
+.ct-hero__emblem { position: absolute; top: 50%; right: clamp(-30px, 1vw, 64px); transform: translateY(-50%);
+  width: clamp(280px, 38vw, 540px); z-index: 0; pointer-events: none; color: var(--gold); }
+.ct-hero__emblem svg { width: 100%; height: auto; overflow: visible;
+  animation: ct-emblem-float 7s ease-in-out infinite, ct-emblem-glow 4.8s ease-in-out infinite; }
+.ct-hero__emblem .em-rings circle { stroke: var(--gold-deep); }
 /* keep the headline above the emblem so it sits partly behind the text */
 .ct-hero .wrap { position: relative; z-index: 1; }
+@keyframes ct-emblem-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-11px); } }
+@keyframes ct-emblem-glow {
+  0%,100% { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--gold) 34%, transparent)); }
+  50%     { filter: drop-shadow(0 0 30px color-mix(in srgb, var(--gold) 62%, transparent)); }
+}
+@media (prefers-reduced-motion: reduce){ .ct-hero__emblem svg { animation: none; filter: drop-shadow(0 0 16px color-mix(in srgb, var(--gold) 45%, transparent)); } }
 @media (max-width: 900px){ .ct-hero__emblem { display: none; } }
