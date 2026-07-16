@@ -574,7 +574,7 @@
 
 .transition__pixel {
   aspect-ratio: 1;
-  background-color: #ff5d2b;
+  background-color: var(--gold);
   width: 100%;
 }
 
@@ -680,4 +680,4 @@
 
 /* Pixel transition panel */
 .transition { z-index: var(--z-transition); }
-.transition__pixel { background-color: var(--ink); }
+.transition__pixel { background-color: var(--gold); }

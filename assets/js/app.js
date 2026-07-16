@@ -54,28 +54,35 @@
     const wrap = document.createElement("div"); wrap.className = "transition"; wrap.setAttribute("aria-hidden", "true");
     const panel = document.createElement("div"); panel.className = "transition__panel";
     wrap.appendChild(panel); document.body.appendChild(wrap);
-    let pixels = [];
+    let pixels = [], ROWS = 1;
     function build() {
       const size = window.innerWidth < 600 ? 24 : 32; // finer than osmo's default
       const cols = Math.ceil(window.innerWidth / size), rows = Math.ceil(window.innerHeight / size);
+      ROWS = rows;
       panel.innerHTML = ""; pixels = [];
-      for (let c = 0; c < cols; c++) {
-        const col = document.createElement("div"); col.className = "transition__col";
-        for (let r = 0; r < rows; r++) { const px = document.createElement("div"); px.className = "transition__pixel"; col.appendChild(px); pixels.push(px); }
-        panel.appendChild(col);
+      // build ROW-major so the pixel array reads top-to-bottom, then left-to-right
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          let col = panel.children[c];
+          if (!col) { col = document.createElement("div"); col.className = "transition__col"; panel.appendChild(col); }
+          const px = document.createElement("div"); px.className = "transition__pixel"; col.appendChild(px); pixels.push(px);
+        }
       }
     }
     build();
     let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(build, 200); });
+    // top-to-bottom wipe: delay scales with the pixel's row, plus a little jitter for the dissolve grain
+    const SPREAD = 0.5, JITTER = 0.06;
+    const rowStagger = (i) => (Math.floor(i / (pixels.length / ROWS)) / ROWS) * SPREAD + Math.random() * JITTER;
     const cover = (cb) => {
       if (reduce) { cb && cb(); return; }
       gsap.set(panel, { opacity: 1 }); gsap.set(pixels, { opacity: 0 });
-      gsap.to(pixels, { opacity: 1, duration: 0.06, ease: "none", stagger: { amount: 0.45, from: "random" }, onComplete: cb });
+      gsap.to(pixels, { opacity: 1, duration: 0.07, ease: "none", stagger: rowStagger, onComplete: cb });
     };
     const reveal = () => {
       if (reduce) { gsap.set(panel, { opacity: 0 }); return; }
       gsap.set(panel, { opacity: 1 }); gsap.set(pixels, { opacity: 1 });
-      gsap.to(pixels, { opacity: 0, duration: 0.06, ease: "none", stagger: { amount: 0.45, from: "random" }, onComplete: () => gsap.set(panel, { opacity: 0 }) });
+      gsap.to(pixels, { opacity: 0, duration: 0.07, ease: "none", stagger: rowStagger, onComplete: () => gsap.set(panel, { opacity: 0 }) });
     };
     // intercept plain, primary-click, same-origin navigations only
     document.addEventListener("click", (e) => {
@@ -302,7 +309,7 @@
           <span class="pcard__num mono">P/${String(n + 1).padStart(2, "0")}</span>
           <div class="pcard__media"><img src="${IMG(p.cover)}" alt="${p.title}" loading="lazy"></div>
           <div class="pcard__body">
-            <div><span class="pcard__tag">${p.tag}</span><h3 class="pcard__title">${p.title}</h3><div class="pcard__loc">${p.city} · ${p.style} · ${p.year}</div></div>
+            <div><span class="pcard__tag">${p.tag}</span><h3 class="pcard__title">${p.title}</h3><div class="pcard__loc">${p.city} · ${p.style}${p.year ? " · " + p.year : ""}</div></div>
             <span class="pcard__go" aria-hidden="true">↗</span>
           </div>`;
         grid.appendChild(a);
@@ -358,7 +365,7 @@
           <a href="projects.html" class="tlink" style="color:var(--paper)"><span class="ar">←</span> All projects</a>
           <span class="pcard__tag" style="margin-top:auto">${p.tag}</span>
           <h1 class="h1 display">${p.title}</h1>
-          <div class="pd-hero__meta mono">${p.city} &nbsp;·&nbsp; ${p.style} &nbsp;·&nbsp; ${p.year} &nbsp;·&nbsp; ${p.photos} frames</div>
+          <div class="pd-hero__meta mono">${p.city} &nbsp;·&nbsp; ${p.style}${p.year ? " &nbsp;·&nbsp; " + p.year : ""} &nbsp;·&nbsp; ${p.photos} frames</div>
         </div>
       </header>
       <section class="section wrap pd-intro">
@@ -367,7 +374,7 @@
           <dl class="spec pd-spec">${specRows}</dl>
         </div>
       </section>
-      <section class="wrap" style="padding-top:clamp(16px,2vw,26px)"><span class="repnote">Photography representative of Kashi's work, project details are documented</span></section>
+      <section class="wrap" style="padding-top:clamp(16px,2vw,26px)"><span class="repnote">Photography from Kashi's own project gallery.</span></section>
       <section class="wrap pd-gallery">${gallery}</section>
       <section class="section wrap">
         <div class="rowline"><span class="eyebrow eyebrow--plain">Next project</span></div>

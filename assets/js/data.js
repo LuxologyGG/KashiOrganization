@@ -2,9 +2,9 @@
    KASHI ORGANIZATION, Site content (verified data)
    Sources: Houzz portfolio (Kashi's own), CSLB #998954, CA SoS
    entity #2859838 (filed 2006), Redfin/Zillow (322 Manhattan Ave),
-   BuildZoom (score 92). Project photography is premium licensed
-   stock matched to each build's documented style (Houzz project
-   galleries are bot-protected; see README).
+   BuildZoom (score 92). Project photography is Kashi's own, pulled
+   from their Houzz project galleries (addresses in the South Bay
+   beach cities: Manhattan Beach, Hermosa Beach, Redondo Beach).
    ============================================================= */
 window.KASHI = {
   company: {
@@ -14,7 +14,7 @@ window.KASHI = {
     since: "2006",
     owner: "Arash Abbasian",
     ownerRole: "Founder & Principal",
-    region: "South Bay · Palos Verdes Peninsula, Los Angeles",
+    region: "South Bay Beach Cities, Los Angeles",
     phone: "(310) 882-5505",
     phoneAlt: "(310) 704-8090",
     email: "info@kashiorganization.com",
@@ -24,7 +24,7 @@ window.KASHI = {
     rating: "5.0",
     reviews: "11",
     intro:
-      "For two decades, Kashi Organization has built custom homes and led development across the South Bay and the Palos Verdes Peninsula. We work with our clients from first sketch to final walkthrough, with an obsessive eye for detail and a standard of quality that does not bend.",
+      "For two decades, Kashi Organization has built custom homes and led development across the South Bay's beach cities, Manhattan Beach, Hermosa Beach and Redondo Beach. We work with our clients from first sketch to final walkthrough, with an obsessive eye for detail and a standard of quality that does not bend.",
     ethos:
       "We don't just build quality, we build homes people are proud to live in.",
   },
@@ -38,12 +38,12 @@ window.KASHI = {
   ],
 
   services: [
-    { k: "01", title: "Custom Home Building", copy: "Ground-up bespoke residences, engineered and finished to the last detail. From foundation to final coat, every home is built as if it were our own.", img: "pool-1" },
-    { k: "02", title: "Construction Management", copy: "Owner's representation, budgeting, scheduling and trade coordination. We manage the complexity so the vision stays intact and on-budget.", img: "kitchen-1" },
-    { k: "03", title: "Real Estate Development", copy: "Full-cycle development of spec and investment properties, tens of millions delivered, from site acquisition through sale.", img: "ext-coastal-1" },
-    { k: "04", title: "Whole-Home Remodels & Additions", copy: "Timeless renovations and additions that respect the original architecture while elevating how a home lives.", img: "living-4" },
-    { k: "05", title: "ADUs & Accessory Structures", copy: "Guest houses, studios and accessory dwelling units designed to extend the property with the same craft as the main residence.", img: "ext-estate-2" },
-    { k: "06", title: "Design-Build & Pre-Construction", copy: "Early collaboration with architects and designers, feasibility, permitting and value engineering before a single wall goes up.", img: "interior-detail-2" },
+    { k: "01", title: "Custom Home Building", copy: "Ground-up bespoke residences, engineered and finished to the last detail. From foundation to final coat, every home is built as if it were our own.", img: "hz/322-manhattan-ave-hero" },
+    { k: "02", title: "Construction Management", copy: "Owner's representation, budgeting, scheduling and trade coordination. We manage the complexity so the vision stays intact and on-budget.", img: "hz/336-ocean-view-ave-3" },
+    { k: "03", title: "Real Estate Development", copy: "Full-cycle development of spec and investment properties, tens of millions delivered, from site acquisition through sale.", img: "hz/706-708-2nd-st-hero" },
+    { k: "04", title: "Whole-Home Remodels & Additions", copy: "Timeless renovations and additions that respect the original architecture while elevating how a home lives.", img: "hz/2106-belmont-ln-hero" },
+    { k: "05", title: "ADUs & Accessory Structures", copy: "Guest houses, studios and accessory dwelling units designed to extend the property with the same craft as the main residence.", img: "hz/707-1st-pl-hero" },
+    { k: "06", title: "Design-Build & Pre-Construction", copy: "Early collaboration with architects and designers, feasibility, permitting and value engineering before a single wall goes up.", img: "hz/705-1st-pl-hero" },
   ],
 
   process: [
@@ -53,7 +53,7 @@ window.KASHI = {
     { k: "Phase 04", title: "Delivery & Beyond", copy: "A thorough walkthrough, a warranty that means something, and a relationship that continues long after we hand you the keys.", items: ["Detailed final walkthrough", "Warranty & support", "Post-move responsiveness", "A client for life"] },
   ],
 
-  /* Projects, real Kashi builds (addresses/styles from their Houzz portfolio) */
+  /* Projects, real Kashi builds, photography from their own Houzz galleries */
   projects: [
     {
       slug: "322-manhattan-ave",
@@ -62,12 +62,26 @@ window.KASHI = {
       style: "Contemporary",
       year: "2016",
       tag: "Ground-up custom residence",
-      cover: "ext-contemporary-1",
+      cover: "hz/322-manhattan-ave-hero",
       feature: true,
-      photos: 61,
+      photos: 60,
       specs: { Bedrooms: "4", Bathrooms: "6", "Living area": "4,477 sq ft", Style: "Contemporary", Completed: "2016", Value: "$5.4M sale" },
       blurb: "A four-level contemporary residence steps from the sand in Hermosa Beach. Walls of glass, a rooftop deck with whitewater views, a home theater and a temperature-controlled wine wall, designed with Tomaro Design Group and built by Kashi. Later sold for $5.4 million.",
-      gallery: ["ext-contemporary-1","kitchen-1","living-2","pool-1","staircase-1","bath-1","deck-1","bedroom-1"]
+      gallery: ["hz/322-manhattan-ave-1","hz/322-manhattan-ave-2","hz/322-manhattan-ave-3","hz/322-manhattan-ave-4","hz/322-manhattan-ave-5","hz/322-manhattan-ave-6"]
+    },
+    {
+      slug: "705-1st-pl",
+      title: "705 1st Place",
+      city: "Hermosa Beach, CA",
+      style: "Contemporary",
+      year: "",
+      tag: "Ground-up new construction",
+      cover: "hz/705-1st-pl-hero",
+      feature: true,
+      photos: 53,
+      specs: { Type: "Ground-up new construction", Style: "Coastal Contemporary", Levels: "3", Feature: "Rooftop deck" },
+      blurb: "A ground-up contemporary on one of Hermosa Beach's walk streets, three levels of stacked stone, warm wood and glass rising to a rooftop deck. Oak floors, an open kitchen-and-living volume, and a facade that reads clean and quiet from the street.",
+      gallery: ["hz/705-1st-pl-1","hz/705-1st-pl-2","hz/705-1st-pl-3","hz/705-1st-pl-4","hz/705-1st-pl-5","hz/705-1st-pl-6"]
     },
     {
       slug: "336-ocean-view-ave",
@@ -76,12 +90,51 @@ window.KASHI = {
       style: "Coastal",
       year: "2019",
       tag: "Coastal contemporary",
-      cover: "ext-coastal-1",
+      cover: "hz/336-ocean-view-ave-hero",
       feature: true,
-      photos: 56,
-      specs: { Bedrooms: "5", Bathrooms: "5", Levels: "3", Style: "Coastal Contemporary", Feature: "Ocean-view roof deck" },
-      blurb: "A light-filled coastal contemporary organized around indoor-outdoor living and a top-floor deck that opens to the Pacific. Clean lines, warm materials, and a stair that reads as sculpture.",
-      gallery: ["ext-coastal-1","hero-dusk","kitchen-3","living-1","deck-1","staircase-2","pool-1"]
+      photos: 55,
+      specs: { Style: "Coastal Contemporary", Levels: "3", Feature: "Ocean-view roof deck", Detail: "Spiral stair" },
+      blurb: "A light-filled coastal contemporary organized around indoor-outdoor living and a top-floor deck that opens to the Pacific. Clean lines, warm materials, and a spiral stair that reads as sculpture.",
+      gallery: ["hz/336-ocean-view-ave-1","hz/336-ocean-view-ave-2","hz/336-ocean-view-ave-3","hz/336-ocean-view-ave-4","hz/336-ocean-view-ave-5","hz/336-ocean-view-ave-6"]
+    },
+    {
+      slug: "332-ocean-view-ave",
+      title: "332 Ocean View Avenue",
+      city: "Hermosa Beach, CA",
+      style: "Coastal",
+      year: "",
+      tag: "Coastal contemporary",
+      cover: "hz/332-ocean-view-ave-hero",
+      photos: 46,
+      specs: { Type: "Ground-up new construction", Style: "Coastal Contemporary", Feature: "Pergola roof deck", Detail: "Spiral stair" },
+      blurb: "A white coastal contemporary with clean Spanish-modern lines, a pergola-shaded roof deck and an open plan drawn toward the light. Built ground-up in Hermosa Beach, one street back from the sand.",
+      gallery: ["hz/332-ocean-view-ave-1","hz/332-ocean-view-ave-2","hz/332-ocean-view-ave-3","hz/332-ocean-view-ave-4","hz/332-ocean-view-ave-5","hz/332-ocean-view-ave-6"]
+    },
+    {
+      slug: "706-708-2nd-st",
+      title: "706 & 708 2nd Street",
+      city: "Hermosa Beach, CA",
+      style: "Contemporary",
+      year: "",
+      tag: "Twin residences · development",
+      cover: "hz/706-708-2nd-st-hero",
+      photos: 35,
+      specs: { Program: "Twin-home development", Homes: "2", Style: "Contemporary", Scope: "Acquisition → build" },
+      blurb: "Two ground-up residences developed side by side on 2nd Street in Hermosa Beach. Stone and stucco exteriors, bright open living volumes and rooftop decks, carried from acquisition through construction.",
+      gallery: ["hz/706-708-2nd-st-1","hz/706-708-2nd-st-2","hz/706-708-2nd-st-3","hz/706-708-2nd-st-4","hz/706-708-2nd-st-5","hz/706-708-2nd-st-6"]
+    },
+    {
+      slug: "707-1st-pl",
+      title: "707 1st Place",
+      city: "Hermosa Beach, CA",
+      style: "Contemporary",
+      year: "",
+      tag: "Ground-up new construction",
+      cover: "hz/707-1st-pl-hero",
+      photos: 15,
+      specs: { Type: "Ground-up new construction", Style: "Contemporary", Feature: "Open main level" },
+      blurb: "A crisp contemporary on Hermosa Beach's 1st Place, wood-and-stucco massing over a stone base, a chef's kitchen and a bright, open main level built to flow to the outdoors.",
+      gallery: ["hz/707-1st-pl-1","hz/707-1st-pl-2","hz/707-1st-pl-3","hz/707-1st-pl-4","hz/707-1st-pl-5","hz/707-1st-pl-6"]
     },
     {
       slug: "1905-speyer-ln",
@@ -90,12 +143,11 @@ window.KASHI = {
       style: "Traditional",
       year: "2012",
       tag: "Elegant custom home",
-      cover: "ext-grey-1",
-      feature: true,
-      photos: 49,
-      specs: { Bedrooms: "5", Bathrooms: "5", Style: "Elegant Traditional", Features: "Wine cellar · Iron spiral stair" },
+      cover: "hz/1905-speyer-ln-hero",
+      photos: 36,
+      specs: { Style: "Elegant Traditional", Features: "Wine cellar · Iron spiral stair", Detail: "Double crown molding" },
       blurb: "\"A modernized castle sprinkled with contemporary twists.\" Rounded entries, an iron spiral staircase, double crown molding and a wine cellar, a home its owners, both architects, called love at first sight.",
-      gallery: ["ext-grey-1","kitchen-3","living-1","staircase-2","bath-2","bedroom-2"]
+      gallery: ["hz/1905-speyer-ln-1","hz/1905-speyer-ln-2","hz/1905-speyer-ln-3","hz/1905-speyer-ln-4","hz/1905-speyer-ln-5","hz/1905-speyer-ln-6"]
     },
     {
       slug: "2106-belmont-ln",
@@ -104,37 +156,11 @@ window.KASHI = {
       style: "Traditional",
       year: "2015",
       tag: "Timeless remodel & addition",
-      cover: "ext-estate-2",
-      photos: 41,
-      specs: { Scope: "Whole-home remodel", Bathrooms: "4", Style: "Timeless Traditional", Feature: "Wine cellar" },
-      blurb: "A comprehensive remodel and addition that reworked the home top to bottom, a warm, timeless interior with a chef's kitchen, refined millwork and a wine cellar.",
-      gallery: ["ext-estate-2","kitchen-2","living-3","bath-1","bedroom-1"]
-    },
-    {
-      slug: "1502-phelan-ln",
-      title: "1502 Phelan Lane",
-      city: "Redondo Beach, CA",
-      style: "Mediterranean",
-      year: "2014",
-      tag: "Tuscan custom home",
-      cover: "ext-white-1",
-      photos: 17,
-      specs: { Style: "Mediterranean / Tuscan", Feature: "Sand-finish stucco", Exterior: "Tuscan elevation" },
-      blurb: "A Tuscan-inspired residence with hand sand-finished stucco, arched detailing and landscaped grounds, Mediterranean warmth built to South Bay standards.",
-      gallery: ["ext-white-1","pool-2","kitchen-3","living-2","staircase-1"]
-    },
-    {
-      slug: "1715-harriman-ln",
-      title: "1715 Harriman Lane",
-      city: "Redondo Beach, CA",
-      style: "Mediterranean",
-      year: "2014",
-      tag: "Mediterranean custom home",
-      cover: "ext-luxury-1",
-      photos: 16,
-      specs: { Style: "Mediterranean", Bedrooms: "5", Feature: "Custom entry & stair" },
-      blurb: "A Mediterranean custom home with a dramatic entry, sculptural staircase and generous living spaces that flow to a private patio.",
-      gallery: ["ext-luxury-1","living-2","kitchen-2","bath-2","interior-detail-1"]
+      cover: "hz/2106-belmont-ln-hero",
+      photos: 31,
+      specs: { Scope: "Whole-home remodel", Style: "Timeless Traditional", Feature: "Chef's kitchen", Detail: "Refined millwork" },
+      blurb: "A comprehensive remodel and addition that reworked the home top to bottom, a warm, timeless interior with a chef's kitchen, refined millwork and generous, light-filled living spaces.",
+      gallery: ["hz/2106-belmont-ln-1","hz/2106-belmont-ln-2","hz/2106-belmont-ln-3","hz/2106-belmont-ln-4","hz/2106-belmont-ln-5","hz/2106-belmont-ln-6"]
     },
     {
       slug: "2501-huntington-ln",
@@ -143,24 +169,37 @@ window.KASHI = {
       style: "Traditional",
       year: "2015",
       tag: "Classic custom home",
-      cover: "living-4",
+      cover: "hz/2501-huntington-ln-hero",
       photos: 20,
       specs: { Style: "Classic Traditional", Feature: "Grand staircase", Interior: "Formal living & dining" },
       blurb: "A classic custom home with a grand staircase, formal living and dining rooms and a family wing, traditional proportions executed with modern build quality.",
-      gallery: ["living-4","living-3","kitchen-3","staircase-2","bath-2"]
+      gallery: ["hz/2501-huntington-ln-1","hz/2501-huntington-ln-2","hz/2501-huntington-ln-3","hz/2501-huntington-ln-4","hz/2501-huntington-ln-5","hz/2501-huntington-ln-6"]
     },
     {
-      slug: "hermosa-coastal-collection",
-      title: "Hermosa Coastal Collection",
-      city: "Hermosa Beach, CA",
-      style: "Coastal",
-      year: "2018",
-      tag: "Development · multi-residence",
-      cover: "hero-estate",
-      photos: 40,
-      specs: { Program: "Spec development", Homes: "Multiple", Style: "Coastal Contemporary", Location: "1st Pl / 2nd St / Ocean View" },
-      blurb: "A cluster of ground-up coastal contemporary homes developed across Hermosa Beach, 1st Place, 2nd Street and Ocean View, from acquisition through construction and sale.",
-      gallery: ["hero-estate","ext-coastal-1","pool-2","deck-1","living-1"]
+      slug: "1715-harriman-ln",
+      title: "1715 Harriman Lane",
+      city: "Redondo Beach, CA",
+      style: "Mediterranean",
+      year: "2014",
+      tag: "Mediterranean custom home",
+      cover: "hz/1715-harriman-ln-hero",
+      photos: 16,
+      specs: { Style: "Mediterranean", Feature: "Custom entry & stair", Interior: "Warm formal living" },
+      blurb: "A Mediterranean custom home with a dramatic entry, sculptural staircase and generous, warm living spaces that flow out to a private patio.",
+      gallery: ["hz/1715-harriman-ln-1","hz/1715-harriman-ln-2","hz/1715-harriman-ln-3","hz/1715-harriman-ln-4","hz/1715-harriman-ln-5","hz/1715-harriman-ln-6"]
+    },
+    {
+      slug: "1502-phelan-ln",
+      title: "1502 Phelan Lane",
+      city: "Redondo Beach, CA",
+      style: "Mediterranean",
+      year: "2014",
+      tag: "Tuscan custom home",
+      cover: "hz/1502-phelan-ln-hero",
+      photos: 10,
+      specs: { Style: "Mediterranean / Tuscan", Feature: "Sand-finish stucco", Exterior: "Tuscan elevation" },
+      blurb: "A Tuscan-inspired residence with hand sand-finished stucco, arched detailing and landscaped grounds, Mediterranean warmth built to South Bay standards.",
+      gallery: ["hz/1502-phelan-ln-1","hz/1502-phelan-ln-2","hz/1502-phelan-ln-3","hz/1502-phelan-ln-4","hz/1502-phelan-ln-5","hz/1502-phelan-ln-6"]
     },
   ],
 
@@ -213,7 +252,7 @@ window.KASHI = {
   ],
 
   faqs: [
-    { q: "Where does Kashi Organization build?", a: "We focus on the South Bay and the Palos Verdes Peninsula, Hermosa Beach, Redondo Beach, Manhattan Beach and the Peninsula cities, where we've built and developed for two decades." },
+    { q: "Where does Kashi Organization build?", a: "We focus on the South Bay's beach cities, Manhattan Beach, Hermosa Beach and Redondo Beach, where we've built and developed for two decades." },
     { q: "Do you take on remodels, or only ground-up homes?", a: "Both. Our core is ground-up custom homes and development, but we also take on whole-home remodels, additions and ADUs where the scope and standard fit the way we work." },
     { q: "Are you licensed and insured?", a: "Yes. Kashi Organization holds California CSLB license #998954, Class B General Building, active, in good standing, with a clean record. We carry full insurance and workers' compensation coverage." },
     { q: "How involved is the owner?", a: "Directly. Arash Abbasian is hands-on across every project, the reason clients and trade partners consistently point to communication, integrity and follow-through as what sets Kashi apart." },
