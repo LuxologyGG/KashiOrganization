@@ -269,7 +269,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .quote-lg { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.28; font-weight: 400; }
 .quote-lg .word { display: inline-block; }
 .testi { display: grid; grid-template-columns: 1fr; gap: clamp(30px,4vw,56px); }
-.testi__q { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(25px,3.3vw,52px); line-height: 1.3; letter-spacing: 0; }
+.testi__q { font-family: var(--font-mono); font-weight: 400; font-style: normal; font-size: clamp(18px,2.2vw,35px); line-height: 1.55; letter-spacing: -.01em; }
 .testi__q b { color: var(--gold); font-weight: inherit; }
 .testi__foot { display:flex; align-items:center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .testi__who { font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .06em; text-transform: uppercase; }
@@ -461,5 +461,5 @@ h1 em, h2 em, h3 em, .h1 em, .h2 em, .subhero h1 em { font-style: normal; color:
   .cta__emblem { justify-self: center; width: clamp(150px, 44vw, 220px); order: -1; margin-bottom: 8px; }
 }
 
-/* ============================ Serif accent (Sentient), used sparingly ============================ */
-.serif-accent { font-family: var(--font-serif); font-weight: 400; font-style: italic; letter-spacing: 0; }
+/* ============================ Heading accent word: display font, bronze tint ============================ */
+.serif-accent { font-style: normal; color: var(--gold-2); font-weight: inherit; }

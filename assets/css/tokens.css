@@ -50,7 +50,6 @@
   --font-display: "Clash Display", "General Sans", "Arial Narrow", sans-serif;
   --font-body:    "General Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-mono:    "Chivo Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --font-serif:   "Sentient", Georgia, "Times New Roman", serif;   /* classy accent, used sparingly */
 
   /* Fluid type scale */
   --fs-eyebrow: clamp(10px, .76vw, 12px);
