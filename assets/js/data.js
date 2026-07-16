@@ -1,5 +1,5 @@
 /* =============================================================
-   KASHI ORGANIZATION — Site content (verified data)
+   KASHI ORGANIZATION, Site content (verified data)
    Sources: Houzz portfolio (Kashi's own), CSLB #998954, CA SoS
    entity #2859838 (filed 2006), Redfin/Zillow (322 Manhattan Ave),
    BuildZoom (score 92). Project photography is premium licensed
@@ -26,7 +26,7 @@ window.KASHI = {
     intro:
       "For two decades, Kashi Organization has built custom homes and led development across the South Bay and the Palos Verdes Peninsula. We work with our clients from first sketch to final walkthrough, with an obsessive eye for detail and a standard of quality that does not bend.",
     ethos:
-      "We don't just build quality — we build homes people are proud to live in.",
+      "We don't just build quality, we build homes people are proud to live in.",
   },
 
   /* Odometer stats */
@@ -38,22 +38,22 @@ window.KASHI = {
   ],
 
   services: [
-    { k: "01", title: "Custom Home Building", copy: "Ground-up bespoke residences, engineered and finished to the last detail. From foundation to final coat, every home is built as if it were our own." , img: "pool-1" },
+    { k: "01", title: "Custom Home Building", copy: "Ground-up bespoke residences, engineered and finished to the last detail. From foundation to final coat, every home is built as if it were our own.", img: "pool-1" },
     { k: "02", title: "Construction Management", copy: "Owner's representation, budgeting, scheduling and trade coordination. We manage the complexity so the vision stays intact and on-budget.", img: "kitchen-1" },
-    { k: "03", title: "Real Estate Development", copy: "Full-cycle development of spec and investment properties — tens of millions delivered, from site acquisition through sale.", img: "ext-coastal-1" },
+    { k: "03", title: "Real Estate Development", copy: "Full-cycle development of spec and investment properties, tens of millions delivered, from site acquisition through sale.", img: "ext-coastal-1" },
     { k: "04", title: "Whole-Home Remodels & Additions", copy: "Timeless renovations and additions that respect the original architecture while elevating how a home lives.", img: "living-4" },
     { k: "05", title: "ADUs & Accessory Structures", copy: "Guest houses, studios and accessory dwelling units designed to extend the property with the same craft as the main residence.", img: "ext-estate-2" },
-    { k: "06", title: "Design-Build & Pre-Construction", copy: "Early collaboration with architects and designers — feasibility, permitting and value engineering before a single wall goes up.", img: "interior-detail-2" },
+    { k: "06", title: "Design-Build & Pre-Construction", copy: "Early collaboration with architects and designers, feasibility, permitting and value engineering before a single wall goes up.", img: "interior-detail-2" },
   ],
 
   process: [
-    { k: "Phase 01", title: "Discovery & Pre-Construction", copy: "We start with feasibility, budgeting and permitting — aligning the program, the site and the numbers before anything is committed.", items: ["Feasibility & site analysis", "Transparent budgeting", "Permitting & entitlements", "Design-build coordination"] },
+    { k: "Phase 01", title: "Discovery & Pre-Construction", copy: "We start with feasibility, budgeting and permitting, aligning the program, the site and the numbers before anything is committed.", items: ["Feasibility & site analysis", "Transparent budgeting", "Permitting & entitlements", "Design-build coordination"] },
     { k: "Phase 02", title: "Design Development", copy: "Working alongside your architect and designer, we refine selections and detailing, value-engineering without ever compromising the finish.", items: ["Architect & designer collaboration", "Material & finish selections", "Value engineering", "Structural & systems planning"] },
-    { k: "Phase 03", title: "Construction", copy: "Closely managed trades, weekly reporting and relentless quality control. A clean, organized site — always, on time and on budget.", items: ["Self-managed trade partners", "Weekly progress reporting", "Rigorous quality control", "On-schedule delivery"] },
+    { k: "Phase 03", title: "Construction", copy: "Closely managed trades, weekly reporting and relentless quality control. A clean, organized site, always, on time and on budget.", items: ["Self-managed trade partners", "Weekly progress reporting", "Rigorous quality control", "On-schedule delivery"] },
     { k: "Phase 04", title: "Delivery & Beyond", copy: "A thorough walkthrough, a warranty that means something, and a relationship that continues long after we hand you the keys.", items: ["Detailed final walkthrough", "Warranty & support", "Post-move responsiveness", "A client for life"] },
   ],
 
-  /* Projects — real Kashi builds (addresses/styles from their Houzz portfolio) */
+  /* Projects, real Kashi builds (addresses/styles from their Houzz portfolio) */
   projects: [
     {
       slug: "322-manhattan-ave",
@@ -66,7 +66,7 @@ window.KASHI = {
       feature: true,
       photos: 61,
       specs: { Bedrooms: "4", Bathrooms: "6", "Living area": "4,477 sq ft", Style: "Contemporary", Completed: "2016", Value: "$5.4M sale" },
-      blurb: "A four-level contemporary residence steps from the sand in Hermosa Beach. Walls of glass, a rooftop deck with whitewater views, a home theater and a temperature-controlled wine wall — designed with Tomaro Design Group and built by Kashi. Later sold for $5.4 million.",
+      blurb: "A four-level contemporary residence steps from the sand in Hermosa Beach. Walls of glass, a rooftop deck with whitewater views, a home theater and a temperature-controlled wine wall, designed with Tomaro Design Group and built by Kashi. Later sold for $5.4 million.",
       gallery: ["ext-contemporary-1","kitchen-1","living-2","pool-1","staircase-1","bath-1","deck-1","bedroom-1"]
     },
     {
@@ -94,7 +94,7 @@ window.KASHI = {
       feature: true,
       photos: 49,
       specs: { Bedrooms: "5", Bathrooms: "5", Style: "Elegant Traditional", Features: "Wine cellar · Iron spiral stair" },
-      blurb: "\"A modernized castle sprinkled with contemporary twists.\" Rounded entries, an iron spiral staircase, double crown molding and a wine cellar — a home its owners, both architects, called love at first sight.",
+      blurb: "\"A modernized castle sprinkled with contemporary twists.\" Rounded entries, an iron spiral staircase, double crown molding and a wine cellar, a home its owners, both architects, called love at first sight.",
       gallery: ["ext-grey-1","kitchen-3","living-1","staircase-2","bath-2","bedroom-2"]
     },
     {
@@ -107,7 +107,7 @@ window.KASHI = {
       cover: "ext-estate-2",
       photos: 41,
       specs: { Scope: "Whole-home remodel", Bathrooms: "4", Style: "Timeless Traditional", Feature: "Wine cellar" },
-      blurb: "A comprehensive remodel and addition that reworked the home top to bottom — a warm, timeless interior with a chef's kitchen, refined millwork and a wine cellar.",
+      blurb: "A comprehensive remodel and addition that reworked the home top to bottom, a warm, timeless interior with a chef's kitchen, refined millwork and a wine cellar.",
       gallery: ["ext-estate-2","kitchen-2","living-3","bath-1","bedroom-1"]
     },
     {
@@ -120,7 +120,7 @@ window.KASHI = {
       cover: "ext-white-1",
       photos: 17,
       specs: { Style: "Mediterranean / Tuscan", Feature: "Sand-finish stucco", Exterior: "Tuscan elevation" },
-      blurb: "A Tuscan-inspired residence with hand sand-finished stucco, arched detailing and landscaped grounds — Mediterranean warmth built to South Bay standards.",
+      blurb: "A Tuscan-inspired residence with hand sand-finished stucco, arched detailing and landscaped grounds, Mediterranean warmth built to South Bay standards.",
       gallery: ["ext-white-1","pool-2","kitchen-3","living-2","staircase-1"]
     },
     {
@@ -146,7 +146,7 @@ window.KASHI = {
       cover: "living-4",
       photos: 20,
       specs: { Style: "Classic Traditional", Feature: "Grand staircase", Interior: "Formal living & dining" },
-      blurb: "A classic custom home with a grand staircase, formal living and dining rooms and a family wing — traditional proportions executed with modern build quality.",
+      blurb: "A classic custom home with a grand staircase, formal living and dining rooms and a family wing, traditional proportions executed with modern build quality.",
       gallery: ["living-4","living-3","kitchen-3","staircase-2","bath-2"]
     },
     {
@@ -159,7 +159,7 @@ window.KASHI = {
       cover: "hero-estate",
       photos: 40,
       specs: { Program: "Spec development", Homes: "Multiple", Style: "Coastal Contemporary", Location: "1st Pl / 2nd St / Ocean View" },
-      blurb: "A cluster of ground-up coastal contemporary homes developed across Hermosa Beach — 1st Place, 2nd Street and Ocean View — from acquisition through construction and sale.",
+      blurb: "A cluster of ground-up coastal contemporary homes developed across Hermosa Beach, 1st Place, 2nd Street and Ocean View, from acquisition through construction and sale.",
       gallery: ["hero-estate","ext-coastal-1","pool-2","deck-1","living-1"]
     },
   ],
@@ -213,10 +213,10 @@ window.KASHI = {
   ],
 
   faqs: [
-    { q: "Where does Kashi Organization build?", a: "We focus on the South Bay and the Palos Verdes Peninsula — Hermosa Beach, Redondo Beach, Manhattan Beach and the Peninsula cities — where we've built and developed for two decades." },
+    { q: "Where does Kashi Organization build?", a: "We focus on the South Bay and the Palos Verdes Peninsula, Hermosa Beach, Redondo Beach, Manhattan Beach and the Peninsula cities, where we've built and developed for two decades." },
     { q: "Do you take on remodels, or only ground-up homes?", a: "Both. Our core is ground-up custom homes and development, but we also take on whole-home remodels, additions and ADUs where the scope and standard fit the way we work." },
-    { q: "Are you licensed and insured?", a: "Yes. Kashi Organization holds California CSLB license #998954, Class B General Building — active, in good standing, with a clean record. We carry full insurance and workers' compensation coverage." },
-    { q: "How involved is the owner?", a: "Directly. Arash Abbasian is hands-on across every project — the reason clients and trade partners consistently point to communication, integrity and follow-through as what sets Kashi apart." },
+    { q: "Are you licensed and insured?", a: "Yes. Kashi Organization holds California CSLB license #998954, Class B General Building, active, in good standing, with a clean record. We carry full insurance and workers' compensation coverage." },
+    { q: "How involved is the owner?", a: "Directly. Arash Abbasian is hands-on across every project, the reason clients and trade partners consistently point to communication, integrity and follow-through as what sets Kashi apart." },
     { q: "How do we start a project?", a: "Reach out through the contact page or call the office. We'll set up an initial conversation to understand your site, program and budget, and outline how a Kashi build would take shape." },
   ],
 };

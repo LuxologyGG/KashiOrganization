@@ -1,5 +1,5 @@
 /* =============================================================
-   KASHI ORGANIZATION — Design Tokens (v2 · brutalist / earthy)
+   KASHI ORGANIZATION, Design Tokens (v2 · brutalist / earthy)
    Black · white · warm brown/spruce. Clash Display + General Sans +
    Chivo Mono. Sharp (0 radius), image-led, restrained.
    Variable names preserved from v1 so component CSS keeps working;
@@ -7,8 +7,8 @@
    ============================================================= */
 
 :root {
-  /* ---- Core palette — warm near-black, bone white, brown/spruce ---- */
-  --ink:        #0c0b0a;   /* warm near-black — primary dark ground + text */
+  /* ---- Core palette, warm near-black, bone white, brown/spruce ---- */
+  --ink:        #0c0b0a;   /* warm near-black, primary dark ground + text */
   --ink-1:      #131110;
   --ink-2:      #1b1815;   /* charcoal brown                    */
   --ink-3:      #262019;
@@ -16,7 +16,7 @@
   --steel-2:    #968b7d;
   --steel-3:    #b8ad9d;
 
-  --paper:      #efe9dd;   /* warm bone — primary light ground  */
+  --paper:      #efe9dd;   /* warm bone, primary light ground  */
   --paper-1:    #e7e0d1;
   --paper-2:    #ddd4c2;
   --paper-3:    #cfc4ad;
@@ -76,7 +76,7 @@
   --maxw:   1600px;
   --measure: 60ch;
 
-  /* ---- Form language — sharp, brutalist ---- */
+  /* ---- Form language, sharp, brutalist ---- */
   --radius:   0px;
   --radius-lg:0px;
   --border:   1px solid var(--line);

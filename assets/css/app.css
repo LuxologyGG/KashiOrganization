@@ -1,5 +1,5 @@
 /* =============================================================
-   KASHI ORGANIZATION — Components & Sections
+   KASHI ORGANIZATION, Components & Sections
    ============================================================= */
 
 /* ---------- Reusable HUD corner-tick frame ---------- */
@@ -142,7 +142,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .btn--ghost:hover { background: var(--fg); color: var(--bg); }
 .btn--ghost .btn__chev { background: var(--fg); color: var(--bg); }
 
-/* CTA button in nav — notched w/ status dot */
+/* CTA button in nav, notched w/ status dot */
 .btn-cta {
   display:inline-flex; align-items:center; gap:10px;
   font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing:.06em; text-transform: uppercase;
@@ -326,7 +326,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .split-line { overflow: hidden; display: block; }
 .split-line > * { display: block; }
 
-/* image reveal — clip-path wipe handled in JS */
+/* image reveal, clip-path wipe handled in JS */
 .img-reveal { position: relative; overflow: hidden; }
 
 /* generic media block */
@@ -396,7 +396,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 #main:focus { outline: none; }
 
 /* ============================================================
-   v2 brutalist additions — icon capabilities, parallax band,
+   v2 brutalist additions, icon capabilities, parallax band,
    fluid full-bleed image breaks
    ============================================================ */
 
@@ -431,13 +431,13 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .flow { background: var(--bg); }
 .flow--tint { background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 5%, var(--paper)), var(--paper) 40%); }
 
-/* Big statement block — let it breathe, image-led */
+/* Big statement block, let it breathe, image-led */
 .statement { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); line-height: .98; letter-spacing: -.03em; max-width: 20ch; }
 .statement em { font-style: normal; color: var(--gold); }
 
-/* Brutalist: no fancy italics — accent via colour/weight only */
+/* Brutalist: no fancy italics, accent via colour/weight only */
 h1 em, h2 em, h3 em, .h1 em, .h2 em, .subhero h1 em { font-style: normal; color: var(--accent); }
 
-/* Skip link — visually hidden until focused */
+/* Skip link, visually hidden until focused */
 .skip-link { position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 10px 16px; transform: translateY(-160%); transition: transform .3s var(--e-out); }
 .skip-link:focus { transform: translateY(0); outline: 2px solid var(--gold-2); outline-offset: 2px; }

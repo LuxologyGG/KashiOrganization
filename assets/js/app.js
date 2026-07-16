@@ -1,5 +1,5 @@
 /* =============================================================
-   KASHI ORGANIZATION — Motion engine (v2)
+   KASHI ORGANIZATION, Motion engine (v2)
    Lenis + GSAP. First-load-only loader, pixel page transitions,
    hero-scoped "scroll to explore" text cursor. No global cursor,
    no magnetic buttons.
@@ -344,7 +344,7 @@
     if (!root || !R.projects) return;
     const slug = new URLSearchParams(location.search).get("slug");
     const p = R.projects.find((x) => x.slug === slug) || R.projects[0];
-    document.title = `${p.title} — Kashi Organization`;
+    document.title = `${p.title}, Kashi Organization`;
     const specRows = Object.entries(p.specs).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
     const gallery = p.gallery.map((g, i) => `<figure class="pd-gitem ${i % 3 === 0 ? "wide" : ""} img-reveal"><img src="${IMG(g)}" alt="${p.style} interior/exterior in the style of ${p.title}" loading="lazy"></figure>`).join("");
     const idx = R.projects.indexOf(p); const next = R.projects[(idx + 1) % R.projects.length];
@@ -364,7 +364,7 @@
           <dl class="spec pd-spec">${specRows}</dl>
         </div>
       </section>
-      <section class="wrap" style="padding-top:clamp(16px,2vw,26px)"><span class="repnote">Photography representative of Kashi's work — project details are documented</span></section>
+      <section class="wrap" style="padding-top:clamp(16px,2vw,26px)"><span class="repnote">Photography representative of Kashi's work, project details are documented</span></section>
       <section class="wrap pd-gallery">${gallery}</section>
       <section class="section wrap">
         <div class="rowline"><span class="eyebrow eyebrow--plain">Next project</span></div>
@@ -385,7 +385,7 @@
     const mailtoFallback = () => {
       const g = (n) => (form.querySelector("#" + n) || {}).value || "";
       const body = `Name: ${g("name")}\nEmail: ${g("email")}\nPhone: ${g("phone")}\nType: ${g("type")}\nLocation: ${g("location")}\n\n${g("message")}`;
-      window.location.href = `mailto:${form.dataset.mailto || "info@kashiorganization.com"}?subject=${encodeURIComponent("Project inquiry — " + g("name"))}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${form.dataset.mailto || "info@kashiorganization.com"}?subject=${encodeURIComponent("Project inquiry, " + g("name"))}&body=${encodeURIComponent(body)}`;
       succeed();
     };
     form.addEventListener("submit", (e) => {

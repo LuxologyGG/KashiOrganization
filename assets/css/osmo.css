@@ -1,5 +1,5 @@
 /* =============================================================
-   Osmo components — button-070, button-082, pixel transition,
+   Osmo components, button-070, button-082, pixel transition,
    dynamic text cursor. Verbatim CSS + Kashi theming overrides.
    ============================================================= */
 :root {
@@ -660,7 +660,7 @@ Step 3: Add custom CSSStep 2: Add custom CSSCustom CSS in WebflowCurious about w
 /* ============================================================
    KASHI THEMING OVERRIDES
    ============================================================ */
-/* Button 070 — brutalist HUD button. Text = mono. */
+/* Button 070, brutalist HUD button. Text = mono. */
 .button-070 { --button-070-corner-size:.5em; --button-070-hover-corner-move:.3em; --button-070-padding:1.05em 1.4em; --button-070-border-radius:0; font-family:var(--font-mono); font-size:var(--fs-mono); letter-spacing:.1em; text-transform:uppercase; }
 /* on dark grounds (default): paper text/corners → fill paper on hover */
 .button-070 { --button-070-color:var(--paper); --button-070-corner-color:var(--paper); --button-070-hover-color:var(--ink); --button-070-hover-color-background:var(--paper); --button-070-color-focus:var(--paper); --button-070-hover-corner-color:var(--ink); }
@@ -670,11 +670,11 @@ Step 3: Add custom CSSStep 2: Add custom CSSCustom CSS in WebflowCurious about w
 .button-070.is-ink { --button-070-color:var(--ink); --button-070-corner-color:var(--ink); --button-070-hover-color:var(--paper); --button-070-hover-color-background:var(--ink); --button-070-color-focus:var(--ink); --button-070-hover-corner-color:var(--paper); }
 .button-070.is-ink.is-accent { --button-070-hover-color-background:var(--gold); --button-070-hover-color:var(--accent-ink); --button-070-hover-corner-color:var(--accent-ink); }
 
-/* Button 082 — bordered fill button */
+/* Button 082, bordered fill button */
 .button-082 { --button-082-border-radius:0; --button-082-padding:1.05em 1.4em; font-family:var(--font-mono); font-size:var(--fs-mono); letter-spacing:.1em; text-transform:uppercase; --button-082-color:var(--paper); --button-082-color-background:var(--ink); --button-082-border-color:var(--paper); --button-082-hover-color-background:var(--ink-3); }
 .button-082.is-accent { --button-082-color-background:var(--gold); --button-082-color:var(--accent-ink); --button-082-border-color:var(--accent-ink); --button-082-hover-color-background:var(--gold-1); }
 
-/* Dynamic text cursor — "Scroll to explore" bubble (hero-scoped) */
+/* Dynamic text cursor, "Scroll to explore" bubble (hero-scoped) */
 .cursor { z-index: var(--z-cursor); }
 .cursor-bubble { background-color:var(--paper); color:var(--ink); border-radius:0; height:auto; padding:.75em 1.25em; }
 .cursor-bubble__text { font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:500; }

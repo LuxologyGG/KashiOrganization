@@ -1,5 +1,5 @@
 /* =============================================================
-   KASHI ORGANIZATION — Page-specific layouts
+   KASHI ORGANIZATION, Page-specific layouts
    ============================================================= */
 
 /* ---------- Sub-page hero (projects / about / services / contact) ---------- */
@@ -84,11 +84,11 @@
 .dots .dot { width: 4px; height: 4px; border-radius: 50%; }
 .dots-wrap { position: relative; overflow: hidden; }
 
-/* Reveal pre-hide guard — only when JS is active; no-JS shows everything */
+/* Reveal pre-hide guard, only when JS is active; no-JS shows everything */
 .js [data-reveal="fade"], .js [data-reveal-item], .js [data-reveal="lines"], .js [data-scramble] { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal], [data-reveal-item], [data-scramble] { opacity: 1 !important; transform: none !important; }
 }
-/* Vendor/JS failure safety net — reveal everything, drop the loader */
+/* Vendor/JS failure safety net, reveal everything, drop the loader */
 .js-failed [data-reveal], .js-failed [data-reveal-item], .js-failed [data-scramble] { opacity: 1 !important; }
 .js-failed .loader { display: none !important; }
