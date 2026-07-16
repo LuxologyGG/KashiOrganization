@@ -35,6 +35,122 @@
     strip.innerHTML = cells + cells; // duplicate for a seamless loop
   }
 
+  /* ---------------- Pixel shoreline wave (hero background) ----------------
+     A chunky golden-hour pixel ocean rendered on a 2D canvas. The waterline
+     undulates with a few travelling sines and slowly washes up and down (tide),
+     so the whole field of pixels rises over and recedes from the scrolling
+     film-strip beneath it. Translucent below the crest, so the photos read as
+     though they are submerged within the surf. */
+  (function initWave() {
+    var cv = document.querySelector("[data-pj-wave]");
+    if (!cv) return;
+    var host = cv.closest(".pj-hero") || cv.parentNode;
+    var ctx = cv.getContext("2d");
+    if (!ctx) return;
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var CELL = 15;                 // chunky pixel size (css px)
+    var W = 0, H = 0, cols = 0, rows = 0, noise = null;
+
+    // golden-hour shoreline palette (brand tokens): deep ink water -> bronze ->
+    // gold -> warm crest -> bone spray.
+    var DEEP  = [15, 14, 11];
+    var MID   = [78, 57, 29];
+    var SHAL  = [161, 124, 69];
+    var CREST = [214, 178, 112];
+    var FOAM  = [239, 233, 221];
+    function mix(a, b, t) {
+      return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+    }
+
+    function size() {
+      W = host.clientWidth;
+      H = host.clientHeight;
+      if (!W || !H) return;
+      cv.width = W; cv.height = H;               // dpr 1 -> naturally chunky + cheap
+      cols = Math.ceil(W / CELL) + 1;
+      rows = Math.ceil(H / CELL) + 1;
+      noise = new Float32Array(cols * rows);     // static per-cell grain for foam
+      for (var i = 0; i < noise.length; i++) noise[i] = Math.random();
+    }
+
+    // waterline y for a given column centre (lower value = higher up the page)
+    function levelAt(cx, t) {
+      var base = H * 0.75;
+      var tide = Math.sin(t * 0.0004) * H * 0.05;                     // wash up/down (~16s)
+      var w1 = Math.sin(cx * 0.017 + t * 0.0015) * CELL * 1.1;
+      var w2 = Math.sin(cx * 0.006 - t * 0.0009 + 1.3) * CELL * 1.6;
+      var w3 = Math.sin(cx * 0.034 + t * 0.0022) * CELL * 0.6;
+      return base + tide + w1 + w2 + w3;
+    }
+
+    function paint(x, y, rgb, a) {
+      ctx.globalAlpha = a;
+      ctx.fillStyle = "rgb(" + (rgb[0] | 0) + "," + (rgb[1] | 0) + "," + (rgb[2] | 0) + ")";
+      ctx.fillRect(x, y, CELL - 0.6, CELL - 0.6);   // hair gap -> pixel-grid read
+    }
+
+    function frame(t) {
+      if (!W || !H) return;
+      ctx.clearRect(0, 0, W, H);
+      for (var c = 0; c < cols; c++) {
+        var cx = c * CELL;
+        var line = levelAt(cx + CELL * 0.5, t);
+        for (var r = 0; r < rows; r++) {
+          var cy = r * CELL;
+          var nz = noise[c * rows + r];
+          var depth = (cy + CELL) - line;            // >0 underwater
+          if (depth <= 0) {
+            // above the surf: sparse spray that rises and recedes near the crest
+            if (-depth < CELL * 1.7) {
+              var spray = 0.5 + 0.5 * Math.sin(t * 0.004 + nz * 30 + cx * 0.05);
+              if (nz > 0.9 - spray * 0.12) paint(cx, cy, FOAM, 0.32 + 0.32 * spray);
+            }
+            continue;
+          }
+          if (depth < CELL * 1.3) {                   // foam crest band
+            paint(cx, cy, mix(CREST, FOAM, nz * 0.6), 0.9);
+            continue;
+          }
+          // underwater: colour + opacity ramp with depth (photos glow through the shallows)
+          var k = Math.min(1, depth / (H * 0.4));
+          var col = k < 0.5 ? mix(SHAL, MID, k / 0.5) : mix(MID, DEEP, (k - 0.5) / 0.5);
+          var sh = Math.sin(t * 0.003 + cx * 0.04 + cy * 0.06 + nz * 12);
+          if (sh > 0.82) col = mix(col, CREST, 0.22);  // drifting caustic sparkle
+          paint(cx, cy, col, 0.42 + 0.5 * k);
+        }
+      }
+    }
+
+    var raf = 0, running = false, t0 = 0;
+    function loop(now) { raf = requestAnimationFrame(loop); frame(now - t0); }
+    function play() {
+      if (running || reduceMotion) return;
+      running = true;
+      t0 = (window.performance && performance.now) ? performance.now() : 0;
+      raf = requestAnimationFrame(loop);
+    }
+    function pause() { running = false; cancelAnimationFrame(raf); }
+
+    size();
+
+    var rz;
+    window.addEventListener("resize", function () {
+      clearTimeout(rz);
+      rz = setTimeout(function () { size(); if (reduceMotion) frame(4200); }, 160);
+    });
+
+    if (reduceMotion) { frame(4200); return; }          // one static frame
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (ents) {
+        ents.forEach(function (en) { en.isIntersecting ? play() : pause(); });
+      }, { threshold: 0.01 }).observe(host);
+    } else {
+      play();
+    }
+  })();
+
   /* ---------------- Build panels ---------------- */
   var frag = document.createDocumentFragment();
 
