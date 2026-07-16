@@ -269,7 +269,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .quote-lg { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.28; font-weight: 400; }
 .quote-lg .word { display: inline-block; }
 .testi { display: grid; grid-template-columns: 1fr; gap: clamp(30px,4vw,56px); }
-.testi__q { font-family: var(--font-display); font-size: clamp(24px,3.1vw,50px); line-height: 1.24; letter-spacing: -.005em; }
+.testi__q { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(25px,3.3vw,52px); line-height: 1.3; letter-spacing: 0; }
 .testi__q b { color: var(--gold); font-weight: inherit; }
 .testi__foot { display:flex; align-items:center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .testi__who { font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .06em; text-transform: uppercase; }
@@ -298,7 +298,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .footer { position: relative; background: var(--ink); color: var(--paper); overflow: hidden; }
 .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: clamp(30px,4vw,64px); padding-block: clamp(60px,7vw,110px); position: relative; z-index: 2; }
 .footer__brand .wordmark { font-family: var(--font-display); font-size: clamp(30px,3.4vw,52px); line-height: 1; }
-.footer__brand img { height: 54px; margin-bottom: 20px; }
+.footer__brand img { height: clamp(60px, 6.5vw, 88px); width: auto; margin-bottom: 24px; }
 .footer__brand p { color: color-mix(in srgb,var(--paper) 66%, transparent); max-width: 36ch; margin-top: 16px; }
 .footer__col h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-2); margin-bottom: 18px; }
 .footer__col a, .footer__col p { display:block; color: color-mix(in srgb,var(--paper) 78%, transparent); padding: 5px 0; transition: color .3s; }
@@ -448,3 +448,18 @@ h1 em, h2 em, h3 em, .h1 em, .h2 em, .subhero h1 em { font-style: normal; color:
 :where(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .on-dark { --accent-text: var(--gold-2); }
 @media (max-width: 760px) { .hero__scroll { display: none; } }
+
+/* ============================ CTA split + assembling emblem ============================ */
+.cta--split .cta__split { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(30px,5vw,90px); align-items: center; }
+.cta--split .cta__inner { justify-items: start; }
+.cta__emblem { justify-self: end; width: clamp(180px, 24vw, 360px); }
+.cta__emblem svg { width: 100%; height: auto; overflow: visible; }
+.cta__emblem .em-polys polygon { fill: var(--paper); }
+.cta__emblem .em-rings circle { stroke: var(--gold-2); }
+@media (max-width: 860px){
+  .cta--split .cta__split { grid-template-columns: 1fr; }
+  .cta__emblem { justify-self: center; width: clamp(150px, 44vw, 220px); order: -1; margin-bottom: 8px; }
+}
+
+/* ============================ Serif accent (Sentient), used sparingly ============================ */
+.serif-accent { font-family: var(--font-serif); font-weight: 400; font-style: italic; letter-spacing: 0; }

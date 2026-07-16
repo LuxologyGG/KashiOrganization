@@ -277,16 +277,54 @@
     if (!hero) return;
     document.body.classList.add("hero-live");
     const media = $(".hero__media img, .hero__media video", hero);
+    const isVideo = media && media.tagName === "VIDEO";
+    if (isVideo && reduce) { try { media.pause(); media.removeAttribute("autoplay"); } catch (e) {} }
     if (media && !reduce) {
       gsap.to(media, { yPercent: 18, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
-      const km = gsap.fromTo(media, { scale: 1.06 }, { scale: 1.17, duration: 18, ease: "sine.inOut", repeat: -1, yoyo: true }); // cinemagraph drift ("video" feel)
-      ScrollTrigger.create({ trigger: hero, start: "top bottom", end: "bottom top", onToggle: (self) => (self.isActive ? km.play() : km.pause()) }); // pause off-screen
+      if (isVideo) {
+        // the timelapse already provides motion; just pause it off-screen for perf
+        ScrollTrigger.create({ trigger: hero, start: "top bottom", end: "bottom top",
+          onToggle: (self) => { try { if (self.isActive) { const pr = media.play(); if (pr && pr.catch) pr.catch(() => {}); } else media.pause(); } catch (e) {} } });
+      } else {
+        const km = gsap.fromTo(media, { scale: 1.06 }, { scale: 1.17, duration: 18, ease: "sine.inOut", repeat: -1, yoyo: true }); // cinemagraph drift
+        ScrollTrigger.create({ trigger: hero, start: "top bottom", end: "bottom top", onToggle: (self) => (self.isActive ? km.play() : km.pause()) });
+      }
     }
     // full-bleed parallax bands
     $$(".band__media img").forEach((im) => { if (!reduce) gsap.fromTo(im, { yPercent: -12 }, { yPercent: 12, ease: "none", scrollTrigger: { trigger: im.closest(".band"), start: "top bottom", end: "bottom top", scrub: true } }); });
     // fade hero content out as it leaves (fluid handoff to next section)
     const inner = $(".hero__inner", hero);
     if (inner && !reduce) gsap.to(inner, { yPercent: -24, opacity: 0.15, ease: "none", scrollTrigger: { trigger: hero, start: "30% top", end: "bottom top", scrub: true } });
+  }
+
+  /* ---------------- CTA emblem: rings draw on, polygons assemble ---------------- */
+  function initCtaEmblem() {
+    const box = $("[data-emblem]");
+    if (!box) return;
+    const svg = $("svg", box); if (!svg) return;
+    const polys = $$("polygon", svg);
+    const rings = $$("circle", svg);
+    if (reduce) return; // static emblem for reduced motion
+    gsap.set(polys, { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" });
+    gsap.set(rings, { strokeDasharray: 1, strokeDashoffset: 1 });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: box, start: "top 82%", once: true } });
+    tl.to(rings, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut", stagger: 0.18 }, 0)
+      .to(polys, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)", stagger: { each: 0.028, from: "random" } }, 0.25);
+  }
+
+  /* ---------------- "Vision meets execution": line drawing → photo scrub ---------------- */
+  function initVME() {
+    const stage = $("[data-vme]");
+    if (!stage) return;
+    const photo = $("[data-vme-photo]", stage);
+    const seam = $("[data-vme-seam]", stage);
+    if (!photo) return;
+    if (reduce) { gsap.set(photo, { clipPath: "inset(0 0 0 0)" }); if (seam) gsap.set(seam, { opacity: 0 }); return; }
+    // photo starts fully hidden (revealed from the bottom up as you scroll)
+    gsap.set(photo, { clipPath: "inset(100% 0 0 0)" });
+    gsap.timeline({ scrollTrigger: { trigger: stage, start: "top 78%", end: "bottom 62%", scrub: 0.6 } })
+      .fromTo(photo, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none" }, 0)
+      .fromTo(seam || {}, { top: "100%" }, { top: "0%", ease: "none" }, 0);
   }
 
   /* =============================================================
@@ -429,6 +467,8 @@
     initNav();
     initMarquee();
     initHero();
+    initCtaEmblem();
+    initVME();
     initAccordion();
     initTesti();
     initForm();

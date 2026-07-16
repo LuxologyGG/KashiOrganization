@@ -92,3 +92,16 @@
 /* Vendor/JS failure safety net, reveal everything, drop the loader */
 .js-failed [data-reveal], .js-failed [data-reveal-item], .js-failed [data-scramble] { opacity: 1 !important; }
 .js-failed .loader { display: none !important; }
+
+/* ---------- Vision meets execution (sketch → photo scrub) ---------- */
+.vme__head { max-width: 46ch; margin-bottom: clamp(28px,4vw,58px); }
+.vme__stage { position: relative; }
+.vme__frame { position: relative; width: 100%; aspect-ratio: 3/2; overflow: hidden; border: 1px solid var(--line); background: var(--paper-1); }
+.vme__frame > img, .vme__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.vme__sketch { z-index: 1; }
+.vme__photo { position: absolute; inset: 0; z-index: 2; will-change: clip-path; clip-path: inset(100% 0 0 0); }
+.vme__seam { position: absolute; left: 0; right: 0; top: 100%; height: 2px; z-index: 3; background: var(--gold); box-shadow: 0 0 22px 1px color-mix(in srgb, var(--gold) 65%, transparent); pointer-events: none; }
+.vme__tag { position: absolute; z-index: 4; font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .16em; text-transform: uppercase; padding: 7px 13px; }
+.vme__tag--v { top: 16px; left: 16px; color: var(--ink); border: 1px solid color-mix(in srgb, var(--ink) 26%, transparent); }
+.vme__tag--e { bottom: 16px; right: 16px; color: var(--paper); background: color-mix(in srgb, var(--ink) 62%, transparent); }
+@media (prefers-reduced-motion: reduce){ .vme__photo { clip-path: inset(0 0 0 0); } .vme__seam { display: none; } }
