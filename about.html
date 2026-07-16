@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="assets/css/osmo.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" href="assets/css/pages.css">
+<script type="importmap">
+{ "imports": {
+  "three": "./assets/js/vendor/three/three.module.js",
+  "three/addons/": "./assets/js/vendor/three/jsm/"
+}}
+</script>
 <meta property="og:image" content="https://luxologygg.github.io/KashiOrganization/assets/img/projects/hz/336-ocean-view-ave-hero.jpg">
 <link rel="canonical" href="https://luxologygg.github.io/KashiOrganization/about.html">
 <meta property="og:url" content="https://luxologygg.github.io/KashiOrganization/about.html">
@@ -37,20 +43,21 @@
 <div class="menu"><nav><a href="projects.html"><small>01</small>Projects</a><a href="services.html"><small>02</small>Services</a><a href="about.html"><small>03</small>About</a><a href="contact.html"><small>04</small>Contact</a></nav><div class="menu__foot"><span>(310) 882-5505</span><span>Manhattan Beach · Hermosa · Redondo</span><span>CSLB #998954 · Class B</span></div></div>
 
 <main id="main" tabindex="-1">
-<section class="ab-hero on-dark" style="background:var(--ink);color:var(--paper)">
-  <div class="tech-grid"></div>
-  <div class="glow" style="left:50%;transform:translateX(-50%);top:-14%"></div>
-  <div class="wrap ab-hero__inner" style="position:relative;z-index:2">
-    <span class="eyebrow eyebrow--plain" data-scramble="scroll">Kashi Organization · Owner-led since 2006</span>
-    <h1 class="ab-hero__title" data-reveal="lines">Twenty years,<br><em class="serif-accent">one name</em> on every home.</h1>
-    <p class="ab-hero__lead" data-reveal="fade">An owner-led builder and developer in the South Bay beach cities, building a handful of homes a year the way they should be built, carefully, honestly, without shortcuts.</p>
-    <div class="ab-hero__facts mono" data-reveal="fade">
-      <span><b>A. Abbasian</b> Principal</span>
-      <span><b>CSLB #998954</b> Class B</span>
-      <span><b>5.0 ★</b> Houzz, 11 reviews</span>
-      <span><b>20 yrs</b> On the coast</span>
+<section class="ab3d on-dark">
+  <canvas class="ab3d__canvas" data-house-3d aria-hidden="true"></canvas>
+  <div class="wrap ab3d__inner">
+    <div class="ab3d__text">
+      <span class="eyebrow eyebrow--plain" data-scramble="scroll">Kashi Organization · Owner-led since 2006</span>
+      <h1 class="ab3d__title" data-reveal="lines">Built by hand.<br>Built to <em>last.</em></h1>
+      <p class="ab3d__lead" data-reveal="fade">Every home starts as geometry and ends as a place you live in. Two decades building custom homes across the South Bay beach cities, one name on all of them.</p>
+      <div class="ab3d__facts mono" data-reveal="fade">
+        <span><b>A. Abbasian</b> Principal</span>
+        <span><b>CSLB #998954</b> Class B</span>
+        <span><b>5.0 ★</b> Houzz</span>
+      </div>
     </div>
   </div>
+  <span class="ab3d__scroll mono" aria-hidden="true">Scroll</span>
 </section>
 
 <section class="section vme" data-theme="light">
@@ -159,5 +166,6 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 <script src="assets/js/app.js"></script>
+<script type="module" src="assets/js/about-hero-3d.js"></script>
 </body>
 </html>

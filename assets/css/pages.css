@@ -119,3 +119,31 @@
 .ab-hero__facts span { display: grid; gap: 5px; }
 .ab-hero__facts b { color: var(--paper); font-weight: 500; }
 @media (max-width: 640px){ .ab-hero__facts { gap: 16px 26px; } }
+
+/* ---------- About hero: instanced-triangle house (three.js) ---------- */
+.ab3d { position: relative; min-height: 100svh; overflow: hidden; background: var(--ink); color: var(--paper); display: grid; }
+.ab3d__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+.ab3d__inner { position: relative; z-index: 2; align-self: center; width: 100%; pointer-events: none; }
+.ab3d__text { max-width: 46ch; margin-left: auto; text-align: left; }
+.ab3d .eyebrow { color: var(--gold-2); }
+.ab3d__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(40px, 6.4vw, 104px); line-height: .95; letter-spacing: -.03em; margin-top: 18px; text-shadow: 0 2px 40px rgba(12,11,10,.55); }
+.ab3d__title em { font-style: normal; color: var(--gold-2); }
+.ab3d__lead { margin-top: 22px; font-size: var(--fs-lead); line-height: 1.5; color: color-mix(in srgb, var(--paper) 74%, var(--ink)); max-width: 42ch; margin-left: auto; }
+.ab3d__facts { display: flex; flex-wrap: wrap; gap: 14px 30px; margin-top: 30px; justify-content: flex-start; font-size: var(--fs-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--fg-faint); }
+.ab3d__facts b { color: var(--paper); font-weight: 500; }
+.ab3d__scroll { position: absolute; left: 50%; bottom: clamp(16px, 3vh, 32px); transform: translateX(-50%); z-index: 2; font-size: var(--fs-mono); letter-spacing: .22em; text-transform: uppercase; color: var(--fg-faint); }
+.ab3d__scroll::after { content: ""; display: block; width: 1px; height: 26px; margin: 8px auto 0; background: linear-gradient(var(--gold-2), transparent); }
+/* the deconstructed particles fade in once the model is built */
+.ab3d__canvas { opacity: 0; transition: opacity 1.1s var(--e-out); }
+.ab3d--ready .ab3d__canvas { opacity: 1; }
+/* no-WebGL / load-fail fallback: quiet technical grid instead of the canvas */
+.ab3d--fallback .ab3d__canvas { display: none; }
+.ab3d--fallback::before { content: ""; position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--gold) 22%, transparent) 1px, transparent 1.4px);
+  background-size: 26px 26px; mask-image: radial-gradient(120% 90% at 30% 50%, #000 30%, transparent 78%); opacity: .5; }
+@media (max-width: 900px){
+  .ab3d__inner { align-self: end; padding-bottom: 15vh; }
+  .ab3d__text { margin-left: 0; max-width: none; text-align: center; }
+  .ab3d__lead { margin-left: auto; margin-right: auto; }
+  .ab3d__facts { justify-content: center; }
+}
