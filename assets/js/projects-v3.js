@@ -36,11 +36,12 @@
   }
 
   /* ---------------- Pixel shoreline wave (hero background) ----------------
-     A chunky golden-hour pixel ocean rendered on a 2D canvas. The waterline
-     undulates with a few travelling sines and slowly washes up and down (tide),
-     so the whole field of pixels rises over and recedes from the scrolling
-     film-strip beneath it. Translucent below the crest, so the photos read as
-     though they are submerged within the surf. */
+     A chunky golden-hour pixel ocean rendered on a 2D canvas, sitting BEHIND
+     the film-strip. The shoreline is vertical: deep water on the right edge,
+     dry sand on the left. It undulates with a few travelling sines and the
+     whole surf surges left and draws back right (tide), so the waves read as
+     rolling in from the right. Beach props rest along the shoreline and get
+     washed as the water sweeps over them. */
   (function initWave() {
     var cv = document.querySelector("[data-pj-wave]");
     if (!cv) return;
@@ -83,7 +84,7 @@
     var SCALLOP  = ["..ccc..", ".ccccc.", "ccccccc", "cCcCcCc", ".c.c.c."];
     var SPIRAL   = [".ccc..", "cddcc.", "cdCdc.", "cddc..", ".cc...", "..c..."];
     var CLAM     = [".ccc.", "ccccc", "cCcCc", ".c.c."];
-    var SP = 15, objects = [];
+    var SP = 15, objects = [], shoreBase = 0, shoreAmp = 0;
 
     function drawCell(x, y, rgb, a, sz) {
       ctx.globalAlpha = a;
@@ -101,48 +102,56 @@
       noise = new Float32Array(cols * rows);     // static per-cell grain for foam
       for (var i = 0; i < noise.length; i++) noise[i] = Math.random();
 
-      // place the beach props along the tideline (fx = centre, fy = base, of W/H)
+      // resting shoreline sits to the RIGHT of the copy so the water never
+      // covers the title/lead; a small surge sweeps it left and back.
+      shoreBase = (W < 640 ? 0.74 : 0.63) * W;
+      shoreAmp = (W < 640 ? 0.02 : 0.03) * W;
+
+      // place the beach props in the open band right of the shoreline (fx, fy
+      // are the prop CENTRE as fractions of W/H): below the title, above the strip
       SP = W < 640 ? 10 : (W < 1024 ? 13 : 16);
       var pool = W < 640
-        ? [{ s: UMBRELLA, fx: 0.70, fy: 0.79 }, { s: STARFISH, fx: 0.26, fy: 0.83 }, { s: SCALLOP, fx: 0.52, fy: 0.855 }]
-        : [{ s: UMBRELLA, fx: 0.71, fy: 0.785 }, { s: STARFISH, fx: 0.205, fy: 0.805 },
-           { s: SCALLOP, fx: 0.375, fy: 0.83 }, { s: SPIRAL, fx: 0.86, fy: 0.82 }, { s: CLAM, fx: 0.53, fy: 0.84 }];
+        ? [{ s: UMBRELLA, fx: 0.82, fy: 0.52 }, { s: STARFISH, fx: 0.93, fy: 0.45 }, { s: SCALLOP, fx: 0.88, fy: 0.60 }]
+        : [{ s: UMBRELLA, fx: 0.645, fy: 0.52 }, { s: STARFISH, fx: 0.78, fy: 0.46 },
+           { s: SCALLOP, fx: 0.725, fy: 0.595 }, { s: SPIRAL, fx: 0.84, fy: 0.50 }, { s: CLAM, fx: 0.70, fy: 0.45 }];
       objects = pool.map(function (o) {
         var rws = o.s.length, cls = o.s[0].length;
-        return { s: o.s, left: Math.round(o.fx * W - cls * SP / 2), top: Math.round(o.fy * H - rws * SP) };
+        return { s: o.s, left: Math.round(o.fx * W - cls * SP / 2), top: Math.round(o.fy * H - rws * SP / 2) };
       });
     }
 
-    // waterline y for a given column centre (lower value = higher up the page)
-    function levelAt(cx, t) {
-      var base = H * 0.75;
-      var tide = Math.sin(t * 0.0004) * H * 0.05;                     // wash up/down (~16s)
-      var w1 = Math.sin(cx * 0.017 + t * 0.0015) * CELL * 1.1;
-      var w2 = Math.sin(cx * 0.006 - t * 0.0009 + 1.3) * CELL * 1.6;
-      var w3 = Math.sin(cx * 0.034 + t * 0.0022) * CELL * 0.6;
-      return base + tide + w1 + w2 + w3;
+    // shoreline x for a given row centre (water is to the RIGHT of this x).
+    // A slow surge sweeps it left and draws it back right; travelling sines
+    // ripple the edge so the surf rolls in from the right.
+    function shorelineAt(cy, t) {
+      var tide = Math.sin(t * 0.00036) * shoreAmp;                    // surge left / draw back right
+      var w1 = Math.sin(cy * 0.020 + t * 0.0016) * CELL * 1.2;
+      var w2 = Math.sin(cy * 0.009 - t * 0.0011 + 1.3) * CELL * 1.8;
+      var w3 = Math.sin(cy * 0.040 + t * 0.0026) * CELL * 0.7;
+      return shoreBase + tide + w1 + w2 + w3;
     }
 
     function paint(x, y, rgb, a) { drawCell(x, y, rgb, a, CELL); }
 
-    // Beach props: a dark keyline lifts each prop off the busy surf; emerged
-    // pixels stay bright/dry, and pixels below the local waterline blend toward
-    // the shallows so the tide reads as washing over them.
+    // Beach props: a dark keyline lifts each prop off the busy surf; dry pixels
+    // (left of the shoreline) stay bright, and pixels the water has reached
+    // (right of the shoreline) blend toward the shallows and fade, so the surf
+    // reads as sweeping over them.
     function drawSprites(t) {
       for (var i = 0; i < objects.length; i++) {
-        var o = objects[i], sp = o.s, r, c, rowStr, ch, px, py, line, sub;
+        var o = objects[i], sp = o.s, r, c, rowStr, ch, px, py, sub;
         // pass 1: dilated dark silhouette -> a clean "sticker" outline that
-        // fades as the pixel goes underwater, so submerged props dissolve
+        // fades as the pixel goes under the surf, so washed props dissolve
         for (r = 0; r < sp.length; r++) {
           rowStr = sp[r];
           for (c = 0; c < rowStr.length; c++) {
             if (!SPAL[rowStr.charAt(c)]) continue;
             px = o.left + c * SP; py = o.top + r * SP;
-            sub = (py + SP * 0.5) - levelAt(px + SP * 0.5, t);
+            sub = (px + SP * 0.5) - shorelineAt(py + SP * 0.5, t);
             drawCell(px - 2, py - 2, INK, sub < 0 ? 0.9 : Math.max(0.32, 0.9 - sub / (SP * 3.5)), SP + 3);
           }
         }
-        // pass 2: colour, washed by the tide
+        // pass 2: colour, washed by the surf
         for (r = 0; r < sp.length; r++) {
           rowStr = sp[r];
           for (c = 0; c < rowStr.length; c++) {
@@ -150,12 +159,12 @@
             var col = SPAL[ch];
             if (!col) continue;
             px = o.left + c * SP; py = o.top + r * SP;
-            sub = (py + SP * 0.5) - levelAt(px + SP * 0.5, t);   // >0 underwater
+            sub = (px + SP * 0.5) - shorelineAt(py + SP * 0.5, t);   // >0 in the water
             if (sub < 0) {
-              drawCell(px, py, col, 1, SP - 1.2);            // dry / above the surf
+              drawCell(px, py, col, 1, SP - 1.2);            // dry
             } else {
-              var wet = Math.min(0.6, sub / (SP * 4));        // deeper -> more washed out
-              drawCell(px, py, mix(col, SHAL, 0.3 + wet), 0.86, SP - 1.2);
+              var wet = Math.min(0.45, sub / (SP * 5));       // deeper -> more washed out
+              drawCell(px, py, mix(col, SHAL, 0.22 + wet), 0.9, SP - 1.2);
               if (sub < SP * 1.2) drawCell(px, py, FOAM, 0.26, SP - 1.2); // foam at the wash line
             }
           }
@@ -166,34 +175,34 @@
     function frame(t) {
       if (!W || !H) return;
       ctx.clearRect(0, 0, W, H);
-      for (var c = 0; c < cols; c++) {
-        var cx = c * CELL;
-        var line = levelAt(cx + CELL * 0.5, t);
-        for (var r = 0; r < rows; r++) {
-          var cy = r * CELL;
+      for (var r = 0; r < rows; r++) {
+        var cy = r * CELL;
+        var edge = shorelineAt(cy + CELL * 0.5, t);
+        for (var c = 0; c < cols; c++) {
+          var cx = c * CELL;
           var nz = noise[c * rows + r];
-          var depth = (cy + CELL) - line;            // >0 underwater
+          var depth = (cx + CELL * 0.5) - edge;      // >0 into the water (to the right)
           if (depth <= 0) {
-            // above the surf: sparse spray that rises and recedes near the crest
-            if (-depth < CELL * 1.7) {
-              var spray = 0.5 + 0.5 * Math.sin(t * 0.004 + nz * 30 + cx * 0.05);
-              if (nz > 0.9 - spray * 0.12) paint(cx, cy, FOAM, 0.32 + 0.32 * spray);
+            // dry sand (left of the shoreline): sparse spray flung ahead of the surf
+            if (-depth < CELL * 1.9) {
+              var spray = 0.5 + 0.5 * Math.sin(t * 0.004 + nz * 30 + cy * 0.05);
+              if (nz > 0.9 - spray * 0.12) paint(cx, cy, FOAM, 0.3 + 0.3 * spray);
             }
             continue;
           }
-          if (depth < CELL * 1.3) {                   // foam crest band
-            paint(cx, cy, mix(CREST, FOAM, nz * 0.6), 0.9);
+          if (depth < CELL * 1.4) {                   // foam crest at the water's edge
+            paint(cx, cy, mix(CREST, FOAM, nz * 0.6), 0.92);
             continue;
           }
-          // underwater: colour + opacity ramp with depth (photos glow through the shallows)
-          var k = Math.min(1, depth / (H * 0.4));
+          // open water: colour + opacity ramp with depth toward the right edge
+          var k = Math.min(1, depth / (W * 0.42));
           var col = k < 0.5 ? mix(SHAL, MID, k / 0.5) : mix(MID, DEEP, (k - 0.5) / 0.5);
           var sh = Math.sin(t * 0.003 + cx * 0.04 + cy * 0.06 + nz * 12);
           if (sh > 0.82) col = mix(col, CREST, 0.22);  // drifting caustic sparkle
-          paint(cx, cy, col, 0.42 + 0.5 * k);
+          paint(cx, cy, col, 0.6 + 0.34 * k);          // opaque background (behind the photos)
         }
       }
-      drawSprites(t);   // beach props on top, washed by the tide
+      drawSprites(t);   // beach props along the shoreline, washed by the surf
     }
 
     var raf = 0, running = false, t0 = 0;

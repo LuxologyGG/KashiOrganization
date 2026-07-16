@@ -316,13 +316,14 @@ html.js-failed .reel-hud { display: none; }
 }
 .pj-hero__inner { flex: 0 0 auto; }
 .pj-wave {
-  position: absolute; inset: 0; z-index: 3;   /* over the strip, under the title */
+  position: absolute; inset: 0; z-index: 1;   /* behind the strip and the copy */
   width: 100%; height: 100%;
   pointer-events: none;
   display: block;
   image-rendering: pixelated;
-  mask-image: linear-gradient(180deg, transparent 0, #000 22%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%);
+  /* keep the copy area (top-left) clear: fade the ocean in from the top */
+  mask-image: linear-gradient(180deg, transparent 0, #000 20%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 20%);
 }
 
 /* ---------- Projects hero: title + image film-strip masthead ---------- */
@@ -331,9 +332,11 @@ html.js-failed .reel-hud { display: none; }
 .pj-hero__inner h1 em { font-style: normal; color: var(--gold-2); }
 .pj-hero__row { display: grid; grid-template-columns: 1.4fr .6fr; gap: clamp(24px,4vw,70px); align-items: end; margin-top: clamp(20px,2.4vw,34px); }
 .pj-hero__row .subhero__lead { max-width: 60ch; }
-.pj-hero__stat { display: grid; gap: 12px; justify-items: end; text-align: right; font-size: var(--fs-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--fg-faint); }
+.pj-hero__stat { display: grid; gap: 12px; justify-items: end; text-align: right; font-size: var(--fs-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--fg-faint); text-shadow: 0 1px 10px rgba(12,11,10,.85); }
 .pj-hero__stat b { color: var(--paper); font-weight: 500; font-size: calc(var(--fs-mono) * 1.05); }
 @media (max-width: 820px){ .pj-hero__row { grid-template-columns: 1fr; } .pj-hero__stat { justify-items: start; text-align: left; display: flex; gap: 22px; flex-wrap: wrap; } }
+/* narrow screens: keep the copy out of the right-edge surf */
+@media (max-width: 640px){ .pj-hero__inner { padding-right: 30%; } }
 /* auto-scrolling strip of the work, pinned to the bottom of the surf band */
 .pj-strip { position: relative; margin-top: auto; z-index: 2; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
