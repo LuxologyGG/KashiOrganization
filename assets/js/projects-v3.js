@@ -63,6 +63,34 @@
       return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
     }
 
+    // ---- Pixel-art beach props (drawn on the same chunky grid) ----
+    // Chars map to colours; '.' is transparent. These rest at the tideline so
+    // the moving waterline visibly covers and reveals them -> reads as a beach.
+    var INK = [20, 18, 14];  // keyline outline, near --ink
+    var SPAL = {
+      o: [173, 132, 72],   // umbrella gold stripe (--gold)
+      x: [239, 233, 221],  // umbrella cream stripe (--paper)
+      p: [120, 90, 42],    // pole / finial (--gold-deep)
+      s: [227, 138, 78],   // starfish coral (pops against the gold surf)
+      S: [190, 104, 58],   // starfish shade
+      c: [237, 229, 216],  // shell bone
+      C: [201, 176, 148],  // shell shade
+      d: [224, 176, 162]   // shell blush
+    };
+    var UMBRELLA = ["....p....", "...oxo...", "..xoxox..", ".oxoxoxo.", "xoxoxoxox",
+                    "....p....", "....p....", "....p....", "....p....", "....p....", "...ppp..."];
+    var STARFISH = ["...s...", "..sss..", "s.sss.s", "sssssss", ".sSSSs.", ".ss.ss.", ".s...s."];
+    var SCALLOP  = ["..ccc..", ".ccccc.", "ccccccc", "cCcCcCc", ".c.c.c."];
+    var SPIRAL   = [".ccc..", "cddcc.", "cdCdc.", "cddc..", ".cc...", "..c..."];
+    var CLAM     = [".ccc.", "ccccc", "cCcCc", ".c.c."];
+    var SP = 15, objects = [];
+
+    function drawCell(x, y, rgb, a, sz) {
+      ctx.globalAlpha = a;
+      ctx.fillStyle = "rgb(" + (rgb[0] | 0) + "," + (rgb[1] | 0) + "," + (rgb[2] | 0) + ")";
+      ctx.fillRect(x, y, sz - 0.6, sz - 0.6);         // hair gap -> pixel-grid read
+    }
+
     function size() {
       W = host.clientWidth;
       H = host.clientHeight;
@@ -72,6 +100,17 @@
       rows = Math.ceil(H / CELL) + 1;
       noise = new Float32Array(cols * rows);     // static per-cell grain for foam
       for (var i = 0; i < noise.length; i++) noise[i] = Math.random();
+
+      // place the beach props along the tideline (fx = centre, fy = base, of W/H)
+      SP = W < 640 ? 10 : (W < 1024 ? 13 : 16);
+      var pool = W < 640
+        ? [{ s: UMBRELLA, fx: 0.70, fy: 0.79 }, { s: STARFISH, fx: 0.26, fy: 0.83 }, { s: SCALLOP, fx: 0.52, fy: 0.855 }]
+        : [{ s: UMBRELLA, fx: 0.71, fy: 0.785 }, { s: STARFISH, fx: 0.205, fy: 0.805 },
+           { s: SCALLOP, fx: 0.375, fy: 0.83 }, { s: SPIRAL, fx: 0.86, fy: 0.82 }, { s: CLAM, fx: 0.53, fy: 0.84 }];
+      objects = pool.map(function (o) {
+        var rws = o.s.length, cls = o.s[0].length;
+        return { s: o.s, left: Math.round(o.fx * W - cls * SP / 2), top: Math.round(o.fy * H - rws * SP) };
+      });
     }
 
     // waterline y for a given column centre (lower value = higher up the page)
@@ -84,10 +123,44 @@
       return base + tide + w1 + w2 + w3;
     }
 
-    function paint(x, y, rgb, a) {
-      ctx.globalAlpha = a;
-      ctx.fillStyle = "rgb(" + (rgb[0] | 0) + "," + (rgb[1] | 0) + "," + (rgb[2] | 0) + ")";
-      ctx.fillRect(x, y, CELL - 0.6, CELL - 0.6);   // hair gap -> pixel-grid read
+    function paint(x, y, rgb, a) { drawCell(x, y, rgb, a, CELL); }
+
+    // Beach props: a dark keyline lifts each prop off the busy surf; emerged
+    // pixels stay bright/dry, and pixels below the local waterline blend toward
+    // the shallows so the tide reads as washing over them.
+    function drawSprites(t) {
+      for (var i = 0; i < objects.length; i++) {
+        var o = objects[i], sp = o.s, r, c, rowStr, ch, px, py, line, sub;
+        // pass 1: dilated dark silhouette -> a clean "sticker" outline that
+        // fades as the pixel goes underwater, so submerged props dissolve
+        for (r = 0; r < sp.length; r++) {
+          rowStr = sp[r];
+          for (c = 0; c < rowStr.length; c++) {
+            if (!SPAL[rowStr.charAt(c)]) continue;
+            px = o.left + c * SP; py = o.top + r * SP;
+            sub = (py + SP * 0.5) - levelAt(px + SP * 0.5, t);
+            drawCell(px - 2, py - 2, INK, sub < 0 ? 0.9 : Math.max(0.32, 0.9 - sub / (SP * 3.5)), SP + 3);
+          }
+        }
+        // pass 2: colour, washed by the tide
+        for (r = 0; r < sp.length; r++) {
+          rowStr = sp[r];
+          for (c = 0; c < rowStr.length; c++) {
+            ch = rowStr.charAt(c);
+            var col = SPAL[ch];
+            if (!col) continue;
+            px = o.left + c * SP; py = o.top + r * SP;
+            sub = (py + SP * 0.5) - levelAt(px + SP * 0.5, t);   // >0 underwater
+            if (sub < 0) {
+              drawCell(px, py, col, 1, SP - 1.2);            // dry / above the surf
+            } else {
+              var wet = Math.min(0.6, sub / (SP * 4));        // deeper -> more washed out
+              drawCell(px, py, mix(col, SHAL, 0.3 + wet), 0.86, SP - 1.2);
+              if (sub < SP * 1.2) drawCell(px, py, FOAM, 0.26, SP - 1.2); // foam at the wash line
+            }
+          }
+        }
+      }
     }
 
     function frame(t) {
@@ -120,6 +193,7 @@
           paint(cx, cy, col, 0.42 + 0.5 * k);
         }
       }
+      drawSprites(t);   // beach props on top, washed by the tide
     }
 
     var raf = 0, running = false, t0 = 0;
