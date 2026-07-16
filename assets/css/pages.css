@@ -5,8 +5,8 @@
 /* ---------- Sub-page hero (projects / about / services / contact) ---------- */
 .subhero { position: relative; padding-top: calc(var(--gutter) + clamp(70px,9vw,140px)); padding-bottom: clamp(30px,4vw,60px); overflow: hidden; }
 .subhero .eyebrow { color: var(--accent-text); }
-.subhero h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: .98; letter-spacing: -.015em; margin-top: 20px; max-width: 16ch; }
-.subhero h1 em { font-style: italic; color: var(--accent-text); }
+.subhero h1 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h1); line-height: .92; letter-spacing: -.03em; margin-top: 20px; max-width: 16ch; }
+.subhero h1 em { font-style: normal; color: var(--accent-text); }
 .on-dark.subhero .eyebrow, .on-dark .subhero .eyebrow { color: var(--gold-2); }
 .on-dark.subhero h1 em, .on-dark .subhero h1 em { color: var(--gold-2); }
 /* subhero with HUD readout column */

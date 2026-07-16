@@ -24,7 +24,7 @@
 .tech-grid {
   position: absolute; inset: 0; z-index: var(--z-grid);
   pointer-events: none; opacity: .5;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23c1922f' stroke-width='1' opacity='0.16'%3E%3Cpath d='M36 31v10M31 36h10'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23a17c45' stroke-width='1' opacity='0.18'%3E%3Cpath d='M36 31v10M31 36h10'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 72px 72px;
   mask-image: radial-gradient(120% 100% at 50% 0%, #000 55%, transparent 100%);
 }
@@ -69,17 +69,7 @@
 .loader__count b { color: var(--gold-2); font-weight: 500; }
 body.loading { overflow: hidden; }
 
-/* ============================ Custom cursor ============================ */
-.cursor { position: fixed; top: 0; left: 0; z-index: var(--z-cursor); pointer-events: none; mix-blend-mode: difference; will-change: transform; }
-.cursor__dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #fff; transform: translate(-50%,-50%); }
-.cursor__ring { position: absolute; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; transform: translate(-50%,-50%); transition: width .3s var(--e-out), height .3s var(--e-out), background .3s; }
-.cursor.is-hover .cursor__ring { width: 66px; height: 66px; background: rgba(255,255,255,.08); }
-.cursor.is-hover .cursor__dot { opacity: 0; }
-.cursor__label { position:absolute; transform: translate(-50%,-50%); font-family: var(--font-mono); font-size: 10px; letter-spacing:.12em; text-transform: uppercase; color:#fff; opacity:0; transition: opacity .25s; white-space: nowrap; }
-.cursor.is-view .cursor__ring { width: 84px; height: 84px; background: rgba(255,255,255,.06); }
-.cursor.is-view .cursor__label { opacity: 1; }
-.cursor.is-view .cursor__dot { opacity: 0; }
-@media (hover: none), (max-width: 900px) { .cursor { display: none; } }
+/* Cursor: hero-scoped "scroll to explore" bubble lives in osmo.css */
 
 /* ============================ Header / Nav ============================ */
 .nav {
@@ -100,7 +90,8 @@ body.loading { overflow: hidden; }
 .nav.is-light:not(.is-solid) .btn-cta { background: var(--ink); color: var(--paper); }
 .nav.is-light:not(.is-solid) .btn-cta::before { background: var(--gold-2); }
 .nav__brand { display: flex; align-items: center; gap: 12px; z-index: 2; }
-.nav__brand img { height: clamp(30px,3vw,40px); width: auto; }
+.nav__brand img { height: clamp(40px,4vw,56px); width: auto; transition: transform .4s var(--e-out); }
+.nav__brand:hover img { transform: scale(1.06); }
 .nav__brand .wordmark { font-family: var(--font-display); font-size: clamp(18px,1.7vw,23px); letter-spacing: .06em; line-height: 1; }
 .nav__brand .wordmark small { display:block; font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .34em; color: var(--gold-2); margin-top: 3px; }
 .nav__links { display: flex; align-items: center; gap: clamp(20px,2.4vw,42px); }
@@ -138,7 +129,6 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
   font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .06em;
   text-transform: uppercase; padding: var(--pad); position: relative;
   background: var(--paper); color: var(--ink);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
   transition: background .35s var(--e-out), color .35s, transform .35s var(--e-out);
   overflow: hidden;
 }
@@ -157,7 +147,6 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
   display:inline-flex; align-items:center; gap:10px;
   font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing:.06em; text-transform: uppercase;
   padding: 12px 20px; background: var(--paper); color: var(--ink);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
   transition: background .3s, color .3s;
 }
 .btn-cta::before { content:""; width:7px; height:7px; border-radius:50%; background: var(--gold); animation: k-blink 2.4s infinite; }
@@ -194,10 +183,10 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .hero__grid { position: absolute; inset: 0; z-index: 1; opacity: .35; }
 .hero__inner { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(40px,7vw,110px); }
 .hero__eyebrow { color: var(--gold-2); margin-bottom: clamp(18px,2.4vw,30px); }
-.hero h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h1); line-height: .98; letter-spacing: -.014em; max-width: 15ch; }
-.hero h1 em { font-style: italic; color: var(--gold-2); }
+.hero h1 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h1); line-height: .92; letter-spacing: -.03em; max-width: 16ch; }
+.hero h1 em { font-style: normal; color: var(--gold-2); }
 .hero__sub { margin-top: clamp(22px,3vw,38px); display:flex; align-items:flex-end; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
-.hero__sub p { max-width: 44ch; color: color-mix(in srgb,var(--paper) 80%, transparent); }
+.hero__sub p { max-width: 46ch; color: color-mix(in srgb,var(--paper) 82%, transparent); }
 .hero__scroll { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 3; display: grid; place-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: color-mix(in srgb,var(--paper) 70%, transparent); }
 .hero__scroll .chev { color: var(--gold-2); animation: k-chev 1.8s var(--e-inout) infinite; }
 .hero__meta { position: absolute; top: 42%; right: var(--gutter); z-index: 2; text-align: right; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb,var(--paper) 84%, transparent); display: grid; gap: 8px; text-shadow: 0 1px 14px rgba(6,14,22,.7); }
@@ -242,7 +231,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 
 /* Filters */
 .filters { display: flex; gap: 10px; flex-wrap: wrap; }
-.filter { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .08em; text-transform: uppercase; padding: 9px 18px; border: 1px solid var(--line); color: var(--fg-soft); transition: all .3s; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%); }
+.filter { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .08em; text-transform: uppercase; padding: 9px 18px; border: 1px solid var(--line); color: var(--fg-soft); transition: all .3s; }
 .filter:hover { color: var(--fg); border-color: var(--fg-soft); }
 .filter.is-active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .on-dark .filter.is-active { background: var(--gold); color: var(--accent-ink); border-color: var(--gold); }
@@ -303,7 +292,7 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
 .cta-hud { position: relative; }
 @media (max-width: 900px){ .cta__grid { grid-template-columns: 1fr; } .cta-hud { display: none; } }
 .cta h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.0; max-width: 16ch; }
-.cta h2 em { font-style: italic; color: var(--gold-2); }
+.cta h2 em { font-style: normal; color: var(--gold-2); }
 
 /* ============================ Footer ============================ */
 .footer { position: relative; background: var(--ink); color: var(--paper); overflow: hidden; }
@@ -405,3 +394,50 @@ body.menu-open .menu { clip-path: inset(0 0 0 0); visibility: visible; pointer-e
   .hero__meta { display: none; }
 }
 #main:focus { outline: none; }
+
+/* ============================================================
+   v2 brutalist additions — icon capabilities, parallax band,
+   fluid full-bleed image breaks
+   ============================================================ */
+
+/* Animated SVG capability icons */
+.caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border-block: 1px solid var(--line); }
+.cap { background: var(--bg); padding: clamp(28px,3vw,46px) clamp(20px,2vw,34px); display: grid; gap: 18px; align-content: start; transition: background .4s var(--e-out); }
+.cap:hover { background: color-mix(in srgb, var(--gold) 8%, var(--bg)); }
+.cap__icon { width: 46px; height: 46px; color: var(--fg); }
+.cap__icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cap:hover .cap__icon { color: var(--gold); }
+.cap__k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-faint); }
+.cap h3 { font-family: var(--font-display); font-size: var(--fs-h4); line-height: 1.08; font-weight: 600; }
+.cap p { font-size: calc(var(--fs-body) * .94); color: var(--fg-soft); }
+@media (max-width: 900px){ .caps { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 540px){ .caps { grid-template-columns: 1fr; } }
+
+/* Full-bleed parallax image band (fluid transition between sections) */
+.band { position: relative; height: clamp(60vh, 78vh, 900px); overflow: hidden; display: grid; align-items: center; color: var(--paper); }
+.band__media { position: absolute; inset: -12% 0; z-index: 0; }
+.band__media img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.band::after { content:""; position:absolute; inset:0; z-index:1; background: linear-gradient(180deg, rgba(8,7,6,.5), rgba(8,7,6,.28) 40%, rgba(8,7,6,.6)); }
+.band__inner { position: relative; z-index: 2; }
+.band h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); line-height: .96; letter-spacing: -.03em; max-width: 18ch; }
+.band .eyebrow { color: var(--gold-2); }
+
+/* Minimal hero overview line (brutalist, image-led) */
+.hero__overview { max-width: 30ch; }
+.hero h1.hero__line { font-size: clamp(30px,4.4vw,68px); font-weight: 500; line-height: 1.02; letter-spacing: -.02em; max-width: 22ch; }
+.hero__foot { margin-top: clamp(26px,3vw,44px); display: flex; align-items: center; gap: clamp(18px,2vw,32px); flex-wrap: wrap; }
+
+/* Section that flows from the hero without a hard color slam */
+.flow { background: var(--bg); }
+.flow--tint { background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 5%, var(--paper)), var(--paper) 40%); }
+
+/* Big statement block — let it breathe, image-led */
+.statement { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); line-height: .98; letter-spacing: -.03em; max-width: 20ch; }
+.statement em { font-style: normal; color: var(--gold); }
+
+/* Brutalist: no fancy italics — accent via colour/weight only */
+h1 em, h2 em, h3 em, .h1 em, .h2 em, .subhero h1 em { font-style: normal; color: var(--accent); }
+
+/* Skip link — visually hidden until focused */
+.skip-link { position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 10px 16px; transform: translateY(-160%); transition: transform .3s var(--e-out); }
+.skip-link:focus { transform: translateY(0); outline: 2px solid var(--gold-2); outline-offset: 2px; }
