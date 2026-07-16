@@ -1,0 +1,166 @@
+/* =============================================================
+   KASHI · services.html v3
+   Signature: interactive hover-preview SERVICE INDEX.
+   A bone-ground editorial contents spread - large Clash Display
+   service names on the left, a tall sticky image stage on the
+   right that cross-fades the hovered/focused service, dims the
+   rest, and reveals the copy over a progressive-blur edge.
+   Adapts osmo: image-to-background-zoom (scale/cross-fade) +
+   progressive-blur. Desktop = hover preview; <768 = stacked cards.
+   ============================================================= */
+
+.svc-index { position: relative; }
+.svc-index h2 em { font-style: normal; color: var(--accent-text); }
+
+.svc-index__head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 24px; flex-wrap: wrap;
+  margin-bottom: clamp(30px, 4vw, 68px);
+}
+.svc-index__head h2 { margin-top: 16px; }
+.svc-index__hint {
+  font-family: var(--font-mono); font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono); text-transform: uppercase;
+  color: var(--fg-faint); display: inline-flex; align-items: center; gap: .7em;
+  padding-bottom: 6px;
+}
+.svc-index__hint::before { content: ""; width: 6px; height: 6px; background: var(--accent); flex: none; }
+/* no hover on touch, so drop the hint on the stacked mobile layout */
+@media (max-width: 767px) { .svc-index__hint { display: none; } }
+
+/* ---------------- Panel layout ---------------- */
+.svc-panel {
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: clamp(30px, 4vw, 76px);
+  align-items: start;
+}
+
+/* ---------------- Left: the index list ---------------- */
+.svc-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.svc-row {
+  position: relative; width: 100%; text-align: left;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+  gap: clamp(16px, 2.2vw, 34px);
+  padding: clamp(20px, 2.5vw, 38px) 2px;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  transition: opacity .5s var(--e-osmo), color .5s var(--e-osmo);
+}
+.svc-row__k {
+  font-family: var(--font-mono); font-size: var(--fs-mono);
+  letter-spacing: .14em; color: var(--accent-text);
+  align-self: start; padding-top: .5em;
+}
+.svc-row__title {
+  font-family: var(--font-display); font-weight: 600;
+  letter-spacing: -.025em; line-height: .98;
+  font-size: clamp(28px, 3.6vw, 56px);
+  transition: transform .5s var(--e-osmo);
+}
+.svc-row__go {
+  font-family: var(--font-mono); color: var(--accent-text);
+  opacity: 0; transform: translateX(-10px);
+  transition: opacity .5s var(--e-osmo), transform .5s var(--e-osmo);
+}
+/* gold underline sweep for the active row */
+.svc-row::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 0;
+  background: var(--accent); transition: width .55s var(--e-osmo);
+}
+.svc-list.is-engaged .svc-row:not(.is-active) { opacity: .26; }
+.svc-row.is-active { color: var(--fg); }
+.svc-row.is-active .svc-row__title { transform: translateX(6px); }
+.svc-row.is-active .svc-row__go { opacity: 1; transform: none; }
+.svc-row.is-active::after { width: 100%; }
+.svc-row:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+@media (hover: hover) { .svc-row { cursor: pointer; } }
+
+/* ---------------- Right: sticky image stage ---------------- */
+.svc-stage { position: sticky; top: 13vh; }
+.svc-stage__frame {
+  position: relative; aspect-ratio: 4 / 5; overflow: hidden;
+  background: var(--ink-2);
+}
+.svc-imgs { position: absolute; inset: 0; }
+.svc-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0; will-change: opacity, transform;
+}
+.svc-img.is-active { opacity: 1; }
+.svc-stage__scrim {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--ink) 86%, transparent) 0%,
+    color-mix(in srgb, var(--ink) 30%, transparent) 30%,
+    transparent 52%);
+}
+
+/* progressive blur bottom edge (adapted osmo · progressive-blur) */
+.svc-blur {
+  position: absolute; left: 0; bottom: 0; width: 100%; height: 48%;
+  pointer-events: none; z-index: 3; isolation: isolate; overflow: hidden;
+  transform: translateZ(0);
+}
+.svc-blur__l { position: absolute; inset: 0; }
+.svc-blur__l.is--1 { backdrop-filter: blur(1px);  -webkit-backdrop-filter: blur(1px);
+  -webkit-mask: linear-gradient(#0000 50%, #000 62.5% 75%, #0000 87.5%); mask: linear-gradient(#0000 50%, #000 62.5% 75%, #0000 87.5%); }
+.svc-blur__l.is--2 { backdrop-filter: blur(2px);  -webkit-backdrop-filter: blur(2px);
+  -webkit-mask: linear-gradient(#0000 62.5%, #000 75% 87.5%, #0000 100%); mask: linear-gradient(#0000 62.5%, #000 75% 87.5%, #0000 100%); }
+.svc-blur__l.is--3 { backdrop-filter: blur(4px);  -webkit-backdrop-filter: blur(4px);
+  -webkit-mask: linear-gradient(#0000 75%, #000 87.5% 100%); mask: linear-gradient(#0000 75%, #000 87.5% 100%); }
+.svc-blur__l.is--4 { backdrop-filter: blur(8px);  -webkit-backdrop-filter: blur(8px);
+  -webkit-mask: linear-gradient(#0000 82%, #000 92% 100%); mask: linear-gradient(#0000 82%, #000 92% 100%); }
+.svc-blur__l.is--5 { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  -webkit-mask: linear-gradient(#0000 88%, #000 100%); mask: linear-gradient(#0000 88%, #000 100%); }
+
+.svc-cap {
+  position: absolute; left: 0; bottom: 0; width: 100%; z-index: 4;
+  padding: clamp(18px, 2vw, 32px); padding-bottom: clamp(26px, 3vw, 46px); color: var(--paper);
+}
+.svc-cap__k {
+  font-family: var(--font-mono); font-size: var(--fs-mono);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--gold-2);
+  display: inline-flex; align-items: center; gap: .7em;
+}
+.svc-cap__k::before { content: ""; width: 6px; height: 6px; background: var(--gold-2); flex: none; }
+.svc-cap__title {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -.02em;
+  font-size: var(--fs-h4); margin-top: 10px; line-height: 1.05;
+}
+.svc-cap__copy {
+  margin-top: 10px; max-width: 42ch; font-size: var(--fs-body); line-height: 1.5;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+}
+.svc-stage .corner-frame { z-index: 5; --tc: color-mix(in srgb, var(--paper) 42%, transparent); --tk: 18px; }
+
+/* ---------------- Mobile stacked cards (<768px) ---------------- */
+.svc-cards { display: none; }
+.svc-card { border: 1px solid var(--line); background: var(--bg-2); }
+.svc-card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.svc-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.svc-card__k {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .14em;
+  color: var(--paper); background: color-mix(in srgb, var(--ink) 64%, transparent);
+  backdrop-filter: blur(6px); border: 1px solid color-mix(in srgb, var(--paper) 26%, transparent);
+  padding: 5px 9px;
+}
+.svc-card__body { padding: clamp(18px, 5vw, 26px); }
+.svc-card__title {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -.02em;
+  font-size: clamp(22px, 6vw, 30px); line-height: 1.02;
+}
+.svc-card__copy { margin-top: 12px; color: var(--fg-soft); font-size: var(--fs-body); line-height: 1.55; }
+
+/* ---------------- Responsive switch ---------------- */
+@media (max-width: 767px) {
+  .svc-panel { display: none; }
+  .svc-cards { display: grid; gap: clamp(20px, 6vw, 30px); }
+}
+
+/* JS-off / reduced-motion safety: everything renders statically.
+   (.js hook keeps stage hidden-of-scale only while JS drives it.) */
+@media (prefers-reduced-motion: reduce) {
+  .svc-row, .svc-row__title, .svc-row__go, .svc-row::after { transition: none; }
+}

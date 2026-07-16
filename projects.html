@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="assets/css/osmo.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/projects-v3.css">
 <meta property="og:image" content="https://luxologygg.github.io/KashiOrganization/assets/img/projects/hz/336-ocean-view-ave-hero.jpg">
 <link rel="canonical" href="https://luxologygg.github.io/KashiOrganization/projects.html">
 <meta property="og:url" content="https://luxologygg.github.io/KashiOrganization/projects.html">
@@ -56,13 +57,29 @@
   </div>
 </section>
 
-<section class="section--sm" style="color:var(--paper);padding-top:0">
-  <div class="wrap">
-    <div class="shead__top" style="margin-bottom:26px;align-items:center">
-      <div class="filters" data-filters></div>
+<section class="reel-sec on-dark" aria-label="Project reel, all eleven homes">
+  <div class="tech-grid"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="reel-legend">
+      <div class="reel-legend__lead">
+        <span class="eyebrow eyebrow--plain">The reel</span>
+        <span class="reel-legend__title">Eleven homes, edge to edge</span>
+      </div>
       <span class="repnote">Photography from Kashi's own completed projects, pulled from their Houzz galleries.</span>
     </div>
-    <div class="pgrid" data-projects-grid></div>
+
+    <div class="reel" data-reel>
+      <div class="reel__viewport">
+        <div class="reel__track" data-reel-track>
+          <!-- panels injected by projects-v3.js from window.KASHI.projects -->
+        </div>
+      </div>
+      <div class="reel-hud" aria-hidden="true">
+        <span class="reel-hud__count"><b data-reel-index>01</b> / 11</span>
+        <span class="reel-hud__bar"><span class="reel-hud__fill" data-reel-fill></span></span>
+        <span class="reel-hud__hint">Scroll to <span>advance</span></span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -97,5 +114,6 @@
 <script src="assets/js/vendor/lenis.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/projects-v3.js"></script>
 </body>
 </html>
