@@ -14,7 +14,7 @@
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   window._rebindCursor = () => {}; // legacy no-op (renderers call it)
 
-  gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, InertiaPlugin, CustomEase);
+  gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, CustomEase);
   CustomEase.create("kashi", "0.16,1,0.3,1");
 
   /* ---------------- Lenis smooth scroll ---------------- */
@@ -77,16 +77,20 @@
       gsap.set(panel, { opacity: 1 }); gsap.set(pixels, { opacity: 1 });
       gsap.to(pixels, { opacity: 0, duration: 0.06, ease: "none", stagger: { amount: 0.45, from: "random" }, onComplete: () => gsap.set(panel, { opacity: 0 }) });
     };
-    // intercept internal navigations
+    // intercept plain, primary-click, same-origin navigations only
     document.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; // let new-tab/new-window through
       const a = e.target.closest("a");
       if (!a) return;
       const href = a.getAttribute("href");
-      if (!href || href.startsWith("#") || href.startsWith("mailto") || href.startsWith("tel") || a.target === "_blank" || a.hasAttribute("data-no-transition")) return;
+      if (!href || href.startsWith("#") || href.startsWith("mailto") || href.startsWith("tel") || a.target === "_blank" || a.hasAttribute("download") || a.hasAttribute("data-no-transition")) return;
       if (a.origin && a.origin !== location.origin) return;
+      if (a.href === location.href) { e.preventDefault(); return; } // same-URL: no pointless reload
       e.preventDefault();
       cover(() => { window.location.href = a.href; });
     });
+    // bfcache: if the covered page is restored via Back/Forward, clear the panel
+    window.addEventListener("pageshow", (e) => { if (e.persisted) gsap.set(panel, { opacity: 0 }); });
     return { reveal, cover };
   }
 
@@ -268,7 +272,8 @@
     const media = $(".hero__media img, .hero__media video", hero);
     if (media && !reduce) {
       gsap.to(media, { yPercent: 18, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
-      gsap.fromTo(media, { scale: 1.06 }, { scale: 1.17, duration: 18, ease: "sine.inOut", repeat: -1, yoyo: true }); // cinemagraph drift ("video" feel)
+      const km = gsap.fromTo(media, { scale: 1.06 }, { scale: 1.17, duration: 18, ease: "sine.inOut", repeat: -1, yoyo: true }); // cinemagraph drift ("video" feel)
+      ScrollTrigger.create({ trigger: hero, start: "top bottom", end: "bottom top", onToggle: (self) => (self.isActive ? km.play() : km.pause()) }); // pause off-screen
     }
     // full-bleed parallax bands
     $$(".band__media img").forEach((im) => { if (!reduce) gsap.fromTo(im, { yPercent: -12 }, { yPercent: 12, ease: "none", scrollTrigger: { trigger: im.closest(".band"), start: "top bottom", end: "bottom top", scrub: true } }); });
@@ -293,7 +298,6 @@
         const a = document.createElement("a");
         a.href = `project.html?slug=${p.slug}`;
         a.className = `pcard ${spans[n % spans.length]} ${n % 3 === 1 ? "tall" : ""}`;
-        a.setAttribute("data-cursor-hover", ""); a.setAttribute("data-cursor-text", "View project");
         a.innerHTML = `
           <span class="pcard__num mono">P/${String(n + 1).padStart(2, "0")}</span>
           <div class="pcard__media"><img src="${IMG(p.cover)}" alt="${p.title}" loading="lazy"></div>
@@ -328,7 +332,6 @@
       a.href = `project.html?slug=${p.slug}`;
       a.className = `pcard ${spans[n]} ${n === 2 ? "wide" : ""}`;
       a.dataset.revealItem = "";
-      a.setAttribute("data-cursor-hover", ""); a.setAttribute("data-cursor-text", "View project");
       a.innerHTML = `
         <span class="pcard__num mono">0${n + 1}</span>
         <div class="pcard__media"><img src="${IMG(p.cover)}" alt="${p.title}" loading="lazy"></div>
@@ -368,7 +371,7 @@
       <section class="wrap pd-gallery">${gallery}</section>
       <section class="section wrap">
         <div class="rowline"><span class="eyebrow eyebrow--plain">Next project</span></div>
-        <a href="project.html?slug=${next.slug}" class="pd-next" ${cursorAttrs("View project")}>
+        <a href="project.html?slug=${next.slug}" class="pd-next">
           <div class="pd-next__media"><img src="${IMG(next.cover)}" alt="${next.title}" loading="lazy"></div>
           <div class="pd-next__body"><span class="pcard__tag">${next.tag}</span><h2 class="h2 display">${next.title}</h2><span class="tlink">View project <span class="ar">→</span></span></div>
         </a>
@@ -380,7 +383,7 @@
     const form = $("[data-contact]");
     if (!form) return;
     const ok = $(".form__ok", form);
-    const btnSpan = () => $("button[type=submit] span", form);
+    const btnSpan = () => $(".button-070__text", form) || $("button[type=submit] span", form);
     const succeed = () => { form.classList.add("is-sent"); if (ok) { ok.setAttribute("role", "status"); ok.setAttribute("tabindex", "-1"); ok.focus(); } const s = btnSpan(); if (s) s.textContent = "Send inquiry"; form.reset(); };
     const mailtoFallback = () => {
       const g = (n) => (form.querySelector("#" + n) || {}).value || "";

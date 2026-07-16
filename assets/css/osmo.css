@@ -578,7 +578,6 @@
   width: 100%;
 }
 
-Step 3: Add custom CSSStep 2: Add custom CSSCustom CSS in WebflowCurious about where to put custom CSS in Webflow? Ilja explains it in the below video:Watch the videoCSSCopy
 /* ---- dynamic text cursor (osmo) ---- */
 .cursor {
   z-index: 25;
@@ -675,7 +674,7 @@ Step 3: Add custom CSSStep 2: Add custom CSSCustom CSS in WebflowCurious about w
 .button-082.is-accent { --button-082-color-background:var(--gold); --button-082-color:var(--accent-ink); --button-082-border-color:var(--accent-ink); --button-082-hover-color-background:var(--gold-1); }
 
 /* Dynamic text cursor, "Scroll to explore" bubble (hero-scoped) */
-.cursor { z-index: var(--z-cursor); }
+.cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: var(--z-cursor); }
 .cursor-bubble { background-color:var(--paper); color:var(--ink); border-radius:0; height:auto; padding:.75em 1.25em; }
 .cursor-bubble__text { font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:500; }
 
