@@ -337,8 +337,10 @@
 }
 
 /* ---------- Hero emblem: simplistic line-art of the lion, drawn in ---------- */
-.ct-hero__emblem { position: absolute; top: clamp(56px, 11vh, 150px); right: clamp(18px, 7vw, 150px);
-  width: clamp(190px, 26vw, 400px); z-index: 0; pointer-events: none;
-  color: color-mix(in srgb, var(--ink) 60%, transparent); }
+.ct-hero__emblem { position: absolute; top: 50%; right: clamp(-24px, 2vw, 70px); transform: translateY(-50%);
+  width: clamp(300px, 40vw, 560px); z-index: 0; pointer-events: none;
+  color: color-mix(in srgb, var(--ink) 44%, transparent); }
 .ct-hero__emblem svg { width: 100%; height: auto; overflow: visible; }
+/* keep the headline above the emblem so it sits partly behind the text */
+.ct-hero .wrap { position: relative; z-index: 1; }
 @media (max-width: 900px){ .ct-hero__emblem { display: none; } }

@@ -316,7 +316,7 @@
   function initEmblemDraw() {
     var box = $("[data-emblem-draw]");
     if (!box) return;
-    var shapes = $$("polygon, circle", box);
+    var shapes = $$("path, polygon, circle, line, ellipse", box);
     if (!shapes.length) return;
     if (reduce) { gsap.set(shapes, { strokeDashoffset: 0 }); return; }
     gsap.set(shapes, { strokeDasharray: 1, strokeDashoffset: 1 });
