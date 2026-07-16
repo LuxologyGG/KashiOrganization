@@ -26,6 +26,15 @@
   var pad = function (n) { return String(n).padStart(2, "0"); };
   var total = projects.length;
 
+  /* ---------------- Hero film-strip (image-forward masthead) ---------------- */
+  var strip = document.querySelector("[data-proj-strip]");
+  if (strip) {
+    var cells = projects.map(function (p) {
+      return '<span class="pj-strip__cell"><img src="' + esc(IMG(p.cover)) + '" alt="" loading="lazy" decoding="async"></span>';
+    }).join("");
+    strip.innerHTML = cells + cells; // duplicate for a seamless loop
+  }
+
   /* ---------------- Build panels ---------------- */
   var frag = document.createDocumentFragment();
 
