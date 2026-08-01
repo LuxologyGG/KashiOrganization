@@ -79,10 +79,18 @@ Any field that could not be sourced is omitted rather than estimated.
 
 ### A note on photography
 
-322 Manhattan Avenue uses its own photography. The other four projects currently use premium license-free
-architectural photography curated per build to match each one's documented character, self-hosted under
-`assets/img/projects/` and mapped to a project in `data-v3.js`, so swapping in real photos later is a one-line
-change per image. The client has additional photography available; that is the highest-value next step.
+Four of the five projects use the client's own photography:
+
+- **322 Manhattan Avenue** uses its own set under `assets/img/projects/hz/`.
+- **The Glass House, The Modern Farmhouse and The Lockdown House** use the eight images embedded in the client's
+  Word document, extracted and cropped free of the screenshot chrome they arrived in, under
+  `assets/img/projects/kashi/`. These cap out around 1400 x 950 px because they were screen captures rather than
+  original files. The originals exist (one capture shows `412SFrancisca_HiRes (10 of 99).jpg`) and are the
+  outstanding ask.
+- **The Brick House** is the only project still on curated license-free stand-ins. It carries a visible
+  "representative imagery" caption and its alt text says so.
+
+Every image is a slug in `data-v3.js`, so replacing one is a single-line change.
 
 ## Run locally
 

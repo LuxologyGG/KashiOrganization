@@ -51,17 +51,26 @@
           });
         }
 
+        // Honest alt text: only claim it is the home itself when the photo really is.
+        var alt = p.imageNote
+          ? "Representative imagery for " + p.name + ", " + p.city
+          : p.name + ", " + p.city;
+
         var figure = p.hero
           ? '<figure class="chapter__figure" data-v3="fade">' +
-            '<img src="' + IMG(p.hero) + '" alt="' + esc(p.name) + ", " + esc(p.city) +
+            '<img src="' + IMG(p.hero) + '" alt="' + esc(alt) +
             '" loading="lazy" decoding="async" data-para>' +
+            (p.imageNote ? "<figcaption>" + esc(p.imageNote) + "</figcaption>" : "") +
             "</figure>"
           : "";
 
         var strip = (p.gallery && p.gallery.length)
           ? '<div class="strip" data-v3="fade">' +
             p.gallery.map(function (g, gi) {
-              return '<img src="' + IMG(g) + '" alt="' + esc(p.name) + ", view " + (gi + 1) +
+              var galt = p.imageNote
+                ? "Representative imagery for " + p.name + ", view " + (gi + 1)
+                : p.name + ", view " + (gi + 1);
+              return '<img src="' + IMG(g) + '" alt="' + esc(galt) +
                      '" loading="lazy" decoding="async">';
             }).join("") +
             "</div>"

@@ -83,16 +83,38 @@ transaction is a resale of a roughly two-year-old home, not a builder's first sa
 
 ---
 
-## 4. Photography, the highest-value thing he can send
+## 4. Photography: we found the eight in the document, and we need the originals
 
-He offered more photos. That is the single biggest quality upgrade available.
+The Word document had **eight photos embedded in it**, which we extracted and put on the site. They cover exactly
+the three projects that had nothing:
 
-Right now only **322 Manhattan Avenue** uses its own photography. The other four use licensed architectural
-stand-ins chosen to match each build's documented character. They are mapped by name in `data-v3.js`, so
-swapping in a real photo is a one-line change per image, no redesign.
+| Project | Photos now live |
+|---|---|
+| The Glass House on the Hill | 3 (exterior, floating staircase, stair hall) |
+| The Modern Farmhouse | 3 (exterior, Dutch door entry, dining and stair) |
+| The Lockdown House | 2 (exterior, open-plan living) |
 
-**Ask, in priority order:** The Brick House (the view and the white brick are the whole story), The Glass House,
-The Modern Farmhouse, The Lockdown House. Roughly one exterior hero plus five interiors each.
+Two useful things came out of them. The Glass House photo clearly shows the **floating staircase**, which no
+public record mentioned, so that detail in the story is now backed by an image. And the Dutch door photo shows
+the **1801 address numbers**, confirming the Modern Farmhouse address.
+
+**The problem: they are screenshots, not photographs.** Five were taken from a photo viewer and three from a
+browser on the Redfin listing, so they carry that window's chrome (now cropped off) and they cap out at roughly
+1400 x 950 pixels, some smaller. That is fine mid-page. It is thin for a full-width header on a large monitor.
+
+**The screenshots show the real files exist.** One title bar reads `412SFrancisca_HiRes (10 of 99).jpg`, and the
+Redfin viewer shows "2 OF 55".
+
+**Ask:** the actual folders, not more screenshots. Specifically the `412SFrancisca_HiRes` set (99 files), the
+equivalent for 1801 6th Street, and whatever exists for The Lockdown House and The Brick House. A shared drive
+link or a WeTransfer is easiest. Anything at 2000 px wide or better is ideal.
+
+**Priority:** The Brick House first, since it is the only project still on stand-in photography and the view and
+the white brick are the entire story. Then higher-resolution versions of the three above.
+
+One legal note worth a sentence from him: the three Modern Farmhouse images came off the Redfin listing, and
+listing photos are normally the photographer's or the brokerage's copyright rather than the builder's. He very
+likely has rights to photography of his own project, but it is worth confirming before launch.
 
 ---
 

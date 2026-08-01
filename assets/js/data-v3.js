@@ -101,13 +101,10 @@ window.KASHI = {
         address: "412 S Francisca Avenue",
         recordUrl:
           "https://www.redfin.com/CA/Redondo-Beach/412-S-Francisca-Ave-90277/home/7705110",
-        hero: "ext-white-1",
+        hero: "kashi/glass-house-exterior",
         gallery: [
-          "staircase-1",
-          "interior-detail-1",
-          "ext-traditional-1",
-          "bath-1",
-          "hero-dusk",
+          "kashi/glass-house-staircase",
+          "kashi/glass-house-hall",
         ],
         facts: { Bedrooms: "6", Bathrooms: "7.5", "Living area": "4,850 sq ft", Completed: "2025" },
         story: [
@@ -128,13 +125,10 @@ window.KASHI = {
         address: "1801 6th Street",
         recordUrl:
           "https://www.redfin.com/CA/Manhattan-Beach/1801-6th-St-90266/home/6702431",
-        hero: "ext-estate-2",
+        hero: "kashi/farmhouse-exterior",
         gallery: [
-          "kitchen-3",
-          "kitchen-2",
-          "ext-modern-2",
-          "office-1",
-          "staircase-2",
+          "kashi/farmhouse-entry",
+          "kashi/farmhouse-dining",
         ],
         facts: { Bedrooms: "4", Bathrooms: "4.5", "Living area": "3,219 sq ft", Completed: "2018", Lot: "Corner lot" },
         story: [
@@ -155,13 +149,9 @@ window.KASHI = {
         city: "Manhattan Beach, CA",
         address: "",
         recordUrl: "",
-        hero: "kitchen-1",
+        hero: "kashi/lockdown-exterior",
         gallery: [
-          "ext-contemporary-1",
-          "ext-contemporary-2",
-          "deck-1",
-          "bath-2",
-          "ext-coastal-1",
+          "kashi/lockdown-living",
         ],
         facts: {},
         story: [
@@ -190,6 +180,7 @@ window.KASHI = {
           "interior-detail-2",
           "ext-modern-1",
         ],
+        imageNote: "Representative imagery. Photography of this home to follow.",
         facts: { Bedrooms: "4", Bathrooms: "4.5", "Living area": "4,155 sq ft", Lot: "11,100 sq ft", Completed: "2020" },
         story: [
           "Some lots are rare. This one is unreal.",
