@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /v1/
+Disallow: /v2/
 
 Sitemap: https://luxologygg.github.io/KashiOrganization/sitemap.xml

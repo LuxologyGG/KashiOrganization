@@ -5,31 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Not found, Kashi Organization</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0c0b0a">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/img/brand/kashi-emblem.png">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/brutal-fonts.css">
 <link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/v3.css">
 <style>
-  body{min-height:100svh;display:grid;place-items:center;background:var(--ink);color:var(--paper);text-align:center}
-  .nf{position:relative;padding:var(--gutter);display:grid;gap:22px;justify-items:center;z-index:2}
-  .nf img{width:76px;opacity:.95;margin-bottom:6px}
-  .nf .code{font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2)}
-  .nf h1{font-family:var(--font-display);font-size:clamp(44px,9vw,120px);line-height:.95}
-  .nf p{color:color-mix(in srgb,var(--paper) 70%,transparent);max-width:40ch}
+  body{min-height:100svh;display:grid;place-items:center;background:#fff;color:var(--ink);text-align:center}
+  .nf{position:relative;padding:var(--gutter);display:grid;gap:20px;justify-items:center;max-width:640px}
+  .nf__mark{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:0}
+  .nf__mark img{width:min(90vh,86vw);opacity:.065}
+  .nf > *{position:relative;z-index:2}
+  .nf .code{font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+  .nf h1{font-family:var(--font-display);font-weight:600;font-size:clamp(38px,7vw,84px);line-height:.98;letter-spacing:-.025em}
+  .nf p{color:var(--ink-1a);max-width:44ch;line-height:1.6}
+  .nf a.back{display:inline-flex;align-items:center;gap:.6em;margin-top:6px;font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);border-bottom:1px solid rgba(110,82,37,.35);padding-bottom:4px}
+  .nf a.back:hover{border-bottom-color:var(--gold-deep)}
+  .nf a.back svg{width:14px;height:14px}
 </style>
 </head>
-<body class="on-dark">
-<div class="tech-grid"></div>
+<body>
+<div class="nf__mark" aria-hidden="true"><img src="assets/img/brand/kashi-emblem-lg.png" alt=""></div>
 <div class="nf">
-  <img src="assets/img/brand/kashi-emblem.png" alt="Kashi Organization">
   <span class="code">Error 404 · Page not found</span>
   <h1>This one's still<br>on the drawing board.</h1>
   <p>The page you're looking for doesn't exist, but the homes do. Let's get you back.</p>
-  <a data-button-070 href="index.html" class="button-070 is-accent">
-    <span class="button-070__bg-wrap"><span class="button-070__corner-wrap"><span class="button-070__corner is--top-left"></span><span class="button-070__corner is--top-right"></span><span class="button-070__corner is--bottom-left"></span><span class="button-070__corner is--bottom-right"></span></span><span class="button-070__bg"></span></span>
-    <span class="button-070__inner"><span class="button-070__text">Return home</span></span>
+  <a class="back" href="index.html">Return home
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
   </a>
 </div>
 </body>
