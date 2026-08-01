@@ -83,7 +83,7 @@ window.KASHI = {
           "hz/322-manhattan-ave-5",
           "hz/322-manhattan-ave-6",
         ],
-        facts: {},
+        facts: { Bedrooms: "4", Bathrooms: "6", "Living area": "4,477 sq ft", Completed: "2016", Architecture: "Tomaro Design Group" },
         story: [
           "This was our first build south of the Hermosa Pier, and we knew it had to set a tone.",
           "The location was just two blocks from the beach, with incredible light, ocean breeze, and long views. Most people didn't see the area as ready for a project of this scale, but we saw the potential. So we brought in architect Louie Tomaro, whose work needs no introduction in the South Bay, and together we created something that hadn't been done in that pocket before: a four-story modern home with clean lines, open-air living, and a full-height glass elevator that quietly anchored the space.",
@@ -109,7 +109,7 @@ window.KASHI = {
           "bath-1",
           "hero-dusk",
         ],
-        facts: {},
+        facts: { Bedrooms: "6", Bathrooms: "7.5", "Living area": "4,850 sq ft", Completed: "2025" },
         story: [
           "Some projects demand more from you: more time, more precision, more nerve. This one had all of that.",
           "Built as a spec home on a steep hillside lot, the vision was bold from the start: a modern sanctuary wrapped in glass, with panoramic ocean views and a sense of openness so immersive it would feel like living inside an aquarium. Floor-to-ceiling glass on all levels blurs every line between indoors and out. Sunrise to sunset, you are surrounded by the Pacific.",
@@ -136,7 +136,7 @@ window.KASHI = {
           "office-1",
           "staircase-2",
         ],
-        facts: {},
+        facts: { Bedrooms: "4", Bathrooms: "4.5", "Living area": "3,219 sq ft", Completed: "2018", Lot: "Corner lot" },
         story: [
           "In a neighborhood full of predictable builds, we chose a different path.",
           "On this bright corner lot in Manhattan Beach, most developers would have gone with what sells: a beach plantation-style home with siding and decorative shutters. We didn't. Instead, we created a modern French farmhouse, clean, warm, and refined, but completely different from anything else in the area. Designed not to blend in, but to stand out for the right reasons.",
