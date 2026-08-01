@@ -190,7 +190,7 @@ window.KASHI = {
           "interior-detail-2",
           "ext-modern-1",
         ],
-        facts: {},
+        facts: { Bedrooms: "4", Bathrooms: "4.5", "Living area": "4,155 sq ft", Lot: "11,100 sq ft", Completed: "2020" },
         story: [
           "Some lots are rare. This one is unreal.",
           "We waited three years for it to hit the market. Checking, hoping, watching. The moment it did, we bought it within minutes. No hesitation. Because we knew there wasn't another piece of land like it, probably not anywhere.",

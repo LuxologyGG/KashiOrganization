@@ -1,4 +1,4 @@
-# Kashi Organization, Inc. — Website
+# Kashi Organization, Inc. Website
 
 A static, self-contained marketing site for **Kashi Organization, Inc.**, a real estate developer and custom-home
 builder in the South Bay beach cities of Los Angeles.
