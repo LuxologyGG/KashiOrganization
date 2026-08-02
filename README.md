@@ -32,9 +32,12 @@ Ordered as a narrative arc rather than chronologically: origin, craft, distincti
 
 ## Design & tech
 
-- **Type:** Clash Display (display), General Sans (body), Chivo Mono (labels), all self-hosted woff2.
-- **Palette:** white ground, warm near-black ink, bronze accent, near-zero radii, mono technical labels and
-  corner-tick detailing.
+- **Type:** Cinzel (the brand face, matching the logo lockup, used for the company name and the two division
+  tabs), Clash Display (section headings), General Sans (body), Chivo Mono (labels). All self-hosted woff2.
+- **Palette:** white ground, warm near-black ink, and the logo's own gold `#c08a05` sampled from the artwork,
+  with a darker `#9a6d02` for small gold text so it stays AA on white. Near-zero radii, mono technical labels.
+- **The intro mark** settles as a GREY watermark (`grayscale(1)` at 8.5% opacity) and stays there, rather than
+  reverting to the full-colour logo. The colour drains as it grows.
 - **Motion:** [GSAP 3.13](https://gsap.com) (ScrollTrigger, CustomEase) +
   [Lenis](https://lenis.darkroom.engineering) smooth scroll. The emblem bloom, masked reveals, per-chapter
   image parallax, and a nav that appears once the intro is behind you. Every effect has a reduced-motion

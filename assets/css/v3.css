@@ -5,6 +5,16 @@
    the bronze accent + Clash/General Sans/Chivo Mono type system.
    ============================================================= */
 
+/* The logo's own display face: a classical inscriptional serif, matching the
+   KASHI / ORGANIZATION lockup. Self-hosted, no font CDN at runtime. */
+@font-face {
+  font-family: "Cinzel";
+  src: url("../fonts/cinzel-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --white-bg:   #ffffff;
   --bone:       #f6f3ee;   /* warm off-white for alternating bands */
@@ -13,8 +23,13 @@
   --rule-soft:  rgba(12,11,10,.07);
   --ink-1a:     rgba(12,11,10,.72);
   --ink-2a:     rgba(12,11,10,.52);
-  --mark-op:    .065;      /* resting opacity of the bloomed emblem */
+  --mark-op:    .085;      /* resting opacity of the grey emblem watermark */
   --nav-h:      64px;
+
+  /* Sampled straight out of the logo artwork. */
+  --font-brand:  "Cinzel", "Trajan Pro", Georgia, serif;
+  --gold-brand:  #c08a05;  /* the gold in "ORGANIZATION" */
+  --gold-brand-d:#9a6d02;  /* darker, for AA-safe small text on white */
 }
 
 html { scroll-behavior: auto; }
@@ -78,8 +93,12 @@ body.intro-lock { overflow: hidden; }
   height: auto;
   transform: scale(.14);
   opacity: 1;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
 }
+/* Once it has bloomed it settles as a GREY watermark and stays there, rather
+   than reading as the full-colour logo again. JS drives the grayscale from 0
+   to 1 across the bloom so the colour drains as it grows. */
+.intro__mark img.is-set { filter: grayscale(1); }
 /* pre-JS / no-JS resting state */
 .js-failed .intro__mark img,
 html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
@@ -95,11 +114,13 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
 .intro__id { display: block; margin-bottom: clamp(18px, 3vw, 34px); opacity: 0; }
 .intro__id .name {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-brand);   /* matches the logo lockup */
   font-weight: 600;
-  font-size: clamp(22px, 2.6vw, 38px);
-  letter-spacing: -.01em;
-  line-height: 1.05;
+  font-size: clamp(20px, 2.3vw, 34px);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  line-height: 1.12;
+  color: var(--ink);
 }
 .intro__id .sub {
   display: block;
@@ -120,55 +141,76 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
 }
 @media (max-width: 780px) { .divisions { grid-template-columns: 1fr; } }
 
+/* Tabs, not cards. A hairline rule on top that fills gold on hover, the
+   division name in the logo's serif and the logo's gold, then a short line
+   of explanation underneath. */
 .division {
-  --d-pad: clamp(20px, 2.4vw, 38px);
+  --d-pad: clamp(16px, 1.9vw, 30px);
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: .9em;
-  padding: var(--d-pad);
-  min-height: clamp(190px, 24vh, 260px);
-  text-align: left;
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid var(--rule);
-  border-radius: 0;
+  gap: .75em;
+  padding: clamp(18px, 2.1vw, 32px) var(--d-pad) clamp(16px, 1.8vw, 26px);
+  text-align: center;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--rule);
   opacity: 0;
-  transition: border-color .45s var(--e-osmo), background .45s var(--e-osmo), transform .45s var(--e-osmo);
+  transition: background .45s var(--e-osmo);
 }
-.division:hover, .division:focus-visible { border-color: var(--gold); background: rgba(255,255,255,.94); transform: translateY(-3px); }
+.division::before {
+  content: "";
+  position: absolute; top: -1px; left: 50%; right: 50%; height: 2px;
+  background: var(--gold-brand);
+  transition: left .5s var(--e-osmo), right .5s var(--e-osmo);
+}
+.division:hover, .division:focus-visible { background: rgba(192,138,5,.045); }
+.division:hover::before, .division:focus-visible::before,
+.division[aria-current="true"]::before { left: 0; right: 0; }
+
 .division__k {
   font-family: var(--font-mono);
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-mono);
-  color: var(--gold-deep);
+  color: var(--ink-2a);
 }
+/* the division name, set like the logo wordmark */
 .division__name {
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
   font-weight: 600;
-  font-size: clamp(21px, 2.15vw, 34px);
-  line-height: 1.04;
-  letter-spacing: -.015em;
+  font-size: clamp(17px, 1.72vw, 27px);
+  line-height: 1.16;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+  color: var(--gold-brand);
 }
-.division__lede { font-size: clamp(13.5px, .95vw, 15.5px); line-height: 1.55; color: var(--ink-1a); max-width: 42ch; }
+.division__lede {
+  font-size: clamp(13px, .92vw, 15px);
+  line-height: 1.6;
+  color: var(--ink-1a);
+  max-width: 40ch;
+  margin-inline: auto;
+}
 .division__go {
-  margin-top: auto;
+  margin-top: auto;          /* both tabs' CTAs sit on the same line */
+  padding-top: .5em;
   display: inline-flex;
   align-items: center;
-  gap: .6em;
+  justify-content: center;
+  gap: .55em;
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
-  letter-spacing: .1em;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--gold-deep);
+  color: var(--gold-brand-d);
 }
-.division__go svg { width: 14px; height: 14px; transition: transform .4s var(--e-osmo); }
+.division__go svg { width: 13px; height: 13px; transition: transform .4s var(--e-osmo); }
 .division:hover .division__go svg { transform: translateX(5px); }
 .division__soon {
-  position: absolute; top: var(--d-pad); right: var(--d-pad);
-  font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--ink-2a); border: 1px solid var(--rule); padding: 3px 8px;
+  font-style: normal;
+  margin-left: .55em;
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-2a); border: 1px solid var(--rule); padding: 2px 7px;
 }
 
 .intro__scroll {

@@ -152,7 +152,7 @@
     try { seen = sessionStorage.getItem("kashiV3Intro") === "1"; } catch (e) {}
 
     if (!mark || reduce || !hasGSAP) {
-      if (mark) { mark.style.transform = "scale(1)"; mark.style.opacity = rest; }
+      if (mark) { mark.style.transform = "scale(1)"; mark.style.opacity = rest; mark.classList.add("is-set"); }
       if (id) id.style.opacity = 1;
       cards.forEach(function (c) { c.style.opacity = 1; });
       if (cue) cue.style.opacity = 1;
@@ -175,6 +175,7 @@
 
     if (fast) {
       // Repeat visit in the same session: settle quickly, no long bloom.
+      mark.classList.add("is-set");
       tl.set(mark, { scale: 1, opacity: rest })
         .to([id].filter(Boolean), { opacity: 1, duration: 0.45 })
         .to(cards, { opacity: 1, y: 0, duration: 0.45, stagger: 0.06 }, "-=0.3")
@@ -186,9 +187,15 @@
     // small + centered  ->  grows to fill most of the screen  ->  fades back
     // to a semi-transparent watermark, leaving the divisions in front.
     gsap.set(cards, { y: 18 });
+    var drain = { g: 0 }; // colour drains to grey as it grows
     tl.to(mark, { scale: 0.42, duration: 0.9, ease: "power2.out" })
       .to(mark, { scale: 1, duration: 1.55, ease: "power1.inOut" }, "-=0.25")
       .to(mark, { opacity: rest, duration: 1.15, ease: "power2.inOut" }, "-=1.15")
+      .to(drain, {
+        g: 1, duration: 1.15, ease: "power2.inOut",
+        onUpdate: function () { mark.style.filter = "grayscale(" + drain.g + ")"; },
+        onComplete: function () { mark.style.filter = ""; mark.classList.add("is-set"); },
+      }, "-=1.15")
       .to([id].filter(Boolean), { opacity: 1, duration: 0.7 }, "-=0.55")
       .to(cards, { opacity: 1, y: 0, duration: 0.75, stagger: 0.09 }, "-=0.45")
       .to(cue, { opacity: 1, duration: 0.5 }, "-=0.3");
@@ -255,14 +262,8 @@
       }
     }
 
-    // The watermark eases away as the content takes over.
-    if (mark && intro && !reduce) {
-      gsap.to(mark, {
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: { trigger: intro, start: "center center", end: "bottom top", scrub: true },
-      });
-    }
+    // The grey watermark stays put for the whole intro, per client direction.
+    // It leaves naturally when the intro section scrolls away, so no fade here.
 
     if (reduce) {
       $$("[data-v3]").forEach(function (el) { el.style.opacity = 1; el.style.transform = "none"; });
