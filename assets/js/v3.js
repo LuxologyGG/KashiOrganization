@@ -107,7 +107,10 @@
       .join("");
   }
 
-  /* ---------------- Render: construction management ---------------- */
+  /* ---------------- Render: construction management ----------------
+     The capability grid is switched off at the client's request; the section
+     just reads "Under Construction". Kept so it can be turned back on by
+     re-adding <div class="cm-grid" id="cm-cells"></div> to the page. */
   function renderConstruction() {
     var host = $("#cm-cells");
     if (!host || !R.construction) return;

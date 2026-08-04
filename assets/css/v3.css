@@ -30,6 +30,8 @@
   --font-brand:  "Cinzel", "Trajan Pro", Georgia, serif;
   --gold-brand:  #c08a05;  /* the gold in "ORGANIZATION" */
   --gold-brand-d:#9a6d02;  /* darker, for AA-safe small text on white */
+  --brand-blue:  #4a6171;  /* the lighter slate blue in the logo's lion */
+  --brand-blue-d:#3d515e;  /* one step down, for rules and edges */
 }
 
 html { scroll-behavior: auto; }
@@ -184,28 +186,6 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
   text-transform: uppercase;
   color: var(--gold-brand);
 }
-.division__lede {
-  font-size: clamp(13px, .92vw, 15px);
-  line-height: 1.6;
-  color: var(--ink-1a);
-  max-width: 40ch;
-  margin-inline: auto;
-}
-.division__go {
-  margin-top: auto;          /* both tabs' CTAs sit on the same line */
-  padding-top: .5em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .55em;
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--gold-brand-d);
-}
-.division__go svg { width: 13px; height: 13px; transition: transform .4s var(--e-osmo); }
-.division:hover .division__go svg { transform: translateX(5px); }
 .division__soon {
   font-style: normal;
   margin-left: .55em;
@@ -275,6 +255,14 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
 .band { position: relative; padding-block: clamp(74px, 11vw, 168px); }
 .band--bone { background: var(--bone); }
 .band--ink { background: var(--ink); color: var(--paper); }
+.band--blue { background: var(--brand-blue); color: var(--paper); padding-bottom: clamp(46px, 6vw, 96px); }
+/* The logo gold is too dark to sit on the blue, so the on-blue scope uses a
+   lightened gold and slightly brighter muted text to hold AA. */
+.band--blue .div-rail__k { color: #e3b862; }          /* large display, 3.49:1 */
+.band--blue .eyebrow-m { color: rgba(246,243,238,.86); }
+.band--blue .eyebrow-m::before { background: #e3b862; }
+.v3foot .v3foot__divs a:hover,
+.v3foot .v3foot__bar a:hover { color: #eac77f; }
 
 .section-head { display: grid; gap: clamp(14px, 1.6vw, 22px); max-width: 900px; }
 .section-head h2 {
@@ -285,7 +273,8 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
   letter-spacing: -.025em;
 }
 .section-head .lede { font-size: clamp(16px, 1.35vw, 21px); line-height: 1.5; color: var(--ink-1a); max-width: 56ch; }
-.band--ink .section-head .lede { color: rgba(246,243,238,.72); }
+.band--ink .section-head .lede,
+.band--blue .section-head .lede { color: rgba(246,243,238,.78); }
 
 /* division marker rail */
 .div-rail {
@@ -294,7 +283,8 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
   border-bottom: 1px solid var(--rule);
   margin-bottom: clamp(30px, 4.6vw, 70px);
 }
-.band--ink .div-rail { border-bottom-color: rgba(246,243,238,.16); }
+.band--ink .div-rail,
+.band--blue .div-rail { border-bottom-color: rgba(246,243,238,.22); }
 .div-rail__k {
   font-family: var(--font-display); font-weight: 600;
   font-size: clamp(30px, 4.4vw, 64px); line-height: 1; color: var(--gold);
@@ -392,6 +382,17 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
 }
 
 /* ============================ Construction Management ============================ */
+.cm-uc {
+  margin-top: clamp(30px, 5vw, 72px);
+  margin-bottom: clamp(20px, 3.5vw, 48px);
+  font-family: var(--font-brand);
+  font-weight: 600;
+  font-size: clamp(26px, 4.2vw, 62px);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: rgba(246,243,238,.92);
+}
 .cm-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
   gap: clamp(1px, .1vw, 2px);
@@ -426,16 +427,16 @@ html:not(.js) .intro__mark img { transform: scale(1); opacity: var(--mark-op); }
 .contact-list dd { font-family: var(--font-display); font-weight: 500; font-size: clamp(19px, 1.9vw, 30px); line-height: 1.15; letter-spacing: -.01em; }
 .contact-list dd a:hover { color: var(--gold-deep); }
 
-.v3foot { background: var(--ink); color: var(--paper); padding-block: clamp(46px, 7vw, 96px); }
+.v3foot { background: var(--brand-blue); color: var(--paper); padding-block: clamp(46px, 7vw, 96px); }
 .v3foot__top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 30px; }
 .v3foot__lockup img { width: clamp(190px, 22vw, 300px); height: auto; }
 .v3foot__divs { display: grid; gap: .6em; }
-.v3foot__divs a { font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(246,243,238,.72); }
+.v3foot__divs a { font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(246,243,238,.82); }
 .v3foot__divs a:hover { color: var(--gold-2); }
 .v3foot__bar {
-  margin-top: clamp(30px, 4vw, 56px); padding-top: 20px; border-top: 1px solid rgba(246,243,238,.16);
+  margin-top: clamp(30px, 4vw, 56px); padding-top: 20px; border-top: 1px solid rgba(246,243,238,.24);
   display: flex; flex-wrap: wrap; gap: 12px 26px; justify-content: space-between;
-  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(246,243,238,.5);
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(246,243,238,.66);
 }
 .v3foot__bar a { color: inherit; }
 .v3foot__bar a:hover { color: var(--gold-2); }

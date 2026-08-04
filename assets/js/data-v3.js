@@ -67,6 +67,30 @@ window.KASHI = {
     /* Narrative order: origin, craft, distinction, conviction, personal. */
     projects: [
       {
+        slug: "glass-house-on-the-hill",
+        name: "The Glass House on the Hill",
+        subtitle: "Built for the Beach Life",
+        city: "Redondo Beach, CA",
+        address: "412 S Francisca Avenue",
+        recordUrl:
+          "https://www.redfin.com/CA/Redondo-Beach/412-S-Francisca-Ave-90277/home/7705110",
+        hero: "kashi/glass-house-exterior",
+        gallery: [
+          "kashi/glass-house-staircase",
+          "kashi/glass-house-hall",
+        ],
+        facts: { Bedrooms: "6", Bathrooms: "7.5", "Living area": "4,850 sq ft", Completed: "2025" },
+        story: [
+          "Some projects demand more from you: more time, more precision, more nerve. This one had all of that.",
+          "Built as a spec home on a steep hillside lot, the vision was bold from the start: a modern sanctuary wrapped in glass, with panoramic ocean views and a sense of openness so immersive it would feel like living inside an aquarium. Floor-to-ceiling glass on all levels blurs every line between indoors and out. Sunrise to sunset, you are surrounded by the Pacific.",
+          "It took time, longer than we expected. Not because of delays, but because every detail mattered. The floating staircase had to feel effortless, and the master shower had to be something that made people stop mid-tour and just say, “Wow.” The Fleetwood window and door package alone required months of lead time, followed by a meticulous installation process to ensure every panel aligned perfectly: flush, clean, and seamless.",
+          "Even the demolition had its moment. As we brought down the final three-story wing of the original 100-year-old house, I stood there with one eye on the excavator and one eye on the neighboring property, quietly hoping the hill didn't decide to make the day more interesting. It didn't. But that tension? That stayed with me.",
+          "In the end, the right buyers walked in and instantly connected. You can always tell when someone falls in love with a space. It's in their eyes, their silence, the way they don't want to leave. They're a wonderful family, full of warmth and appreciation for the craft that went into every corner of the house. Seeing people like that make it their home, that's the most rewarding part of building.",
+        ],
+        pull: "Some projects demand more from you: more time, more precision, more nerve.",
+      },
+
+      {
         slug: "south-of-the-pier",
         name: "South of the Pier",
         subtitle: "Built Before Its Time",
@@ -94,27 +118,25 @@ window.KASHI = {
       },
 
       {
-        slug: "glass-house-on-the-hill",
-        name: "The Glass House on the Hill",
-        subtitle: "Built for the Beach Life",
-        city: "Redondo Beach, CA",
-        address: "412 S Francisca Avenue",
-        recordUrl:
-          "https://www.redfin.com/CA/Redondo-Beach/412-S-Francisca-Ave-90277/home/7705110",
-        hero: "kashi/glass-house-exterior",
+        slug: "lockdown-house",
+        name: "The Lockdown House",
+        subtitle: "Designed with Breathing Room",
+        city: "Manhattan Beach, CA",
+        address: "",
+        recordUrl: "",
+        hero: "kashi/lockdown-exterior",
         gallery: [
-          "kashi/glass-house-staircase",
-          "kashi/glass-house-hall",
+          "kashi/lockdown-living",
         ],
-        facts: { Bedrooms: "6", Bathrooms: "7.5", "Living area": "4,850 sq ft", Completed: "2025" },
+        facts: {},
         story: [
-          "Some projects demand more from you: more time, more precision, more nerve. This one had all of that.",
-          "Built as a spec home on a steep hillside lot, the vision was bold from the start: a modern sanctuary wrapped in glass, with panoramic ocean views and a sense of openness so immersive it would feel like living inside an aquarium. Floor-to-ceiling glass on all levels blurs every line between indoors and out. Sunrise to sunset, you are surrounded by the Pacific.",
-          "It took time, longer than we expected. Not because of delays, but because every detail mattered. The floating staircase had to feel effortless, and the master shower had to be something that made people stop mid-tour and just say, “Wow.” The Fleetwood window and door package alone required months of lead time, followed by a meticulous installation process to ensure every panel aligned perfectly: flush, clean, and seamless.",
-          "Even the demolition had its moment. As we brought down the final three-story wing of the original 100-year-old house, I stood there with one eye on the excavator and one eye on the neighboring property, quietly hoping the hill didn't decide to make the day more interesting. It didn't. But that tension? That stayed with me.",
-          "In the end, the right buyers walked in and instantly connected. You can always tell when someone falls in love with a space. It's in their eyes, their silence, the way they don't want to leave. They're a wonderful family, full of warmth and appreciation for the craft that went into every corner of the house. Seeing people like that make it their home, that's the most rewarding part of building.",
+          "Some decisions you make on instinct. This home was one of them.",
+          "Most builders in Manhattan Beach would have squeezed five bedrooms into this footprint. We chose four. Why? Because space matters more than count. We wanted every bedroom to feel intentional, not just livable, but generous. And that meant fewer rooms, more light, more air, and more privacy. Each suite has its own bathroom. No compromises.",
+          "One of our favorite design moments lives under the floating staircase: a full-height glass wine room that became a centerpiece of the main floor. Every element of this house was shaped by the idea of clarity and openness, from the flow of the spaces to the clean material palette.",
+          "And then came the unexpected: we hit the market the week before the world shut down for COVID. Timing couldn't have been worse. But quality finds its audience. Even in the middle of global uncertainty, the house attracted real interest, because people could feel the difference in how it was built.",
+          "That's the kind of decision that stays with you. In a market that often prioritizes square footage over experience, we built this home with breathing room, and that made all the difference.",
         ],
-        pull: "Some projects demand more from you: more time, more precision, more nerve.",
+        pull: "In a market that often prioritizes square footage over experience, we built this home with breathing room.",
       },
 
       {
@@ -141,29 +163,12 @@ window.KASHI = {
         ],
         pull: "Designed not to blend in, but to stand out for the right reasons.",
       },
+    ],
 
-      {
-        slug: "lockdown-house",
-        name: "The Lockdown House",
-        subtitle: "Designed with Breathing Room",
-        city: "Manhattan Beach, CA",
-        address: "",
-        recordUrl: "",
-        hero: "kashi/lockdown-exterior",
-        gallery: [
-          "kashi/lockdown-living",
-        ],
-        facts: {},
-        story: [
-          "Some decisions you make on instinct. This home was one of them.",
-          "Most builders in Manhattan Beach would have squeezed five bedrooms into this footprint. We chose four. Why? Because space matters more than count. We wanted every bedroom to feel intentional, not just livable, but generous. And that meant fewer rooms, more light, more air, and more privacy. Each suite has its own bathroom. No compromises.",
-          "One of our favorite design moments lives under the floating staircase: a full-height glass wine room that became a centerpiece of the main floor. Every element of this house was shaped by the idea of clarity and openness, from the flow of the spaces to the clean material palette.",
-          "And then came the unexpected: we hit the market the week before the world shut down for COVID. Timing couldn't have been worse. But quality finds its audience. Even in the middle of global uncertainty, the house attracted real interest, because people could feel the difference in how it was built.",
-          "That's the kind of decision that stays with you. In a market that often prioritizes square footage over experience, we built this home with breathing room, and that made all the difference.",
-        ],
-        pull: "In a market that often prioritizes square footage over experience, we built this home with breathing room.",
-      },
-
+    /* Parked at the client's request ("delete the brick house for now").
+       Kept intact so restoring it is a matter of moving it back into
+       projects[] above. */
+    parked: [
       {
         slug: "brick-house",
         name: "The Brick House",
@@ -198,8 +203,10 @@ window.KASHI = {
   construction: {
     eyebrow: "Division 02",
     title: "Construction Management",
+    /* Per client: this section is just "Under Construction" for now. The
+       capability copy is kept below so it can be switched back on later. */
+    status: "Under Construction",
     lede: "For owners building their own home, we run the project the same way we run our own developments: closely managed trades, transparent budgets, and a clean site.",
-    note: "This division is being expanded. In the meantime, we take on a limited number of construction management engagements each year.",
     capabilities: [
       { k: "01", title: "Owner's representation", copy: "We sit on your side of the table, managing the architect, the trades and the schedule against your budget." },
       { k: "02", title: "Pre-construction & budgeting", copy: "Feasibility, transparent budgeting, permitting and value engineering before a wall goes up." },
