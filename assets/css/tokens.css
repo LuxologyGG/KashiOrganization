@@ -1,0 +1,201 @@
+/* =============================================================
+   KASHI ORGANIZATION, Design Tokens (v2 · brutalist / earthy)
+   Black · white · warm brown/spruce. Clash Display + General Sans +
+   Chivo Mono. Sharp (0 radius), image-led, restrained.
+   Variable names preserved from v1 so component CSS keeps working;
+   only the values + type change.
+   ============================================================= */
+
+:root {
+  /* ---- Core palette, warm near-black, bone white, brown/spruce ---- */
+  --ink:        #0c0b0a;   /* warm near-black, primary dark ground + text */
+  --ink-1:      #131110;
+  --ink-2:      #1b1815;   /* charcoal brown                    */
+  --ink-3:      #262019;
+  --steel:      #6b6155;   /* warm stone (muted)                */
+  --steel-2:    #968b7d;
+  --steel-3:    #b8ad9d;
+
+  --paper:      #efe9dd;   /* warm bone, primary light ground  */
+  --paper-1:    #e7e0d1;
+  --paper-2:    #ddd4c2;
+  --paper-3:    #cfc4ad;
+
+  /* accent family (kept as --gold* names) → warm bronze / spruce wood */
+  --gold:       #a17c45;   /* bronze accent                     */
+  --gold-1:     #b4894a;
+  --gold-2:     #c8a05c;   /* light bronze                      */
+  --gold-deep:  #6e5225;   /* deep brown-bronze                 */
+  --gold-wash:  rgba(161,124,69,.12);
+  --spruce:     #b8996b;   /* warm spruce/oak wood tone         */
+  --brown:      #4a3826;   /* deep earth brown                  */
+
+  --white:      #ffffff;
+  --black:      #050403;
+
+  /* ---- Semantic ---- */
+  --bg:         var(--paper);
+  --bg-2:       var(--paper-1);
+  --fg:         var(--ink);
+  --fg-soft:    color-mix(in srgb, var(--ink) 74%, var(--paper));
+  --fg-faint:   color-mix(in srgb, var(--ink) 60%, var(--paper));   /* AA on bone */
+  --line:       color-mix(in srgb, var(--ink) 15%, transparent);
+  --line-soft:  color-mix(in srgb, var(--ink) 8%, transparent);
+  --accent:     var(--gold);
+  --accent-text: var(--gold-deep);
+  --accent-ink: #1a1206;
+  --focus:      var(--gold-deep);
+
+  /* ---- Typography ---- */
+  --font-display: "Clash Display", "General Sans", "Arial Narrow", sans-serif;
+  --font-body:    "General Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:    "Chivo Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Fluid type scale */
+  --fs-eyebrow: clamp(10px, .76vw, 12px);
+  --fs-mono:    clamp(11px, .84vw, 13px);
+  --fs-body:    clamp(15px, 1.02vw, 17px);
+  --fs-lead:    clamp(18px, 1.5vw, 22px);
+  --fs-h4:      clamp(19px, 1.6vw, 24px);
+  --fs-h3:      clamp(26px, 3vw, 46px);
+  --fs-h2:      clamp(34px, 5vw, 80px);
+  --fs-h1:      clamp(46px, 8vw, 140px);
+  --fs-display: clamp(64px, 14vw, 260px);
+
+  --lh-tight:   0.94;
+  --lh-snug:    1.06;
+  --lh-body:    1.6;
+  --tracking-mono: .16em;
+  --tracking-wide: .3em;
+
+  /* ---- Spacing ---- */
+  --u:      8px;
+  --gutter: clamp(20px, 5vw, 104px);
+  --sect:   clamp(76px, 12vw, 200px);
+  --sect-sm:clamp(48px, 7vw, 110px);
+  --maxw:   1600px;
+  --measure: 60ch;
+
+  /* ---- Form language, sharp, brutalist ---- */
+  --radius:   0px;
+  --radius-lg:0px;
+  --border:   1px solid var(--line);
+  --notch:    0px;
+
+  /* ---- Motion ---- */
+  --e-expo:  cubic-bezier(.16,1,.3,1);
+  --e-out:   cubic-bezier(.22,.61,.36,1);
+  --e-inout: cubic-bezier(.65,.05,.36,1);
+  --e-power: cubic-bezier(.7,0,.2,1);
+  --e-osmo:  cubic-bezier(.19,1,.22,1);
+  --t-fast:  .32s;
+  --t-med:   .6s;
+  --t-slow:  1s;
+
+  /* ---- Layering ---- */
+  --z-grid:   0;
+  --z-base:   1;
+  --z-nav:    60;
+  --z-cursor: 80;
+  --z-transition: 95;
+  --z-loader: 100;
+
+  color-scheme: light;
+}
+
+/* Dark ground scope */
+.on-dark {
+  --bg:       var(--ink);
+  --bg-2:     var(--ink-1);
+  --fg:       var(--paper);
+  --fg-soft:  color-mix(in srgb, var(--paper) 70%, var(--ink));
+  --fg-faint: color-mix(in srgb, var(--paper) 52%, var(--ink));
+  --line:     color-mix(in srgb, var(--paper) 15%, transparent);
+  --line-soft:color-mix(in srgb, var(--paper) 8%, transparent);
+  --accent:   var(--gold-2);
+  --accent-text: var(--gold-2);
+  --focus:    var(--gold-2);
+  color-scheme: dark;
+}
+
+/* ============================ Reset ============================ */
+*,*::before,*::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img,svg,video,canvas { display: block; max-width: 100%; }
+img,video { height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input,textarea,select { font: inherit; color: inherit; }
+ul,ol { list-style: none; padding: 0; }
+h1,h2,h3,h4 { font-weight: 500; line-height: var(--lh-snug); }
+::selection { background: var(--gold); color: var(--accent-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+}
+
+/* ============================ Type utilities ============================ */
+.display { font-family: var(--font-display); font-weight: 600; }
+.serif   { font-family: var(--font-display); }
+.mono    { font-family: var(--font-mono); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: .7em;
+}
+.eyebrow::before {
+  content:""; width: 6px; height: 6px; background: var(--accent); flex: none;
+}
+.eyebrow--plain::before { display:none; }
+
+.h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: var(--lh-tight); font-weight: 600; letter-spacing: -.02em; }
+.h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: var(--lh-tight); font-weight: 600; letter-spacing: -.02em; }
+.h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-snug); font-weight: 600; letter-spacing: -.01em; }
+.h4 { font-family: var(--font-display); font-size: var(--fs-h4); line-height: 1.14; font-weight: 500; letter-spacing: -.01em; }
+.lead { font-size: var(--fs-lead); line-height: 1.45; color: var(--fg-soft); font-weight: 400; }
+.measure { max-width: var(--measure); }
+
+/* ============================ Layout utilities ============================ */
+.wrap   { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.section{ padding-block: var(--sect); position: relative; }
+.section--sm { padding-block: var(--sect-sm); }
+.grid   { display: grid; gap: clamp(20px, 2.4vw, 40px); }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.flex   { display:flex; }
+.between{ justify-content: space-between; }
+.items-end { align-items:flex-end; }
+.gap-s  { gap: calc(var(--u)*2); }
+@media (max-width: 900px){
+  .cols-2,.cols-3,.cols-4 { grid-template-columns: 1fr; }
+  .cols-3.keep-2, .cols-4.keep-2 { grid-template-columns: repeat(2,1fr); }
+}
+
+/* ============================ Keyframes ============================ */
+@keyframes k-drift {
+  0%{transform:translate(-4%,-2%) rotate(0) scale(1.05)} 50%{transform:translate(4%,3%) rotate(8deg) scale(1.15)} 100%{transform:translate(-4%,-2%) rotate(0) scale(1.05)}
+}
+@keyframes k-blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+@keyframes k-marquee { to { transform: translate3d(-50%,0,0); } }
+@keyframes k-chev { 0%,100%{ transform: translateY(0); opacity:.9 } 50%{ transform: translateY(6px); opacity:.35 } }
+@keyframes k-spin { to { transform: rotate(360deg); } }
+@keyframes k-kenburns { 0%{transform:scale(1.02) translate(0,0)} 100%{transform:scale(1.14) translate(-1.5%,-1.5%)} }
